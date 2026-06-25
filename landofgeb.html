@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Land of Geb — Bixxville OS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black:#0A0B0C; --panel:#111316;
+    --white:#F4F5F7; --soft:#CDCFD3; --grey:#A6ADB4;
+    --green:#8CF060; --orange:#F45E26; --red:#E76F51;
+    --rail:#2C482A; --gold:#AA8C4E;
+    --mono:'Poppins',sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--black); color:var(--white);
+    font-family:'Poppins',sans-serif; -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--green);color:var(--black)}
+
+  /* ---------- scroll container ---------- */
+  .deck{scroll-snap-type:y proximity;}
+  .scene{
+    position:relative; min-height:100svh; min-height:100vh;
+    display:flex; flex-direction:column; justify-content:flex-end;
+    padding:88px 26px 64px; scroll-snap-align:start; overflow:hidden;
+  }
+
+  /* ---------- top nav ---------- */
+  nav{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 22px; mix-blend-mode:normal;
+    background:linear-gradient(180deg, rgba(10,11,12,.92), rgba(10,11,12,0));
+  }
+  .brand{display:flex; align-items:center; gap:10px; text-decoration:none}
+  .glyph{width:30px;height:18px;display:block}
+  .brand b{
+    font-weight:600; font-size:12px; letter-spacing:.22em;
+    color:var(--white); text-transform:uppercase;
+  }
+  .navactions{display:flex; align-items:center; gap:14px}
+  .pill{
+    border:1px solid rgba(244,245,247,.45); color:var(--white);
+    border-radius:40px; padding:9px 18px; font-size:13px; font-weight:500;
+    background:transparent; cursor:pointer; text-decoration:none;
+    transition:border-color .25s, color .25s;
+  }
+  .pill:hover{border-color:var(--green); color:var(--green)}
+  .ham{width:28px;height:14px;position:relative;background:none;border:none;cursor:pointer}
+  .ham span{position:absolute;left:0;height:1.6px;width:100%;background:var(--white)}
+  .ham span:first-child{top:2px}.ham span:last-child{bottom:2px}
+
+  /* ---------- progress rail ---------- */
+  .rail{
+    position:fixed; left:18px; top:50%; transform:translateY(-50%);
+    z-index:40; display:flex; flex-direction:column; gap:10px;
+  }
+  .rail i{
+    display:block; width:2px; height:26px; background:var(--rail);
+    border-radius:2px; transition:background .4s, height .4s;
+  }
+  .rail i.on{background:var(--green); height:40px}
+
+  /* ---------- text block ---------- */
+  .label{
+    font-size:12px; letter-spacing:.26em; text-transform:uppercase;
+    color:var(--grey); margin-bottom:18px; font-weight:500;
+  }
+  .label .n{color:var(--green)}
+  h1,h2{font-weight:600; letter-spacing:-.02em; line-height:.98}
+  h1{font-size:clamp(46px,13vw,116px)}
+  h2{font-size:clamp(34px,8.5vw,72px); margin-bottom:22px}
+  .body{
+    color:var(--soft); font-size:clamp(15px,4.2vw,19px); line-height:1.5;
+    max-width:540px; margin-top:18px;
+  }
+  .spine{
+    margin-top:26px; font-size:11px; letter-spacing:.32em; font-weight:600;
+    color:var(--grey);
+  }
+  .spine span{color:var(--green)}
+
+  /* reveal */
+  .rv{opacity:0; transform:translateY(26px); transition:opacity .9s ease, transform .9s ease}
+  .rv.in{opacity:1; transform:none}
+  .d1{transition-delay:.08s}.d2{transition-delay:.18s}.d3{transition-delay:.30s}.d4{transition-delay:.42s}
+
+  /* skip link */
+  .skip{
+    position:absolute; left:26px; bottom:26px; display:flex; align-items:center; gap:8px;
+    color:var(--white); font-size:13px; text-decoration:none; opacity:.7;
+    border-bottom:1px solid rgba(244,245,247,.5); padding-bottom:3px;
+    transition:opacity .25s, color .25s, border-color .25s;
+  }
+  .skip:hover{opacity:1; color:var(--green); border-color:var(--green)}
+
+  /* ---------- HERO ---------- */
+  #hero{justify-content:center; text-align:left; align-items:flex-start}
+  #hero .inner{position:relative; z-index:2}
+  #hero .eyebrow{
+    font-size:12px; letter-spacing:.28em; text-transform:uppercase; color:var(--grey);
+    margin-bottom:26px; font-weight:500;
+  }
+  #hero h1 .o{color:var(--green)}
+
+  /* ---------- math object frame ---------- */
+  .stage{position:relative; z-index:1; width:100%; flex:1; display:flex;
+    align-items:center; justify-content:center; min-height:42svh}
+  svg{width:100%; height:auto; max-width:640px; overflow:visible}
+  .node{fill:none; stroke:var(--green); stroke-width:1.4}
+  .node.dim{stroke:var(--rail)}
+  .node.out{stroke:var(--orange)}
+  .ntext{fill:var(--white); font-family:var(--mono); font-size:13px; font-weight:500}
+  .nlog{fill:var(--green); font-family:var(--mono); font-size:11px; font-weight:600; letter-spacing:.04em}
+  .nlog.o{fill:var(--orange)}
+  .edge{fill:none; stroke:var(--soft); stroke-width:1.4; opacity:.55}
+  .edge.draw{stroke-dasharray:280; stroke-dashoffset:280; transition:stroke-dashoffset 1s ease}
+  .in .edge.draw{stroke-dashoffset:0}
+  .anno{fill:var(--grey); font-family:var(--mono); font-size:11px; letter-spacing:.05em}
+  .eq{fill:var(--soft); font-family:var(--mono); font-weight:500}
+
+  /* node pop reveal */
+  .pop{opacity:0; transform:scale(.82); transform-origin:center; transition:opacity .55s ease, transform .55s ease}
+  .in .pop{opacity:1; transform:none}
+  .in .p1{transition-delay:.05s}.in .p2{transition-delay:.18s}.in .p3{transition-delay:.31s}
+  .in .p4{transition-delay:.44s}.in .p5{transition-delay:.57s}.in .p6{transition-delay:.70s}
+
+  /* ---------- belief ---------- */
+  #belief{justify-content:center}
+  #belief .ripple{position:absolute; left:50%; top:42%; transform:translate(-50%,-50%); z-index:0}
+  #belief .ripple span{
+    position:absolute; left:50%; top:50%; border:1px solid rgba(170,140,78,.22);
+    border-radius:50%; transform:translate(-50%,-50%);
+  }
+  .creed{position:relative; z-index:2; max-width:680px}
+  .creed p{
+    font-family:'Lora',serif; font-size:clamp(22px,6vw,38px); line-height:1.28;
+    color:var(--white); margin:0 0 22px; font-weight:400;
+  }
+  .creed p.last{color:var(--gold); font-style:italic}
+  #belief .floateq{
+    position:absolute; font-family:var(--mono); color:rgba(140,240,96,.13);
+    font-size:clamp(20px,7vw,46px); font-weight:600; z-index:-1; white-space:nowrap;
+  }
+
+  /* ---------- two doors ---------- */
+  #doors{justify-content:center}
+  .doors{display:flex; flex-direction:column; gap:16px; margin-top:30px; width:100%; max-width:660px}
+  .door{
+    display:block; text-decoration:none; color:var(--white);
+    border:1px solid rgba(244,245,247,.16); border-radius:6px; padding:26px 24px;
+    transition:border-color .3s, transform .3s, background .3s;
+  }
+  .door:hover{border-color:var(--green); transform:translateX(6px); background:rgba(140,240,96,.04)}
+  .door .dk{font-size:11px; letter-spacing:.26em; text-transform:uppercase; color:var(--grey); margin-bottom:12px}
+  .door h3{font-size:clamp(24px,7vw,34px); font-weight:600; letter-spacing:-.02em; margin-bottom:10px}
+  .door:nth-child(2) h3{color:var(--green)}
+  .door p{color:var(--soft); font-size:15px; line-height:1.45; max-width:440px}
+  .door .arr{float:right; color:var(--orange); font-size:22px; margin-top:-6px}
+
+  footer{
+    padding:30px 26px 60px; border-top:1px solid var(--rail);
+    color:var(--grey); font-size:12px; letter-spacing:.04em; line-height:1.8;
+  }
+  footer b{color:var(--soft); font-weight:500; letter-spacing:.18em}
+  footer .sx{color:var(--green)}
+
+  /* ---------- slide-out menu ---------- */
+  .menu{
+    position:fixed; inset:0; z-index:60; background:rgba(10,11,12,.97);
+    backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
+    display:flex; flex-direction:column; justify-content:center; align-items:flex-start;
+    padding:0 40px; gap:6px; opacity:0; pointer-events:none; transition:opacity .35s ease;
+  }
+  .menu.open{opacity:1; pointer-events:auto}
+  .menu a{
+    color:var(--white); text-decoration:none; font-weight:600; letter-spacing:-.02em;
+    font-size:clamp(34px,9vw,58px); line-height:1.18; transition:color .25s, padding-left .25s;
+    display:flex; align-items:baseline; gap:16px;
+  }
+  .menu a .mi{font-size:13px; font-weight:500; letter-spacing:.18em; color:var(--grey); font-family:var(--mono)}
+  .menu a:hover{color:var(--green); padding-left:10px}
+  .menu .mfoot{
+    position:absolute; left:40px; bottom:40px; font-size:12px; letter-spacing:.16em;
+    color:var(--grey); text-transform:uppercase;
+  }
+  .menu .mfoot span{color:var(--green)}
+  .menuclose{
+    position:absolute; top:22px; right:24px; width:30px; height:30px; border:none;
+    background:none; cursor:pointer;
+  }
+  .menuclose:before,.menuclose:after{
+    content:''; position:absolute; left:4px; top:14px; width:22px; height:1.8px; background:var(--white);
+  }
+  .menuclose:before{transform:rotate(45deg)} .menuclose:after{transform:rotate(-45deg)}
+
+  /* ---------- about scene ---------- */
+  #about{justify-content:center}
+  .about-grid{display:flex; flex-direction:column; gap:22px; max-width:680px; margin-top:8px}
+  .about-lead{font-family:'Lora',serif; font-size:clamp(20px,5.4vw,32px); line-height:1.32; color:var(--white); font-weight:400}
+  .about-lead em{font-style:italic; color:var(--green)}
+  .about-body{color:var(--soft); font-size:clamp(15px,4.2vw,18px); line-height:1.6; max-width:560px}
+  .about-pts{display:flex; flex-direction:column; gap:14px; margin-top:6px}
+  .about-pt{display:flex; gap:14px; align-items:baseline}
+  .about-pt .b{color:var(--orange); font-weight:700; font-size:15px; font-family:var(--mono)}
+  .about-pt .t{color:var(--soft); font-size:clamp(14px,4vw,17px); line-height:1.5}
+  .about-pt .t b{color:var(--white); font-weight:600}
+
+  /* ---------- work / intake scene ---------- */
+  #work{justify-content:flex-start; padding-top:96px; padding-bottom:80px; min-height:auto; scroll-snap-align:none}
+  .work-wrap{width:100%; max-width:620px; margin:0 auto}
+  .promise{background:var(--panel); border:1px solid rgba(244,245,247,.12); border-left:3px solid var(--gold);
+    border-radius:10px; padding:16px 18px; margin:18px 0 26px; font-size:14px; line-height:1.6; color:var(--soft)}
+  .promise b{color:var(--white)}
+  form{display:flex; flex-direction:column; gap:16px}
+  .frow{display:flex; gap:12px}
+  .frow .field{flex:1}
+  .field label{display:block; font-size:13px; font-weight:600; color:var(--white); margin-bottom:6px}
+  .field .hint{font-size:12px; color:var(--grey); font-weight:400; margin-bottom:6px}
+  .field input,.field textarea{width:100%; background:var(--panel); border:1px solid rgba(244,245,247,.16);
+    border-radius:9px; padding:13px 14px; color:var(--white); font-family:inherit; font-size:14px; transition:border-color .15s}
+  .field input:focus,.field textarea:focus{outline:none; border-color:var(--green)}
+  .field textarea{resize:vertical; min-height:78px; line-height:1.5}
+  .sectlabel{font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); font-weight:600;
+    margin:12px 0 -2px; border-top:1px solid rgba(244,245,247,.1); padding-top:20px}
+  .sectlabel.first{border-top:none; padding-top:0}
+  .submit{background:var(--green); color:#08110C; border:none; border-radius:10px; padding:16px; font-family:inherit;
+    font-size:15px; font-weight:700; cursor:pointer; margin-top:6px; transition:transform .1s, background .15s}
+  .submit:hover{background:#9ff06f} .submit:active{transform:scale(.99)}
+  .formfoot{margin-top:18px; font-size:12px; color:var(--grey); text-align:center; line-height:1.6}
+  .formfoot .gold{color:var(--gold); font-family:'Lora'; font-style:italic}
+
+  @media (max-width:520px){
+    .rail{display:none}
+    .body{max-width:none}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .rv,.pop{opacity:1;transform:none;transition:none}
+    .edge.draw{stroke-dashoffset:0;transition:none}
+    #belief .ripple{display:none}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="brand" href="#hero" aria-label="Land of Geb home">
+    <svg class="glyph" viewBox="0 0 40 24" aria-hidden="true">
+      <polyline points="2,12 9,12 14,4 20,20 26,8 31,12 38,12" fill="none" stroke="#8CF060" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+    </svg>
+    <b>Land&nbsp;of&nbsp;Geb</b>
+  </a>
+  <div class="navactions">
+    <a class="pill" href="#work">Work with us</a>
+    <button class="ham" id="hamBtn" aria-label="Open menu"><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- slide-out menu -->
+<div class="menu" id="menu" aria-hidden="true">
+  <button class="menuclose" id="menuClose" aria-label="Close menu"></button>
+  <a href="#hero"><span class="mi">00</span> Home</a>
+  <a href="#about"><span class="mi">01</span> About</a>
+  <a href="#work"><span class="mi">02</span> Work with us</a>
+  <div class="mfoot">SCOPED <span>·</span> VERIFIED <span>·</span> SETTLED &nbsp;—&nbsp; St. Croix · USVI</div>
+</div>
+
+<div class="rail" id="rail" aria-hidden="true"></div>
+
+<main class="deck">
+
+  <!-- 00 HERO -->
+  <section class="scene" id="hero" data-rail>
+    <div class="inner">
+      <div class="eyebrow rv">Land of Geb &nbsp;·&nbsp; St. Croix, USVI</div>
+      <h1 class="rv d1">You're not behind<br>because you're <span class="o">bad at this.</span></h1>
+      <p class="body rv d2">You're behind because nobody helped you figure out what to do first. Solo operators and small teams hire us when they're swamped, stalled, or just need a second person in the room to help them find the next move. We map the path. We run it with you.</p>
+      <div class="spine rv d3">SCOPED <span>·</span> VERIFIED <span>·</span> SETTLED</div>
+    </div>
+    <a class="skip" href="#decomp">Scroll &nbsp;↓</a>
+  </section>
+
+  <!-- 0.5 ABOUT -->
+  <section class="scene" id="about" data-rail>
+    <div class="about-grid">
+      <div class="label rv"><span class="n">01</span> &nbsp;— &nbsp;About</div>
+      <h2 class="rv d1">We map the fastest path<br>to your goal — <em>and run it.</em></h2>
+      <p class="about-lead rv d2">A project doesn't fail because the work is hard. It fails because the work is done in the <em>wrong order.</em></p>
+      <p class="about-body rv d2">Land of Geb runs on the Bixxville OS — a system for getting work done. You bring a goal. We break it into scoped units, find the order that actually finishes it, and run that work with our team. You stop managing the chaos and start receiving the result.</p>
+      <div class="about-pts rv d3">
+        <div class="about-pt"><span class="b">01</span><span class="t"><b>The order is the edge.</b> Most help hands you a longer to-do list. We hand you the sequence — where to start, what matters, what runs at once.</span></div>
+        <div class="about-pt"><span class="b">02</span><span class="t"><b>Done means done.</b> Every piece of work is defined as a verifiable outcome before it starts. No ambiguity, no argument later.</span></div>
+        <div class="about-pt"><span class="b">03</span><span class="t"><b>We trust the math.</b> The price follows the work, derived not guessed. Scoped, verified, settled.</span></div>
+      </div>
+    </div>
+    <a class="skip" href="#decomp">How it works &nbsp;↓</a>
+  </section>
+
+  <!-- 01 DECOMPOSITION -->
+  <section class="scene" id="decomp" data-rail>
+    <div class="stage" id="st-decomp">
+      <svg viewBox="0 0 640 360" role="img" aria-label="A pitch decomposed into scoped units of work">
+        <!-- job block -->
+        <g class="pop p1">
+          <rect class="node" x="220" y="20" width="200" height="50" rx="8"/>
+          <text class="ntext" x="320" y="42" text-anchor="middle">LAND THE PITCH</text>
+          <text class="nlog" x="320" y="59" text-anchor="middle">10 LOG · $1,000</text>
+        </g>
+        <!-- connectors: job fans out to each scoped task -->
+        <path class="edge draw" d="M320,70 L320,112"/>
+        <path class="edge draw" d="M320,112 L100,150"/>
+        <path class="edge draw" d="M320,112 L250,150"/>
+        <path class="edge draw" d="M320,112 L390,150"/>
+        <path class="edge draw" d="M320,112 L530,150"/>
+        <!-- task nodes -->
+        <g class="pop p2"><rect class="node" x="40" y="150" width="120" height="46" rx="7"/>
+          <text class="ntext" x="100" y="170" text-anchor="middle">Research</text>
+          <text class="nlog" x="100" y="187" text-anchor="middle">2 LOG</text></g>
+        <g class="pop p3"><rect class="node" x="190" y="150" width="120" height="46" rx="7"/>
+          <text class="ntext" x="250" y="170" text-anchor="middle">Build proposal</text>
+          <text class="nlog" x="250" y="187" text-anchor="middle">3 LOG</text></g>
+        <g class="pop p4"><rect class="node" x="330" y="150" width="130" height="46" rx="7"/>
+          <text class="ntext" x="395" y="170" text-anchor="middle">Confirm meeting</text>
+          <text class="nlog" x="395" y="187" text-anchor="middle">1 LOG</text></g>
+        <g class="pop p5"><rect class="node" x="475" y="150" width="120" height="46" rx="7"/>
+          <text class="ntext" x="535" y="170" text-anchor="middle">Refine deck</text>
+          <text class="nlog" x="535" y="187" text-anchor="middle">4 LOG</text></g>
+        <!-- equation -->
+        <g class="pop p6">
+          <text class="eq" x="320" y="290" text-anchor="middle" font-size="20">2 + 3 + 1 + 4 = 10 LOG</text>
+          <text class="anno" x="320" y="318" text-anchor="middle">1 LOG = 1 hour = $100</text>
+        </g>
+      </svg>
+    </div>
+    <div>
+      <div class="label rv"><span class="n">01</span> &nbsp;— &nbsp;Decomposition</div>
+      <h2 class="rv d1">A goal is never one thing.</h2>
+      <p class="body rv d2">Every engagement breaks into scoped units of work. One LOG is one hour. When the parts are named, sized, and priced, the whole stops being a guess — and the order stops being a coin flip.</p>
+    </div>
+    <a class="skip" href="#dag">Skip this section &nbsp;↓</a>
+  </section>
+
+  <!-- 02 THE GRAPH -->
+  <section class="scene" id="dag" data-rail>
+    <div class="stage" id="st-dag">
+      <svg viewBox="0 0 640 300" role="img" aria-label="A directed acyclic graph of a pitch">
+        <defs>
+          <marker id="ah" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+            <path d="M0,0 L9,4.5 L0,9 z" fill="#F45E26"/>
+          </marker>
+        </defs>
+        <!-- top track edges: Research -> Confirm meeting -> Pre-brief -->
+        <path class="edge draw" marker-end="url(#ah)" d="M150,55 L192,55"/>
+        <path class="edge draw" marker-end="url(#ah)" d="M315,55 L357,55"/>
+        <!-- bottom track edges: Build proposal -> Refine deck -->
+        <path class="edge draw" marker-end="url(#ah)" d="M150,200 L192,200"/>
+        <path class="edge draw" marker-end="url(#ah)" d="M315,200 L357,200"/>
+        <!-- both converge on outcome -->
+        <path class="edge draw" marker-end="url(#ah)" d="M480,55 L510,55 L510,130 L505,158"/>
+        <path class="edge draw" marker-end="url(#ah)" d="M480,200 L510,200 L510,175 L505,175"/>
+        <!-- top track -->
+        <g class="pop p1"><rect class="node" x="30" y="34" width="120" height="42" rx="7"/><text class="ntext" x="90" y="60" text-anchor="middle">Research</text></g>
+        <g class="pop p2"><rect class="node" x="193" y="34" width="122" height="42" rx="7"/><text class="ntext" x="254" y="53" text-anchor="middle">Confirm</text><text class="ntext" x="254" y="70" text-anchor="middle">meeting</text></g>
+        <g class="pop p3"><rect class="node" x="357" y="34" width="122" height="42" rx="7"/><text class="ntext" x="418" y="53" text-anchor="middle">Pre-brief</text><text class="nlog" x="418" y="70" text-anchor="middle">client</text></g>
+        <!-- bottom track -->
+        <g class="pop p2"><rect class="node" x="30" y="179" width="120" height="42" rx="7"/><text class="ntext" x="90" y="205" text-anchor="middle">Build proposal</text></g>
+        <g class="pop p3"><rect class="node" x="193" y="179" width="122" height="42" rx="7"/><text class="ntext" x="254" y="205" text-anchor="middle">Refine deck</text></g>
+        <g class="pop p4"><rect class="node" x="357" y="179" width="122" height="42" rx="7"/><text class="ntext" x="418" y="200" text-anchor="middle">Rehearse</text></g>
+        <!-- outcome -->
+        <g class="pop p5"><rect class="node out" x="490" y="148" width="130" height="42" rx="7"/>
+          <text class="ntext" x="555" y="167" text-anchor="middle">Deliver</text>
+          <text class="nlog o" x="555" y="183" text-anchor="middle">the pitch</text></g>
+        <!-- annotations -->
+        <text class="anno pop p6" x="170" y="148" text-anchor="middle">both tracks start now</text>
+        <text class="anno pop p6" x="418" y="260" text-anchor="middle">confirm the room before you build the deck</text>
+      </svg>
+    </div>
+    <div>
+      <div class="label rv"><span class="n">02</span> &nbsp;— &nbsp;The Graph</div>
+      <h2 class="rv d1">Lists lie.<br>A graph tells the truth.</h2>
+      <p class="body rv d2">A list pretends work is a straight line. It is not. A graph shows what runs in parallel, what is blocked, and the hidden rule that saves the whole thing — confirm the room before you build the deck.</p>
+    </div>
+    <a class="skip" href="#value">Skip this section &nbsp;↓</a>
+  </section>
+
+  <!-- 03 THE VALUE -->
+  <section class="scene" id="value" data-rail>
+    <div class="inner" style="max-width:640px">
+      <div class="label rv"><span class="n">03</span> &nbsp;— &nbsp;How we price</div>
+      <h2 class="rv d1">Most businesses price the work<br>before they <em>understand</em> it.</h2>
+      <p class="body rv d2" style="margin-top:32px">We do it the other way.</p>
+      <p class="body rv d3" style="margin-top:24px">Before we name a number, we map the work. Every task has a size. Every hour of attention has a value. The price is the output of that equation — not a guess, not a market rate we hoped would fit, not a number designed to sound reasonable. You see the math before you sign anything. If it fits, you know exactly what you're buying. If it doesn't, that's a real answer too.</p>
+      <p class="rv d4" style="margin-top:40px; font-family:'Lora',Georgia,serif; font-style:italic; font-size:clamp(17px,4vw,22px); color:var(--green)">The number follows the work. Always.</p>
+    </div>
+    <a class="skip" href="#network">Skip this section &nbsp;↓</a>
+  </section>
+
+  <!-- 04 THE NETWORK -->
+  <section class="scene" id="network" data-rail>
+    <div class="stage" id="st-net">
+      <svg viewBox="0 0 640 320" role="img" aria-label="A network of operators settling work">
+        <!-- edges from hub -->
+        <g stroke="#2C482A" stroke-width="1.3">
+          <line class="edge draw" x1="320" y1="160" x2="150" y2="70"/>
+          <line class="edge draw" x1="320" y1="160" x2="500" y2="70"/>
+          <line class="edge draw" x1="320" y1="160" x2="120" y2="220"/>
+          <line class="edge draw" x1="320" y1="160" x2="520" y2="230"/>
+          <line class="edge draw" x1="320" y1="160" x2="330" y2="40"/>
+        </g>
+        <!-- peripheral nodes -->
+        <g class="pop p2"><circle class="node" cx="330" cy="40" r="14"/></g>
+        <g class="pop p3"><circle class="node" cx="500" cy="70" r="14"/></g>
+        <g class="pop p4"><circle class="node" cx="520" cy="230" r="14"/></g>
+        <!-- two named peers -->
+        <g class="pop p2">
+          <circle cx="150" cy="70" r="17" fill="#8CF060"/>
+          <text class="anno" x="150" y="48" text-anchor="middle" fill="#8CF060">St. Croix · Build</text>
+        </g>
+        <g class="pop p3">
+          <circle class="node" cx="120" cy="220" r="17"/>
+          <text class="anno" x="120" y="252" text-anchor="middle">Florida · Real Estate</text>
+        </g>
+        <!-- hub -->
+        <g class="pop p1">
+          <circle cx="320" cy="160" r="26" fill="none" stroke="#F45E26" stroke-width="1.6"/>
+          <circle cx="320" cy="160" r="5" fill="#F45E26"/>
+        </g>
+        <!-- formula -->
+        <g class="pop p6">
+          <text class="eq" x="320" y="300" text-anchor="middle" font-size="15">R = 0.50·Delivery + 0.25·Timeliness + 0.15·Streak − 0.10·Disputes</text>
+        </g>
+      </svg>
+    </div>
+    <div>
+      <div class="label rv"><span class="n">03</span> &nbsp;— &nbsp;The Network</div>
+      <h2 class="rv d1">Many hands.<br>One graph.</h2>
+      <p class="body rv d2">Work routes across the network by proven capability, not by chance. Every contribution is weighted by reputation, recorded, and settled on-chain. Two peers today. A network by design.</p>
+    </div>
+    <a class="skip" href="#belief">Skip this section &nbsp;↓</a>
+  </section>
+
+  <!-- 04 THE BELIEF -->
+  <section class="scene" id="belief" data-rail>
+    <div class="ripple" aria-hidden="true">
+      <span style="width:160px;height:160px"></span>
+      <span style="width:320px;height:320px"></span>
+      <span style="width:520px;height:520px"></span>
+      <span style="width:760px;height:760px"></span>
+    </div>
+    <div class="floateq" style="left:6%;top:24%">E = mc²</div>
+    <div class="floateq" style="right:8%;bottom:30%">1 LOG = 1 hr = $100</div>
+    <div class="creed">
+      <div class="label rv">Our Vision</div>
+      <p class="rv d1">AI should organize the work, not replace the worker.</p>
+      <p class="rv d2">The next economy settles in more than money — in energy, mass, and mathematical work.</p>
+      <p class="rv d3">We build so living things keep a say in that ledger.</p>
+      <p class="rv d4 last">We trust the math and the quantum.</p>
+    </div>
+    <a class="skip" href="#doors">Skip this section &nbsp;↓</a>
+  </section>
+
+  <!-- 06 WORK WITH US (intake) -->
+  <section class="scene" id="work" data-rail>
+    <div class="work-wrap">
+      <div class="label rv"><span class="n">02</span> &nbsp;— &nbsp;Work with us</div>
+      <h2 class="rv d1" style="margin-bottom:14px">Tell us your goal.</h2>
+      <p class="body rv d2" style="margin-top:0">You bring a goal you want done. We break it into the exact order of steps and run it with our team — so you stop managing it.</p>
+      <div class="promise rv d2">
+        Here's how it works: tell us about your goal below. We'll set up a short conversation, and from it you'll get a <b>free partial map</b> of your project — the real first steps and the moves that matter most. If it's a fit, we handle the rest.
+      </div>
+
+      <!-- FormSubmit: emails submissions to bixxville@proton.me. No backend needed.
+           NOTE: the FIRST submission triggers a one-time FormSubmit confirmation email
+           to bixxville@proton.me — click the link in it once to activate, then it just works. -->
+      <form class="rv d3" action="https://formsubmit.co/bixxville@proton.me" method="POST">
+        <input type="hidden" name="_subject" value="New Bixxville project intake">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="true">
+        <input type="text" name="_honey" style="display:none">
+
+        <div class="sectlabel first">About you</div>
+        <div class="frow">
+          <div class="field"><label>Name</label><input type="text" name="Name" required></div>
+          <div class="field"><label>Where you're from</label><input type="text" name="Location" placeholder="City / area" required></div>
+        </div>
+        <div class="field"><label>Email</label><input type="email" name="Email" required></div>
+
+        <div class="sectlabel">Your project</div>
+        <div class="field">
+          <label>What's the goal?</label>
+          <div class="hint">In your own words — what are you trying to get done?</div>
+          <textarea name="The goal" required></textarea>
+        </div>
+        <div class="field">
+          <label>What does "done" look like?</label>
+          <div class="hint">How will you know it succeeded?</div>
+          <textarea name="What done looks like" required></textarea>
+        </div>
+        <div class="frow">
+          <div class="field"><label>Timeframe</label><input type="text" name="Timeframe" placeholder="e.g. 3 months, by spring"></div>
+          <div class="field"><label>Budget range (optional)</label><input type="text" name="Budget range" placeholder="Optional"></div>
+        </div>
+        <div class="field">
+          <label>What's already in motion?</label>
+          <div class="hint">Anything started or already done.</div>
+          <textarea name="Already in motion"></textarea>
+        </div>
+        <div class="field">
+          <label>Biggest obstacle or unknown?</label>
+          <textarea name="Biggest obstacle"></textarea>
+        </div>
+        <div class="field">
+          <label>Who's involved?</label>
+          <div class="hint">Who has to do the work, or who needs to sign off.</div>
+          <input type="text" name="Who is involved">
+        </div>
+
+        <div class="sectlabel">Last thing</div>
+        <div class="field">
+          <label>How did you hear about us?</label>
+          <input type="text" name="How they heard">
+        </div>
+
+        <button type="submit" class="submit">Send my project →</button>
+      </form>
+
+      <div class="formfoot">
+        We read every submission. You'll hear back to set up your conversation.<br>
+        <span class="gold">Bixxville · St. Croix · USVI · We trust the math.</span>
+      </div>
+    </div>
+    <footer>
+      <b>SCOPED <span class="sx">·</span> VERIFIED <span class="sx">·</span> SETTLED</b><br>
+      Land of Geb, LLC — Christiansted, St. Croix, USVI<br>
+      Running on the Bixxville OS · <span class="sx">St. Croix to the world</span>
+    </footer>
+  </section>
+
+</main>
+
+<script>
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ----- slide-out menu ----- */
+  var menu = document.getElementById('menu');
+  var hamBtn = document.getElementById('hamBtn');
+  var menuClose = document.getElementById('menuClose');
+  function openMenu(){ menu.classList.add('open'); menu.setAttribute('aria-hidden','false'); }
+  function closeMenu(){ menu.classList.remove('open'); menu.setAttribute('aria-hidden','true'); }
+  if(hamBtn) hamBtn.addEventListener('click', openMenu);
+  if(menuClose) menuClose.addEventListener('click', closeMenu);
+  if(menu) menu.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', closeMenu); });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeMenu(); });
+
+  /* ----- build progress rail ----- */
+  var scenes = Array.prototype.slice.call(document.querySelectorAll('[data-rail]'));
+  var rail = document.getElementById('rail');
+  scenes.forEach(function(){ var i=document.createElement('i'); rail.appendChild(i); });
+  var ticks = rail.querySelectorAll('i');
+
+  /* ----- reveal + rail sync via IntersectionObserver ----- */
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      var idx = scenes.indexOf(e.target);
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        e.target.querySelectorAll('.rv').forEach(function(el){ el.classList.add('in'); });
+        if(idx>-1){ ticks.forEach(function(t,i){ t.classList.toggle('on', i===idx); }); }
+      }
+    });
+  }, {threshold:0.18});
+  scenes.forEach(function(s){ io.observe(s); });
+
+  /* safety net: reveal any .rv that scrolls into view even if its tall section never hits threshold */
+  var rvIO = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); } });
+  }, {threshold:0.12});
+  document.querySelectorAll('.rv').forEach(function(el){ rvIO.observe(el); });
+
+  /* mark first scene immediately */
+  if(scenes[0]){ scenes[0].classList.add('in'); scenes[0].querySelectorAll('.rv').forEach(function(el){el.classList.add('in');}); if(ticks[0]) ticks[0].classList.add('on'); }
+
+
+})();
+</script>
+</body>
+</html>
