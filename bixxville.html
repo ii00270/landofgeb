@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Bixxville OS — How it works</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black:#0A0B0C; --panel:#111316;
+    --white:#F4F5F7; --soft:#CDCFD3; --grey:#A6ADB4;
+    --green:#8CF060; --orange:#F45E26; --red:#E76F51;
+    --rail:#2C482A; --gold:#AA8C4E;
+    --mono:'Poppins',sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--black); color:var(--white);
+    font-family:'Poppins',sans-serif; -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--green);color:var(--black)}
+
+  nav{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 22px;
+    background:linear-gradient(180deg, rgba(10,11,12,.92), rgba(10,11,12,0));
+  }
+  .brand{display:flex; align-items:center; gap:10px; text-decoration:none}
+  .glyph{width:30px;height:18px;display:block}
+  .brand b{font-weight:600; font-size:12px; letter-spacing:.22em; color:var(--white); text-transform:uppercase}
+  .navactions{display:flex; align-items:center; gap:14px}
+  .pill{
+    border:1px solid rgba(244,245,247,.45); color:var(--white);
+    border-radius:40px; padding:9px 18px; font-size:13px; font-weight:500;
+    background:transparent; cursor:pointer; text-decoration:none;
+    transition:border-color .25s, color .25s;
+  }
+  .pill:hover{border-color:var(--green); color:var(--green)}
+  .ham{width:28px;height:14px;position:relative;background:none;border:none;cursor:pointer}
+  .ham span{position:absolute;left:0;height:1.6px;width:100%;background:var(--white)}
+  .ham span:first-child{top:2px}.ham span:last-child{bottom:2px}
+
+  .menu{
+    position:fixed; inset:0; z-index:60; background:rgba(10,11,12,.97);
+    backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
+    display:flex; flex-direction:column; justify-content:center; align-items:flex-start;
+    padding:0 40px; gap:6px; opacity:0; pointer-events:none; transition:opacity .35s ease;
+  }
+  .menu.open{opacity:1; pointer-events:auto}
+  .menu a{
+    color:var(--white); text-decoration:none; font-weight:600; letter-spacing:-.02em;
+    font-size:clamp(34px,9vw,58px); line-height:1.18; transition:color .25s, padding-left .25s;
+    display:flex; align-items:baseline; gap:16px;
+  }
+  .menu a .mi{font-size:13px; font-weight:500; letter-spacing:.18em; color:var(--grey); font-family:var(--mono)}
+  .menu a:hover{color:var(--green); padding-left:10px}
+  .menu .mfoot{position:absolute; left:40px; bottom:40px; font-size:12px; letter-spacing:.16em; color:var(--grey); text-transform:uppercase}
+  .menu .mfoot span{color:var(--green)}
+  .menuclose{position:absolute; top:22px; right:24px; width:30px; height:30px; border:none; background:none; cursor:pointer}
+  .menuclose:before,.menuclose:after{content:''; position:absolute; left:4px; top:14px; width:22px; height:1.8px; background:var(--white)}
+  .menuclose:before{transform:rotate(45deg)} .menuclose:after{transform:rotate(-45deg)}
+
+  main{max-width:760px; margin:0 auto; padding:140px 26px 100px}
+  .label{font-size:12px; letter-spacing:.26em; text-transform:uppercase; color:var(--grey); margin-bottom:18px; font-weight:500}
+  .label .n{color:var(--green)}
+  h1{font-weight:600; letter-spacing:-.02em; line-height:1.02; font-size:clamp(38px,8vw,64px); margin-bottom:24px}
+  h2{font-weight:600; letter-spacing:-.02em; line-height:1.05; font-size:clamp(26px,5vw,38px); margin:64px 0 18px}
+  .lead{font-family:'Lora',serif; font-size:clamp(19px,3.4vw,24px); line-height:1.4; margin-bottom:20px; color:var(--white)}
+  .lead em{font-style:italic; color:var(--green)}
+  p.body{color:var(--soft); font-size:clamp(15px,3vw,17px); line-height:1.65; max-width:620px; margin-bottom:16px}
+
+  .mechanic{
+    border:1px solid rgba(244,245,247,.12); border-radius:14px; padding:22px 24px;
+    margin-bottom:16px; background:var(--panel);
+  }
+  .mechanic .mk{font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); font-weight:600; margin-bottom:8px}
+  .mechanic h3{font-size:clamp(18px,3.5vw,22px); font-weight:600; margin-bottom:8px}
+  .mechanic p{color:var(--soft); font-size:14.5px; line-height:1.6}
+  .eqline{font-family:var(--mono); color:var(--green); font-size:14px; margin-top:10px; letter-spacing:.02em}
+
+  .steps{display:flex; flex-direction:column; gap:0; margin-top:10px}
+  .step{display:flex; gap:16px; padding:18px 0; border-top:1px solid rgba(244,245,247,.1)}
+  .step:first-child{border-top:none}
+  .step .num{font-family:var(--mono); color:var(--green); font-weight:700; font-size:14px; min-width:28px}
+  .step .txt b{color:var(--white); display:block; margin-bottom:4px; font-size:15px}
+  .step .txt span{color:var(--soft); font-size:14px; line-height:1.55}
+
+  .login-cta{
+    margin-top:70px; padding:36px 30px; border-radius:16px;
+    background:linear-gradient(160deg, rgba(140,240,96,.09), rgba(17,19,22,.6));
+    border:1px solid rgba(140,240,96,.25);
+    text-align:center;
+  }
+  .login-cta h3{font-size:clamp(24px,4.5vw,32px); font-weight:600; margin-bottom:10px}
+  .login-cta p{color:var(--soft); font-size:14.5px; margin-bottom:22px}
+  .login-cta a.big{
+    display:inline-block; background:var(--green); color:#08110C; border-radius:10px;
+    padding:15px 30px; font-weight:700; font-size:15px; text-decoration:none;
+    transition:background .15s;
+  }
+  .login-cta a.big:hover{background:#9ff06f}
+
+  footer{
+    max-width:760px; margin:0 auto; padding:0 26px 60px;
+    color:var(--grey); font-size:12px; letter-spacing:.04em; line-height:1.8;
+  }
+  footer b{color:var(--soft); font-weight:500; letter-spacing:.18em}
+  footer .sx{color:var(--green)}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="brand" href="landofgeb.html#hero" aria-label="Land of Geb home">
+    <svg class="glyph" viewBox="0 0 40 24" aria-hidden="true">
+      <polyline points="2,12 9,12 14,4 20,20 26,8 31,12 38,12" fill="none" stroke="#8CF060" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+    </svg>
+    <b>Land&nbsp;of&nbsp;Geb</b>
+  </a>
+  <div class="navactions">
+    <a class="pill" href="https://ii00270.github.io/Bixxvillenode/" target="_blank" rel="noopener">Log in</a>
+    <button class="ham" id="hamBtn" aria-label="Open menu"><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <button class="menuclose" id="menuClose" aria-label="Close menu"></button>
+  <a href="landofgeb.html#hero"><span class="mi">00</span> Home</a>
+  <a href="about.html"><span class="mi">01</span> About</a>
+  <a href="landofgeb.html#work"><span class="mi">02</span> Work with us</a>
+  <a href="bixxville.html"><span class="mi">03</span> Bixxville</a>
+  <a href="https://ii00270.github.io/Bixxvillenode/" target="_blank" rel="noopener"><span class="mi">04</span> Log in</a>
+  <div class="mfoot">SCOPED <span>·</span> VERIFIED <span>·</span> SETTLED &nbsp;—&nbsp; St. Croix · USVI</div>
+</div>
+
+<main>
+  <div class="label"><span class="n">03</span> &nbsp;— &nbsp;Bixxville</div>
+  <h1>The OS underneath<br>everything we run.</h1>
+  <p class="lead">Bixxville is the operating system Land of Geb runs on — <em>one</em> set of rules for scoping work, proving it happened, and paying for it, no matter what the work is.</p>
+  <p class="body">Every engagement, in any market, moves through the same four mechanics below. Learn these once and you understand how any project on the network gets scoped, run, and paid.</p>
+
+  <h2>The mechanics</h2>
+
+  <div class="mechanic">
+    <div class="mk">01 — Sizing</div>
+    <h3>LOGs</h3>
+    <p>The base unit of work. One LOG is one hour. Every task, in every market, gets sized in LOGs before it starts — so effort is comparable across completely different kinds of work.</p>
+    <div class="eqline">1 LOG = 1 hour</div>
+  </div>
+
+  <div class="mechanic">
+    <div class="mk">02 — Pricing</div>
+    <h3>The price follows the work</h3>
+    <p>Price isn't negotiated up front — it's derived. Each LOG is priced at the operator's tier rate, and the total is the sum across every scoped task.</p>
+    <div class="eqline">price = Σ (LOGs × tier rate)</div>
+  </div>
+
+  <div class="mechanic">
+    <div class="mk">03 — Reputation</div>
+    <h3>Proven, not claimed</h3>
+    <p>Every operator carries a reputation score built from real outcomes — did the work land, was it on time, is there a track record, were there disputes. Work routes to proven capability, not to whoever asked first.</p>
+    <div class="eqline">R = 0.50·Delivery + 0.25·Timeliness + 0.15·Streak − 0.10·Disputes</div>
+  </div>
+
+  <div class="mechanic">
+    <div class="mk">04 — Settlement</div>
+    <h3>Scoped, verified, settled</h3>
+    <p>Work isn't paid on a promise. Each unit is confirmed as a real, checkable outcome before it settles — so payment follows proof, not a timesheet and an argument.</p>
+  </div>
+
+  <h2>How a project actually moves</h2>
+  <div class="steps">
+    <div class="step"><span class="num">01</span><span class="txt"><b>Bring a goal.</b><span>You describe what you're trying to get done and what "done" looks like.</span></span></div>
+    <div class="step"><span class="num">02</span><span class="txt"><b>It gets decomposed.</b><span>The goal breaks into scoped units of work, each sized in LOGs.</span></span></div>
+    <div class="step"><span class="num">03</span><span class="txt"><b>It's mapped as a graph.</b><span>The order that actually finishes it — what runs in parallel, what's blocked — replaces a guessed-at list.</span></span></div>
+    <div class="step"><span class="num">04</span><span class="txt"><b>Work routes to proven operators.</b><span>Each unit goes to whoever on the network has earned the reputation to run it.</span></span></div>
+    <div class="step"><span class="num">05</span><span class="txt"><b>It settles on proof.</b><span>Each unit is verified as done, then paid — scoped, verified, settled.</span></span></div>
+  </div>
+
+  <div class="login-cta">
+    <h3>Already on the network?</h3>
+    <p>Log in to Bixxville to see your LOGs, your standing, and what's moving.</p>
+    <a class="big" href="https://ii00270.github.io/Bixxvillenode/" target="_blank" rel="noopener">Log in to Bixxville →</a>
+  </div>
+</main>
+
+<footer>
+  <b>SCOPED <span class="sx">·</span> VERIFIED <span class="sx">·</span> SETTLED</b><br>
+  Land of Geb, LLC — Christiansted, St. Croix, USVI<br>
+  Running on the Bixxville OS · <span class="sx">St. Croix to the world</span>
+</footer>
+
+<script>
+(function(){
+  var menu = document.getElementById('menu');
+  var hamBtn = document.getElementById('hamBtn');
+  var menuClose = document.getElementById('menuClose');
+  function openMenu(){ menu.classList.add('open'); menu.setAttribute('aria-hidden','false'); }
+  function closeMenu(){ menu.classList.remove('open'); menu.setAttribute('aria-hidden','true'); }
+  if(hamBtn) hamBtn.addEventListener('click', openMenu);
+  if(menuClose) menuClose.addEventListener('click', closeMenu);
+  if(menu) menu.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', closeMenu); });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeMenu(); });
+})();
+</script>
+</body>
+</html>
