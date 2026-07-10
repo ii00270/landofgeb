@@ -132,24 +132,6 @@
   .in .p1{transition-delay:.05s}.in .p2{transition-delay:.18s}.in .p3{transition-delay:.31s}
   .in .p4{transition-delay:.44s}.in .p5{transition-delay:.57s}.in .p6{transition-delay:.70s}
 
-  /* ---------- belief ---------- */
-  #belief{justify-content:center}
-  #belief .ripple{position:absolute; left:50%; top:42%; transform:translate(-50%,-50%); z-index:0}
-  #belief .ripple span{
-    position:absolute; left:50%; top:50%; border:1px solid rgba(170,140,78,.22);
-    border-radius:50%; transform:translate(-50%,-50%);
-  }
-  .creed{position:relative; z-index:2; max-width:680px}
-  .creed p{
-    font-family:'Lora',serif; font-size:clamp(22px,6vw,38px); line-height:1.28;
-    color:var(--white); margin:0 0 22px; font-weight:400;
-  }
-  .creed p.last{color:var(--gold); font-style:italic}
-  #belief .floateq{
-    position:absolute; font-family:var(--mono); color:rgba(140,240,96,.13);
-    font-size:clamp(20px,7vw,46px); font-weight:600; z-index:-1; white-space:nowrap;
-  }
-
   /* ---------- two doors ---------- */
   #doors{justify-content:center}
   .doors{display:flex; flex-direction:column; gap:16px; margin-top:30px; width:100%; max-width:660px}
@@ -244,7 +226,6 @@
     html{scroll-behavior:auto}
     .rv,.pop{opacity:1;transform:none;transition:none}
     .edge.draw{stroke-dashoffset:0;transition:none}
-    #belief .ripple{display:none}
   }
 </style>
 </head>
@@ -286,7 +267,19 @@
       <p class="body rv d2">You're behind because nobody helped you figure out what to do first. Solo operators and small teams hire us when they're swamped, stalled, or just need a second person in the room to help them find the next move. We map the path. We run it with you.</p>
       <div class="spine rv d3">SCOPED <span>·</span> VERIFIED <span>·</span> SETTLED</div>
     </div>
-    <a class="skip" href="#decomp">Scroll &nbsp;↓</a>
+    <a class="skip" href="#whatis">Scroll &nbsp;↓</a>
+  </section>
+
+  <!-- 00.5 WHAT BIXXVILLE IS -->
+  <section class="scene" id="whatis" data-rail>
+    <div class="inner" style="max-width:640px">
+      <div class="label rv">What Bixxville Is</div>
+      <h2 class="rv d1">Bixxville is the operating system.<br>Everything else on this page runs on it.</h2>
+      <p class="body rv d2" style="margin-top:32px">It takes a goal that feels too big to start — a business, a property, a new skill — and breaks it into a clear, ordered sequence of steps you can actually run. AI agents help with the breakdown. You and your team make every real decision.</p>
+      <p class="body rv d3" style="margin-top:24px">The thing that actually slows people down is friction: the unclear next step, the hidden dependency, the decision nobody wants to make alone. Making that friction visible and solvable is the whole job.</p>
+      <p class="rv d4" style="margin-top:40px; font-family:'Lora',Georgia,serif; font-style:italic; font-size:clamp(17px,4vw,22px); color:var(--green)">No person gets left behind as technology advances.</p>
+    </div>
+    <a class="skip" href="#decomp">Skip this section &nbsp;↓</a>
   </section>
 
   <!-- 01 DECOMPOSITION -->
@@ -433,45 +426,25 @@
   </section>
 
   <!-- 04.5 SIGN UP FOR TUTORING -->
-  <section class="scene" id="recruit" data-rail>
+  <section class="scene" id="recruit" data-rail style="background:radial-gradient(1200px 600px at 20% 15%, rgba(255,92,76,.10), transparent 60%), radial-gradient(1000px 500px at 85% 85%, rgba(23,190,187,.09), transparent 55%);">
     <div class="about-grid">
-      <div class="label rv">Sign Up For Tutoring</div>
+      <div class="label rv" style="color:#FF5C4C">Real Skills For Real Kids</div>
       <h2 class="rv d1">Bixxville Tutoring.<br>Now enrolling from&nbsp;St.&nbsp;Croix.</h2>
       <p class="about-body rv d2">Three programs, one operating system — built for families here on the ground.</p>
       <div class="about-pts rv d3">
-        <div class="about-pt"><span class="b">→</span><span class="t"><b>Math Tutoring — $50 / hour.</b> 3 weeks, 2x/week on Zoom. Sliding scale down to $35/hr for families who need it.</span></div>
-        <div class="about-pt"><span class="b">→</span><span class="t"><b>Claude Code Class — $175 / month.</b> 4 weeks, 1-on-1. Leave with a working website you built yourself.</span></div>
-        <div class="about-pt"><span class="b">→</span><span class="t"><b>Sales Crash Course — $200 / week.</b> Scripts, product-market fit, product-channel fit, ideal buyer. Leave with a live website and a first-sale plan.</span></div>
+        <div class="about-pt"><span class="b" style="color:#FF5C4C">→</span><span class="t"><b>Math Tutoring — $50 / hour.</b> 3 weeks, 2x/week on Zoom. Sliding scale down to $35/hr for families who need it.</span></div>
+        <div class="about-pt"><span class="b" style="color:#17BEBB">→</span><span class="t"><b>Claude Code Class — $175 / month.</b> 4 weeks, 1-on-1. Leave with a working website you built yourself.</span></div>
+        <div class="about-pt"><span class="b" style="color:#FFBE3C">→</span><span class="t"><b>Sales Crash Course — $200 / week.</b> Scripts, product-market fit, product-channel fit, ideal buyer. Leave with a live website and a first-sale plan.</span></div>
       </div>
-      <div class="rv d4" style="margin-top:26px;">
+      <div class="rv d4" style="margin-top:26px; display:flex; flex-wrap:wrap; gap:12px;">
         <a class="pill" href="Bixxville_Tutoring.pdf" download style="display:inline-block; border-color:var(--green); color:var(--green);">Sign up for tutoring today →</a>
+        <a class="pill" href="realskills.html" style="display:inline-block; border-color:#FF5C4C; color:#FF5C4C;">Learn more →</a>
       </div>
       <p class="about-body rv d4" style="margin-top:18px; font-size:14px; color:var(--soft);">
         Download the packet, fill out the intake questionnaire on the last page, and send it back to
         <a href="mailto:bixxville@proton.me" style="color:var(--green); text-decoration:none; border-bottom:1px solid rgba(140,240,96,.4);">bixxville@proton.me</a>.
         We'll follow up to schedule your child's first session.
       </p>
-    </div>
-    <a class="skip" href="#belief">Skip this section &nbsp;↓</a>
-  </section>
-
-  <!-- 04 THE BELIEF -->
-  <section class="scene" id="belief" data-rail>
-    <div class="ripple" aria-hidden="true">
-      <span style="width:160px;height:160px"></span>
-      <span style="width:320px;height:320px"></span>
-      <span style="width:520px;height:520px"></span>
-      <span style="width:760px;height:760px"></span>
-    </div>
-    <div class="floateq" style="left:6%;top:24%">E = mc²</div>
-    <div class="floateq" style="right:8%;bottom:30%">1 LOG = 1 hr = $100</div>
-    <div class="creed">
-      <div class="label rv">Our Vision</div>
-      <p class="rv d1">A union and a chamber of commerce built into one operating system — for the people who do the work.</p>
-      <p class="rv d2">AI should organize the work, not replace the worker.</p>
-      <p class="rv d3">The next economy settles in more than money — in energy, mass, and mathematical work.</p>
-      <p class="rv d4">We build so living things keep a say in that ledger.</p>
-      <p class="rv d5 last">We trust the math and the quantum.</p>
     </div>
     <a class="skip" href="#portfolio">Skip this section &nbsp;↓</a>
   </section>
