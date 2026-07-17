@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Work with us — Land of Geb</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FFFFFF; --panel:#F4F5F7;
+    --ink:#0A0B0C; --soft:#4A4F55; --grey:#7A828A;
+    --green:#8CF060; --green-deep:#3F8F1F;
+    --line:#E3E6E9; --gold:#AA8C4E;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:'Poppins',sans-serif; -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--green);color:var(--ink)}
+
+  nav{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 22px;
+    background:linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,255,255,0));
+  }
+  .brand{display:flex; align-items:center; gap:10px; text-decoration:none}
+  .glyph{width:30px;height:18px;display:block}
+  .brand b{font-weight:600; font-size:12px; letter-spacing:.22em; color:var(--ink); text-transform:uppercase}
+  .pill{
+    border:1px solid rgba(10,11,12,.35); color:var(--ink);
+    border-radius:40px; padding:9px 18px; font-size:13px; font-weight:500;
+    background:transparent; cursor:pointer; text-decoration:none;
+    transition:border-color .25s, color .25s;
+  }
+  .pill:hover{border-color:var(--green-deep); color:var(--green-deep)}
+
+  main{max-width:620px; margin:0 auto; padding:120px 26px 80px}
+  .label{font-size:12px; letter-spacing:.26em; text-transform:uppercase; color:var(--grey); margin-bottom:16px; font-weight:500}
+  .label .n{color:var(--green-deep)}
+  h1{font-weight:600; letter-spacing:-.02em; line-height:1.02; font-size:clamp(34px,8.5vw,58px); margin-bottom:14px}
+  .lead{color:var(--soft); font-size:clamp(15px,4.2vw,18px); line-height:1.55; margin-bottom:18px}
+  .promise{
+    background:var(--panel); border:1px solid var(--line); border-left:3px solid var(--gold);
+    border-radius:10px; padding:16px 18px; margin:18px 0 30px; font-size:14px; line-height:1.6; color:var(--soft);
+  }
+  .promise b{color:var(--ink)}
+
+  form{display:flex; flex-direction:column; gap:16px}
+  .frow{display:flex; gap:12px; flex-wrap:wrap}
+  .frow .field{flex:1; min-width:200px}
+  .field label{display:block; font-size:13px; font-weight:600; color:var(--ink); margin-bottom:6px}
+  .field .hint{font-size:12px; color:var(--grey); font-weight:400; margin-bottom:6px}
+  .field input,.field textarea{
+    width:100%; background:var(--bg); border:1px solid var(--line);
+    border-radius:9px; padding:13px 14px; color:var(--ink); font-family:inherit; font-size:14px;
+    transition:border-color .15s;
+  }
+  .field input:focus,.field textarea:focus{outline:none; border-color:var(--green-deep)}
+  .field textarea{resize:vertical; min-height:78px; line-height:1.5}
+  .sectlabel{
+    font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); font-weight:600;
+    margin:12px 0 -2px; border-top:1px solid var(--line); padding-top:20px;
+  }
+  .sectlabel.first{border-top:none; padding-top:0}
+  .submit{
+    background:var(--green); color:#08110C; border:none; border-radius:10px; padding:16px; font-family:inherit;
+    font-size:15px; font-weight:700; cursor:pointer; margin-top:6px; transition:transform .1s, background .15s;
+  }
+  .submit:hover{background:#7ddb52} .submit:active{transform:scale(.99)}
+  .formfoot{margin-top:18px; font-size:12px; color:var(--grey); text-align:center; line-height:1.6}
+  .formfoot .gold{color:var(--gold); font-family:'Lora'; font-style:italic}
+
+  footer{
+    max-width:620px; margin:0 auto; padding:0 26px 60px;
+    color:var(--grey); font-size:12px; letter-spacing:.04em; line-height:1.8;
+  }
+  footer b{color:var(--soft); font-weight:500; letter-spacing:.18em}
+  footer .sx{color:var(--green-deep)}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="brand" href="index.html" aria-label="Land of Geb home">
+    <svg class="glyph" viewBox="0 0 40 24" aria-hidden="true">
+      <polyline points="2,12 9,12 14,4 20,20 26,8 31,12 38,12" fill="none" stroke="#3F8F1F" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+    </svg>
+    <b>Land&nbsp;of&nbsp;Geb</b>
+  </a>
+  <a class="pill" href="index.html">← Back to site</a>
+</nav>
+
+<main>
+  <div class="label"><span class="n">02</span> &nbsp;— &nbsp;Work with us</div>
+  <h1>Tell us your goal.</h1>
+  <p class="lead">You bring a goal you want done. We break it into the exact order of steps and run it with our team — so you stop managing it.</p>
+  <div class="promise">
+    Here's how it works: tell us about your goal below. We'll set up a short conversation, and from it you'll get a <b>free partial map</b> of your project — the real first steps and the moves that matter most. If it's a fit, we handle the rest.
+  </div>
+
+  <!-- FormSubmit: emails submissions to bixxville@proton.me. No backend needed.
+       NOTE: the FIRST submission triggers a one-time FormSubmit confirmation email
+       to bixxville@proton.me — click the link in it once to activate, then it just works. -->
+  <form action="https://formsubmit.co/bixxville@proton.me" method="POST">
+    <input type="hidden" name="_subject" value="New Bixxville project intake">
+    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_captcha" value="true">
+    <input type="text" name="_honey" style="display:none">
+
+    <div class="sectlabel first">About you</div>
+    <div class="frow">
+      <div class="field"><label>Name</label><input type="text" name="Name" required></div>
+      <div class="field"><label>Where you're from</label><input type="text" name="Location" placeholder="City / area" required></div>
+    </div>
+    <div class="field"><label>Email</label><input type="email" name="Email" required></div>
+
+    <div class="sectlabel">Your project</div>
+    <div class="field">
+      <label>What's the goal?</label>
+      <div class="hint">In your own words — what are you trying to get done?</div>
+      <textarea name="The goal" required></textarea>
+    </div>
+    <div class="field">
+      <label>What does "done" look like?</label>
+      <div class="hint">How will you know it succeeded?</div>
+      <textarea name="What done looks like" required></textarea>
+    </div>
+    <div class="frow">
+      <div class="field"><label>Timeframe</label><input type="text" name="Timeframe" placeholder="e.g. 3 months, by spring"></div>
+      <div class="field"><label>Budget range (optional)</label><input type="text" name="Budget range" placeholder="Optional"></div>
+    </div>
+    <div class="field">
+      <label>What's already in motion?</label>
+      <div class="hint">Anything started or already done.</div>
+      <textarea name="Already in motion"></textarea>
+    </div>
+    <div class="field">
+      <label>Biggest obstacle or unknown?</label>
+      <textarea name="Biggest obstacle"></textarea>
+    </div>
+    <div class="field">
+      <label>Who's involved?</label>
+      <div class="hint">Who has to do the work, or who needs to sign off.</div>
+      <input type="text" name="Who is involved">
+    </div>
+
+    <div class="sectlabel">Last thing</div>
+    <div class="field">
+      <label>How did you hear about us?</label>
+      <input type="text" name="How they heard">
+    </div>
+
+    <button type="submit" class="submit">Send my project →</button>
+  </form>
+
+  <div class="formfoot">
+    We read every submission. You'll hear back to set up your conversation.<br>
+    <span class="gold">Bixxville · St. Croix · USVI · We trust the math.</span>
+  </div>
+</main>
+
+<footer>
+  <b>SCOPED <span class="sx">·</span> VERIFIED <span class="sx">·</span> SETTLED</b><br>
+  Land of Geb, LLC — Christiansted, St. Croix, USVI<br>
+  Running on the Bixxville OS · <span class="sx">St. Croix to the world</span>
+</footer>
+
+</body>
+</html>

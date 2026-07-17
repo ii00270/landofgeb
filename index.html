@@ -6,7 +6,7 @@
 <title>Land of Geb — Bixxville OS</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;1,400&family=Archivo+Black&display=swap" rel="stylesheet">
 <style>
   :root{
     --black:#0A0B0C; --panel:#111316;
@@ -24,13 +24,13 @@
   }
   ::selection{background:var(--green);color:var(--black)}
 
-  /* ---------- scroll container ---------- */
-  .deck{scroll-snap-type:y proximity;}
+  /* ---------- scroll container (compact: sections size to content) ---------- */
   .scene{
-    position:relative; min-height:100svh; min-height:100vh;
+    position:relative;
     display:flex; flex-direction:column; justify-content:flex-end;
-    padding:88px 26px 64px; scroll-snap-align:start; overflow:hidden;
+    padding:84px 26px 56px; overflow:hidden;
   }
+  #whatis{min-height:86svh; min-height:86vh; justify-content:center}
 
   /* ---------- top nav ---------- */
   nav{
@@ -92,27 +92,9 @@
   .rv.in{opacity:1; transform:none}
   .d1{transition-delay:.08s}.d2{transition-delay:.18s}.d3{transition-delay:.30s}.d4{transition-delay:.42s}.d5{transition-delay:.56s}
 
-  /* skip link */
-  .skip{
-    position:absolute; left:26px; bottom:26px; display:flex; align-items:center; gap:8px;
-    color:var(--white); font-size:13px; text-decoration:none; opacity:.7;
-    border-bottom:1px solid rgba(244,245,247,.5); padding-bottom:3px;
-    transition:opacity .25s, color .25s, border-color .25s;
-  }
-  .skip:hover{opacity:1; color:var(--green); border-color:var(--green)}
-
-  /* ---------- HERO ---------- */
-  #hero{justify-content:center; text-align:left; align-items:flex-start}
-  #hero .inner{position:relative; z-index:2}
-  #hero .eyebrow{
-    font-size:12px; letter-spacing:.28em; text-transform:uppercase; color:var(--grey);
-    margin-bottom:26px; font-weight:500;
-  }
-  #hero h1 .o{color:var(--green)}
-
   /* ---------- math object frame ---------- */
-  .stage{position:relative; z-index:1; width:100%; flex:1; display:flex;
-    align-items:center; justify-content:center; min-height:42svh}
+  .stage{position:relative; z-index:1; width:100%; display:flex;
+    align-items:center; justify-content:center; margin:6px 0 26px}
   svg{width:100%; height:auto; max-width:640px; overflow:visible}
   .node{fill:none; stroke:var(--green); stroke-width:1.4}
   .node.dim{stroke:var(--rail)}
@@ -286,6 +268,85 @@
   .stat-term .sl{font-size:14px; color:var(--soft)}
   .stat-term.neg .sn{color:var(--orange)}
 
+  /* ---------- NETWORK NAVIGATOR (dashboard) ---------- */
+  .dash{
+    width:100%; max-width:920px; border:1px solid rgba(244,245,247,.14); border-radius:14px;
+    background:#0D0F11; overflow:hidden; margin-top:14px;
+  }
+  .dash-top{
+    display:flex; align-items:center; justify-content:space-between; gap:10px;
+    padding:12px 16px; border-bottom:1px solid rgba(244,245,247,.08); font-family:var(--mono);
+  }
+  .dash-top b{font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:var(--white); font-weight:600}
+  .dash-top b i{color:var(--green); font-style:normal}
+  .dash-live{display:flex; align-items:center; gap:7px; font-size:9px; letter-spacing:.16em; text-transform:uppercase; color:var(--grey)}
+  .dash-live:before{content:''; width:7px; height:7px; border-radius:50%; background:var(--green); display:inline-block}
+  .dash-body{display:flex; flex-direction:column}
+  .dash-graph{flex:1.35; padding:6px 4px 0}
+  .dash-graph svg{max-width:none}
+  .dash-side{flex:1; padding:14px 18px 18px; border-top:1px solid rgba(244,245,247,.08)}
+  @media(min-width:760px){
+    .dash-body{flex-direction:row}
+    .dash-side{border-top:none; border-left:1px solid rgba(244,245,247,.08)}
+  }
+  .ds-t{font-family:var(--mono); font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--green); font-weight:600; margin-bottom:6px}
+  .ds-row{
+    display:flex; justify-content:space-between; align-items:baseline; gap:12px;
+    padding:11px 0; border-bottom:1px solid rgba(244,245,247,.06); font-size:13.5px;
+  }
+  .ds-row:last-child{border-bottom:none}
+  .ds-row .dn{color:var(--white); font-weight:600}
+  .ds-row .df{color:var(--grey); font-family:var(--mono); font-size:11px; text-align:right; white-space:nowrap}
+
+  /* ---------- OS MARKET SNIPPET ---------- */
+  .os-snip{
+    width:100%; max-width:620px; margin-top:38px; border:1px solid rgba(244,245,247,.14);
+    border-radius:12px; background:#0D0F11; overflow:hidden; font-family:var(--mono);
+  }
+  .os-top{display:flex; justify-content:space-between; align-items:center; padding:12px 14px; border-bottom:1px solid rgba(244,245,247,.08)}
+  .os-top b{font-size:12px; letter-spacing:.14em; color:var(--green); font-weight:700}
+  .os-top span{font-size:9px; letter-spacing:.12em; text-transform:uppercase; color:var(--grey)}
+  .os-tabs{display:flex; gap:6px; padding:10px 12px; border-bottom:1px solid rgba(244,245,247,.08)}
+  .os-tabs span{font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--grey); padding:6px 10px; border:1px solid transparent; border-radius:5px}
+  .os-tabs span.on{color:var(--green); border-color:rgba(140,240,96,.4); background:rgba(140,240,96,.06)}
+  .os-sub{font-size:9px; letter-spacing:.18em; text-transform:uppercase; color:var(--grey); padding:12px 14px 4px}
+  .os-row{display:flex; align-items:baseline; gap:10px; padding:10px 14px; border-bottom:1px solid rgba(244,245,247,.05); font-size:11.5px}
+  .os-row:last-child{border-bottom:none}
+  .os-row .n{color:var(--white); font-weight:600; flex-shrink:0}
+  .os-row .e{color:var(--grey); flex:1; min-width:0}
+  .os-row .v{color:var(--green); font-weight:700; white-space:nowrap}
+
+  /* ---------- CLASSES tap hint ---------- */
+  .taphint{
+    display:inline-flex; align-items:center; gap:9px; margin-top:6px;
+    font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--green); font-weight:600;
+  }
+  .taphint .dot{width:8px; height:8px; border-radius:50%; background:var(--green); animation:tapPulse 1.6s ease-in-out infinite}
+  @keyframes tapPulse{0%,100%{opacity:1; transform:scale(1)} 50%{opacity:.35; transform:scale(.7)}}
+  @media (prefers-reduced-motion:reduce){.taphint .dot{animation:none}}
+
+  /* ---------- REAL SKILLS (brand section) ---------- */
+  .rs-scene{background:#FAF5EC}
+  .rs-eyebrow{font-family:'Archivo Black',sans-serif; font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:#FF5C4C}
+  .rs-head{font-family:'Archivo Black',sans-serif; font-weight:400; letter-spacing:0; line-height:1.06; color:#2B2236; font-size:clamp(28px,7.5vw,58px); margin-bottom:0}
+  .rs-body{color:#463C50; font-size:clamp(15px,4.2vw,18px); line-height:1.6; max-width:560px}
+  .rs-pts{display:flex; flex-direction:column; gap:14px; margin-top:6px}
+  .rs-pt{display:flex; gap:14px; align-items:flex-start}
+  .rs-pt .rs-b{width:11px; height:11px; border-radius:3px; flex-shrink:0; margin-top:7px}
+  .rs-pt .rs-t{color:#463C50; font-size:clamp(14px,4vw,17px); line-height:1.5}
+  .rs-pt .rs-t b{color:#1A161E; font-weight:600}
+  .rs-ctas{margin-top:26px; display:flex; flex-wrap:wrap; gap:12px}
+  .rs-btn{border-radius:40px; padding:12px 22px; font-size:14px; font-weight:600; text-decoration:none; display:inline-block; transition:transform .15s, opacity .15s}
+  .rs-btn:hover{transform:translateY(-1px); opacity:.92}
+  .rs-btn.solid{background:#FF5C4C; color:#fff}
+  .rs-btn.line{border:2px solid #17BEBB; color:#0F7C7A}
+  .rs-note{margin-top:18px; font-size:14px; color:#8A8090; max-width:560px; line-height:1.6}
+  .rs-note a{color:#0F7C7A; text-decoration:none; border-bottom:1px solid rgba(23,190,187,.45)}
+
+  /* ---------- WORK CTA ---------- */
+  a.submit{display:block; text-align:center; text-decoration:none}
+
   /* ---------- RULEBOOK: how you win ---------- */
   .win-flat{border:1px solid var(--green); border-radius:10px; padding:26px 24px; margin-top:28px; max-width:600px; background:rgba(140,240,96,.03)}
   .win-flat .wtitle{font-family:var(--mono); font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--green); font-weight:700; margin-bottom:12px}
@@ -306,14 +367,14 @@
 <body>
 
 <nav>
-  <a class="brand" href="#hero" aria-label="Land of Geb home">
+  <a class="brand" href="#whatis" aria-label="Land of Geb home">
     <svg class="glyph" viewBox="0 0 40 24" aria-hidden="true">
       <polyline points="2,12 9,12 14,4 20,20 26,8 31,12 38,12" fill="none" stroke="#8CF060" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
     </svg>
     <b>Land&nbsp;of&nbsp;Geb</b>
   </a>
   <div class="navactions">
-    <a class="pill" href="#work">Work with us</a>
+    <a class="pill" href="work.html">Work with us</a>
     <button class="ham" id="hamBtn" aria-label="Open menu"><span></span><span></span></button>
   </div>
 </nav>
@@ -321,9 +382,9 @@
 <!-- slide-out menu -->
 <div class="menu" id="menu" aria-hidden="true">
   <button class="menuclose" id="menuClose" aria-label="Close menu"></button>
-  <a href="#hero"><span class="mi">00</span> Home</a>
+  <a href="#whatis"><span class="mi">00</span> Home</a>
   <a href="about.html"><span class="mi">01</span> About</a>
-  <a href="#work"><span class="mi">02</span> Work with us</a>
+  <a href="work.html"><span class="mi">02</span> Work with us</a>
   <a href="bixxville.html"><span class="mi">03</span> Bixxville</a>
   <a href="https://ii00270.github.io/Bixxvillenode/" target="_blank" rel="noopener"><span class="mi">04</span> Log in</a>
   <div class="mfoot">SCOPED <span>·</span> VERIFIED <span>·</span> SETTLED &nbsp;—&nbsp; St. Croix · USVI</div>
@@ -333,27 +394,16 @@
 
 <main class="deck">
 
-  <!-- 00 HERO -->
-  <section class="scene" id="hero" data-rail>
-    <div class="inner">
-      <div class="eyebrow rv">Land of Geb &nbsp;·&nbsp; St. Croix, USVI</div>
-      <h1 class="rv d1">You're not behind<br>because you're <span class="o">bad at this.</span></h1>
-      <p class="body rv d2">You're behind because nobody helped you figure out what to do first. Solo operators and small teams hire us when they're swamped, stalled, or just need a second person in the room to help them find the next move. We map the path. We run it with you.</p>
-      <div class="spine rv d3">SCOPED <span>·</span> VERIFIED <span>·</span> SETTLED</div>
-    </div>
-    <a class="skip" href="#whatis">Scroll &nbsp;↓</a>
-  </section>
-
-  <!-- 00.5 WHAT BIXXVILLE IS -->
+  <!-- 00 WHAT BIXXVILLE IS (opening scene) -->
   <section class="scene" id="whatis" data-rail>
     <div class="inner" style="max-width:640px">
-      <div class="label rv">What Bixxville Is</div>
-      <h2 class="rv d1">Bixxville is the operating system.<br>Everything else on this page runs on it.</h2>
+      <div class="label rv">Land of Geb &nbsp;·&nbsp; St. Croix, USVI</div>
+      <h2 class="rv d1">Bixxville is the operating&nbsp;system.</h2>
       <p class="body rv d2" style="margin-top:32px">It takes a goal that feels too big to start — a business, a property, a new skill — and breaks it into a clear, ordered sequence of steps you can actually run. AI agents help with the breakdown. You and your team make every real decision.</p>
       <p class="body rv d3" style="margin-top:24px">The thing that actually slows people down is friction: the unclear next step, the hidden dependency, the decision nobody wants to make alone. Making that friction visible and solvable is the whole job.</p>
       <p class="rv d4" style="margin-top:40px; font-family:'Lora',Georgia,serif; font-style:italic; font-size:clamp(17px,4vw,22px); color:var(--green)">No person gets left behind as technology advances.</p>
+      <div class="spine rv d5">SCOPED <span>·</span> VERIFIED <span>·</span> SETTLED</div>
     </div>
-    <a class="skip" href="#decomp">Skip this section &nbsp;↓</a>
   </section>
 
   <!-- 01 DECOMPOSITION -->
@@ -397,7 +447,6 @@
       <h2 class="rv d1">A goal is never one thing.</h2>
       <p class="body rv d2">Every engagement breaks into scoped units of work. One LOG is one hour. When the parts are named, sized, and priced, the whole stops being a guess — and the order stops being a coin flip.</p>
     </div>
-    <a class="skip" href="#dag">Skip this section &nbsp;↓</a>
   </section>
 
   <!-- 02 THE GRAPH -->
@@ -440,7 +489,6 @@
       <h2 class="rv d1">Lists lie.<br>A graph tells the truth.</h2>
       <p class="body rv d2">A list pretends work is a straight line. It is not. A graph shows what runs in parallel, what is blocked, and the hidden rule that saves the whole thing — confirm the room before you build the deck.</p>
     </div>
-    <a class="skip" href="#value">Skip this section &nbsp;↓</a>
   </section>
 
   <!-- 03 THE VALUE -->
@@ -452,7 +500,6 @@
       <p class="body rv d3" style="margin-top:24px">Before we name a number, we map the work. Every task has a size. Every hour of attention has a value. The price is the output of that equation — not a guess, not a market rate we hoped would fit, not a number designed to sound reasonable. You see the math before you sign anything. If it fits, you know exactly what you're buying. If it doesn't, that's a real answer too.</p>
       <p class="rv d4" style="margin-top:40px; font-family:'Lora',Georgia,serif; font-style:italic; font-size:clamp(17px,4vw,22px); color:var(--green)">The number follows the work. Always.</p>
     </div>
-    <a class="skip" href="#network">Skip this section &nbsp;↓</a>
   </section>
 
   <!-- 04 THE NETWORK -->
@@ -496,7 +543,58 @@
       <h2 class="rv d1">Many hands.<br>One graph.</h2>
       <p class="body rv d2">Work routes across the network by proven capability, not by chance. Every contribution is weighted by reputation, recorded, and settled on-chain. Two peers today. A network by design.</p>
     </div>
-    <a class="skip" href="#rb-hero">Skip this section &nbsp;↓</a>
+  </section>
+
+  <!-- 04.05 THE NAVIGATOR (network dashboard) -->
+  <section class="scene" id="navigator" data-rail>
+    <div class="inner" style="max-width:920px">
+      <div class="label rv">The Navigator</div>
+    </div>
+    <div class="dash rv d1" role="img" aria-label="Bixxville network navigator — every lane connected to one operating system">
+      <div class="dash-top"><b>bixx<i>ville</i></b><span class="dash-live">Network view</span></div>
+      <div class="dash-body">
+        <div class="dash-graph">
+          <svg viewBox="0 0 560 380" aria-hidden="true">
+            <!-- faint texture nodes -->
+            <circle cx="58" cy="72" r="3" fill="#2C482A"/>
+            <circle cx="42" cy="298" r="3" fill="#2C482A"/>
+            <circle cx="84" cy="338" r="2.5" fill="#2C482A"/>
+            <circle cx="200" cy="46" r="2.5" fill="#2C482A"/>
+            <!-- fan edges -->
+            <g fill="none" stroke="#2C482A" stroke-width="1.3" opacity=".85">
+              <path d="M144,190 C260,190 300,42 410,42"/>
+              <path d="M144,190 C260,190 300,90 410,90"/>
+              <path d="M144,190 C260,190 300,186 410,186"/>
+              <path d="M144,190 C260,190 300,234 410,234"/>
+              <path d="M144,190 C260,190 300,282 410,282"/>
+              <path d="M144,190 C260,190 300,330 410,330"/>
+            </g>
+            <path d="M144,190 C260,190 300,138 410,138" fill="none" stroke="#8CF060" stroke-width="1.6"/>
+            <!-- hub -->
+            <circle cx="120" cy="190" r="24" fill="none" stroke="#8CF060" stroke-width="1.6"/>
+            <circle cx="120" cy="190" r="5" fill="#8CF060"/>
+            <text x="120" y="232" text-anchor="middle" fill="#A6ADB4" font-family="Poppins,sans-serif" font-size="10" letter-spacing=".08em">BIXXVILLE OS</text>
+            <!-- lane nodes -->
+            <circle cx="418" cy="42" r="7" fill="#AA8C4E"/><text x="434" y="46" fill="#F4F5F7" font-family="Poppins,sans-serif" font-size="11">Real Estate · Florida</text>
+            <circle cx="418" cy="90" r="7" fill="#8CF060"/><text x="434" y="94" fill="#F4F5F7" font-family="Poppins,sans-serif" font-size="11">St. Croix · Build</text>
+            <circle cx="418" cy="138" r="7" fill="#8CF060"/><circle cx="418" cy="138" r="12" fill="none" stroke="#F4F5F7" stroke-width="1.2"/><text x="437" y="142" fill="#F4F5F7" font-family="Poppins,sans-serif" font-size="11">Justnutz</text>
+            <circle cx="418" cy="186" r="7" fill="#F45E26"/><text x="434" y="190" fill="#F4F5F7" font-family="Poppins,sans-serif" font-size="11">Sanitation</text>
+            <circle cx="418" cy="234" r="7" fill="#CDCFD3"/><text x="434" y="238" fill="#F4F5F7" font-family="Poppins,sans-serif" font-size="11">Akilah's BuzzOFF</text>
+            <circle cx="418" cy="282" r="7" fill="#8CF060"/><text x="434" y="286" fill="#F4F5F7" font-family="Poppins,sans-serif" font-size="11">Tutoring</text>
+            <circle cx="418" cy="330" r="7" fill="#AA8C4E"/><text x="434" y="334" fill="#F4F5F7" font-family="Poppins,sans-serif" font-size="11">Intelligence Layer</text>
+          </svg>
+        </div>
+        <div class="dash-side">
+          <div class="ds-t">Lanes on the network</div>
+          <div class="ds-row"><span class="dn">Real Estate — Florida</span><span class="df">founding lane</span></div>
+          <div class="ds-row"><span class="dn">Justnutz</span><span class="df">4 machines live</span></div>
+          <div class="ds-row"><span class="dn">Sanitation</span><span class="df">newest lane</span></div>
+          <div class="ds-row"><span class="dn">Akilah's BuzzOFF</span><span class="df">distribution</span></div>
+          <div class="ds-row"><span class="dn">Bixxville Tutoring</span><span class="df">enrolling now</span></div>
+          <div class="ds-row"><span class="dn">Intelligence Layer</span><span class="df">education</span></div>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- 04.1 RULEBOOK — HERO -->
@@ -507,8 +605,18 @@
       <div class="rb-roles rv d2">
         <span>Apprentice</span><span>Wrangler</span><span>Architect</span><span>Operator</span>
       </div>
+      <div class="os-snip rv d3" role="img" aria-label="A slice of the Bixxville OS Market tab — the network ledger">
+        <div class="os-top"><b>BIXXVILLE</b><span>the OS · live</span></div>
+        <div class="os-tabs"><span class="on">Market</span><span>Messages</span><span>Work</span><span>Sidekick</span></div>
+        <div class="os-sub">Network — ledger events</div>
+        <div class="os-row"><span class="n">Genesis</span><span class="e">network founded — Feb 27, 2025</span><span class="v">C1</span></div>
+        <div class="os-row"><span class="n">Land of Geb</span><span class="e">founding contribution verified</span><span class="v">1,440 LOG</span></div>
+        <div class="os-row"><span class="n">BUZZ/OFF Global</span><span class="e">first external settlement</span><span class="v">$65</span></div>
+        <div class="os-row"><span class="n">Justnutz</span><span class="e">Guard gym · UVI · Cruzan · CBP</span><span class="v">4 live</span></div>
+        <div class="os-row"><span class="n">Tutoring</span><span class="e">enrolling — St. Croix</span><span class="v">open</span></div>
+        <div class="os-row"><span class="n">Sanitation</span><span class="e">newest lane — scoped</span><span class="v">new</span></div>
+      </div>
     </div>
-    <a class="skip" href="#board">Skip this section &nbsp;↓</a>
   </section>
 
   <!-- 04.2 RULEBOOK — THE BOARD -->
@@ -523,7 +631,6 @@
         <div class="board-meta">Genesis <b>Feb 27, 2025</b> &nbsp;·&nbsp; every cycle runs 28 days, lunar-paced</div>
       </div>
     </div>
-    <a class="skip" href="#classes">Skip this section &nbsp;↓</a>
   </section>
 
   <!-- 04.3 RULEBOOK — THE CLASSES -->
@@ -531,7 +638,8 @@
     <div class="inner" style="max-width:900px">
       <div class="label rv">The Classes</div>
       <h2 class="rv d1">Four roles.<br>One ladder.</h2>
-      <p class="body rv d2">Every member starts at Apprentice and climbs on delivered work — never on anything else. Tap or hover a tile for the real terms.</p>
+      <p class="body rv d2">Every member starts at Apprentice and climbs on delivered work — never on anything else.</p>
+      <div class="taphint rv d2"><span class="dot"></span>Tap a tile — it flips to the real terms</div>
     </div>
     <div class="classgrid rv d3">
       <div class="ctile o1" tabindex="0">
@@ -567,7 +675,6 @@
         </div>
       </div>
     </div>
-    <a class="skip" href="#currency">Skip this section &nbsp;↓</a>
   </section>
 
   <!-- 04.4 RULEBOOK — THE CURRENCY -->
@@ -592,7 +699,6 @@
         </div>
       </div>
     </div>
-    <a class="skip" href="#score">Skip this section &nbsp;↓</a>
   </section>
 
   <!-- 04.5 RULEBOOK — THE SCORE -->
@@ -608,7 +714,6 @@
       <div class="stat-term"><span class="sl">Streak — consecutive cycles at commitment</span><span class="sn">0.15</span></div>
       <div class="stat-term neg"><span class="sl">Disputes — lost or partially lost</span><span class="sn">−0.10</span></div>
     </div>
-    <a class="skip" href="#win">Skip this section &nbsp;↓</a>
   </section>
 
   <!-- 04.6 RULEBOOK — HOW YOU WIN -->
@@ -622,31 +727,29 @@
         <div class="win-rule">Advancement comes from verified, delivered work — full stop. Never from recruiting other members. Never from a fee.</div>
       </div>
     </div>
-    <a class="skip" href="#recruit">Continue &nbsp;↓</a>
   </section>
 
-  <!-- 04.7 SIGN UP FOR TUTORING -->
-  <section class="scene" id="recruit" data-rail style="background:radial-gradient(1200px 600px at 20% 15%, rgba(255,92,76,.10), transparent 60%), radial-gradient(1000px 500px at 85% 85%, rgba(23,190,187,.09), transparent 55%);">
+  <!-- 04.7 SIGN UP FOR TUTORING — Real Skills brand -->
+  <section class="scene rs-scene" id="recruit" data-rail>
     <div class="about-grid">
-      <div class="label rv" style="color:#FF5C4C">Real Skills For Real Kids</div>
-      <h2 class="rv d1">Bixxville Tutoring.<br>Now enrolling from&nbsp;St.&nbsp;Croix.</h2>
-      <p class="about-body rv d2">Three programs, one operating system — built for families here on the ground.</p>
-      <div class="about-pts rv d3">
-        <div class="about-pt"><span class="b" style="color:#FF5C4C">→</span><span class="t"><b>Math Tutoring — $50 / hour.</b> 3 weeks, 2x/week on Zoom. Sliding scale down to $35/hr for families who need it.</span></div>
-        <div class="about-pt"><span class="b" style="color:#17BEBB">→</span><span class="t"><b>Claude Code Class — $175 / month.</b> 4 weeks, 1-on-1. Leave with a working website you built yourself.</span></div>
-        <div class="about-pt"><span class="b" style="color:#FFBE3C">→</span><span class="t"><b>Sales Crash Course — $200 / week.</b> Scripts, product-market fit, product-channel fit, ideal buyer. Leave with a live website and a first-sale plan.</span></div>
+      <div class="rs-eyebrow rv">Real Skills For Real Kids</div>
+      <h2 class="rs-head rv d1">Bixxville Tutoring.<br>Now enrolling from&nbsp;St.&nbsp;Croix.</h2>
+      <p class="rs-body rv d2">Three programs, one operating system — built for families here on the ground.</p>
+      <div class="rs-pts rv d3">
+        <div class="rs-pt"><span class="rs-b" style="background:#FF5C4C"></span><span class="rs-t"><b>Math Tutoring — $50 / hour.</b> 3 weeks, 2x/week on Zoom. Sliding scale down to $35/hr for families who need it.</span></div>
+        <div class="rs-pt"><span class="rs-b" style="background:#17BEBB"></span><span class="rs-t"><b>Claude Code Class — $175 / month.</b> 4 weeks, 1-on-1. Leave with a working website you built yourself.</span></div>
+        <div class="rs-pt"><span class="rs-b" style="background:#FFBE3C"></span><span class="rs-t"><b>Sales Crash Course — $200 / week.</b> Scripts, product-market fit, product-channel fit, ideal buyer. Leave with a live website and a first-sale plan.</span></div>
       </div>
-      <div class="rv d4" style="margin-top:26px; display:flex; flex-wrap:wrap; gap:12px;">
-        <a class="pill" href="Bixxville_Tutoring.pdf" download style="display:inline-block; border-color:var(--green); color:var(--green);">Sign up for tutoring today →</a>
-        <a class="pill" href="realskills.html" style="display:inline-block; border-color:#FF5C4C; color:#FF5C4C;">Learn more →</a>
+      <div class="rs-ctas rv d4">
+        <a class="rs-btn solid" href="Bixxville_Tutoring.pdf" download>Sign up for tutoring today →</a>
+        <a class="rs-btn line" href="realskills.html">Learn more →</a>
       </div>
-      <p class="about-body rv d4" style="margin-top:18px; font-size:14px; color:var(--soft);">
+      <p class="rs-note rv d4">
         Download the packet, fill out the intake questionnaire on the last page, and send it back to
-        <a href="mailto:bixxville@proton.me" style="color:var(--green); text-decoration:none; border-bottom:1px solid rgba(140,240,96,.4);">bixxville@proton.me</a>.
+        <a href="mailto:bixxville@proton.me">bixxville@proton.me</a>.
         We'll follow up to schedule your child's first session.
       </p>
     </div>
-    <a class="skip" href="#portfolio">Skip this section &nbsp;↓</a>
   </section>
 
   <!-- 05.5 WHAT WE RUN -->
@@ -663,7 +766,6 @@
         <div class="about-pt"><span class="b">→</span><span class="t"><b>The Intelligence Layer.</b> Education and behavioral economics — the layer that teaches the system its own patterns, and the one we're growing hardest right now.</span></div>
       </div>
     </div>
-    <a class="skip" href="#work">Work with us &nbsp;↓</a>
   </section>
 
   <!-- 06 WORK WITH US (intake) -->
@@ -673,66 +775,13 @@
       <h2 class="rv d1" style="margin-bottom:14px">Tell us your goal.</h2>
       <p class="body rv d2" style="margin-top:0">You bring a goal you want done. We break it into the exact order of steps and run it with our team — so you stop managing it.</p>
       <div class="promise rv d2">
-        Here's how it works: tell us about your goal below. We'll set up a short conversation, and from it you'll get a <b>free partial map</b> of your project — the real first steps and the moves that matter most. If it's a fit, we handle the rest.
+        Here's how it works: tell us about your goal. We'll set up a short conversation, and from it you'll get a <b>free partial map</b> of your project — the real first steps and the moves that matter most. If it's a fit, we handle the rest.
       </div>
 
-      <!-- FormSubmit: emails submissions to bixxville@proton.me. No backend needed.
-           NOTE: the FIRST submission triggers a one-time FormSubmit confirmation email
-           to bixxville@proton.me — click the link in it once to activate, then it just works. -->
-      <form class="rv d3" action="https://formsubmit.co/bixxville@proton.me" method="POST">
-        <input type="hidden" name="_subject" value="New Bixxville project intake">
-        <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="_captcha" value="true">
-        <input type="text" name="_honey" style="display:none">
-
-        <div class="sectlabel first">About you</div>
-        <div class="frow">
-          <div class="field"><label>Name</label><input type="text" name="Name" required></div>
-          <div class="field"><label>Where you're from</label><input type="text" name="Location" placeholder="City / area" required></div>
-        </div>
-        <div class="field"><label>Email</label><input type="email" name="Email" required></div>
-
-        <div class="sectlabel">Your project</div>
-        <div class="field">
-          <label>What's the goal?</label>
-          <div class="hint">In your own words — what are you trying to get done?</div>
-          <textarea name="The goal" required></textarea>
-        </div>
-        <div class="field">
-          <label>What does "done" look like?</label>
-          <div class="hint">How will you know it succeeded?</div>
-          <textarea name="What done looks like" required></textarea>
-        </div>
-        <div class="frow">
-          <div class="field"><label>Timeframe</label><input type="text" name="Timeframe" placeholder="e.g. 3 months, by spring"></div>
-          <div class="field"><label>Budget range (optional)</label><input type="text" name="Budget range" placeholder="Optional"></div>
-        </div>
-        <div class="field">
-          <label>What's already in motion?</label>
-          <div class="hint">Anything started or already done.</div>
-          <textarea name="Already in motion"></textarea>
-        </div>
-        <div class="field">
-          <label>Biggest obstacle or unknown?</label>
-          <textarea name="Biggest obstacle"></textarea>
-        </div>
-        <div class="field">
-          <label>Who's involved?</label>
-          <div class="hint">Who has to do the work, or who needs to sign off.</div>
-          <input type="text" name="Who is involved">
-        </div>
-
-        <div class="sectlabel">Last thing</div>
-        <div class="field">
-          <label>How did you hear about us?</label>
-          <input type="text" name="How they heard">
-        </div>
-
-        <button type="submit" class="submit">Send my project →</button>
-      </form>
+      <a class="submit rv d3" href="work.html">Start your intake →</a>
 
       <div class="formfoot">
-        We read every submission. You'll hear back to set up your conversation.<br>
+        Takes about 3 minutes. We read every submission.<br>
         <span class="gold">Bixxville · St. Croix · USVI · We trust the math.</span>
       </div>
     </div>
@@ -787,6 +836,27 @@
 
   /* mark first scene immediately */
   if(scenes[0]){ scenes[0].classList.add('in'); scenes[0].querySelectorAll('.rv').forEach(function(el){el.classList.add('in');}); if(ticks[0]) ticks[0].classList.add('on'); }
+
+  /* ----- classes: one-time auto-flip demo when the section scrolls into view ----- */
+  (function(){
+    var cs = document.getElementById('classes');
+    if(!cs || reduce || !('IntersectionObserver' in window)) return;
+    var tiles = cs.querySelectorAll('.ctile');
+    var done = false;
+    var demoIO = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting && !done){
+          done = true;
+          tiles.forEach(function(t,i){
+            setTimeout(function(){ t.classList.add('flipped'); }, 600 + i*420);
+            setTimeout(function(){ t.classList.remove('flipped'); }, 600 + i*420 + 1600);
+          });
+          demoIO.disconnect();
+        }
+      });
+    }, {threshold:.35});
+    demoIO.observe(cs);
+  })();
 
   /* ----- rulebook: tap-to-flip for touch (hover already handles desktop) ----- */
   var flippables = document.querySelectorAll('.flip, .ctile');
