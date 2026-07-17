@@ -218,6 +218,80 @@
   .formfoot{margin-top:18px; font-size:12px; color:var(--grey); text-align:center; line-height:1.6}
   .formfoot .gold{color:var(--gold); font-family:'Lora'; font-style:italic}
 
+  /* ---------- RULEBOOK: kinetic hero ---------- */
+  .kinetic{
+    font-weight:700; letter-spacing:-.03em; line-height:.92; text-transform:uppercase;
+    font-size:clamp(42px,11.5vw,100px);
+  }
+  .kinetic .o{color:var(--green)}
+  .rb-roles{
+    margin-top:28px; font-family:var(--mono); font-size:13px; letter-spacing:.2em;
+    text-transform:uppercase; color:var(--grey); display:flex; flex-wrap:wrap; gap:10px 16px;
+  }
+  .rb-roles span:nth-child(2n){color:var(--green)}
+
+  /* ---------- RULEBOOK: flip mechanic (hover desktop, tap touch) ---------- */
+  .flip{display:inline-flex; position:relative; cursor:pointer; -webkit-tap-highlight-color:transparent; user-select:none}
+  .flip .fa,.flip .fb{transition:opacity .25s ease}
+  .flip .fb{position:absolute; left:0; top:0; opacity:0; color:var(--green)}
+  .flip:hover .fa,.flip.flipped .fa{opacity:0}
+  .flip:hover .fb,.flip.flipped .fb{opacity:1}
+
+  /* ---------- RULEBOOK: the board ---------- */
+  .board-label{font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); font-weight:600; margin-bottom:22px}
+  .board-track{display:flex; gap:3px; width:100%; max-width:640px}
+  .board-tick{flex:1; height:32px; background:var(--rail); border-radius:2px; transition:background .3s}
+  .board-tick.past{background:var(--green); opacity:.32}
+  .board-tick.now{background:var(--green)}
+  .board-meta{margin-top:14px; font-family:var(--mono); font-size:12px; color:var(--grey); letter-spacing:.04em}
+  .board-meta b{color:var(--green)}
+
+  /* ---------- RULEBOOK: the classes ---------- */
+  .classgrid{display:grid; grid-template-columns:repeat(2,1fr); gap:2px; width:100%; max-width:900px; margin-top:6px}
+  @media(min-width:640px){.classgrid{grid-template-columns:repeat(4,1fr)}}
+  .ctile{
+    position:relative; aspect-ratio:3/4; background:var(--panel); border:1px solid rgba(244,245,247,.1);
+    overflow:hidden; cursor:pointer; -webkit-tap-highlight-color:transparent;
+  }
+  .ctile .cface{position:absolute; inset:0; display:flex; flex-direction:column; padding:14px 14px 16px; transition:opacity .28s ease, transform .28s ease}
+  .ctile .cf-front{justify-content:flex-end}
+  .ctile .cf-back{opacity:0; transform:translateY(6px); justify-content:flex-end}
+  .ctile:hover .cf-front,.ctile.flipped .cf-front{opacity:0; transform:translateY(-6px)}
+  .ctile:hover .cf-back,.ctile.flipped .cf-back{opacity:1; transform:none}
+  .ctile .cnum{font-family:var(--mono); font-size:11px; color:var(--grey); letter-spacing:.14em}
+  .ctile .cname{font-size:clamp(14px,2.6vw,22px); font-weight:700; letter-spacing:-.02em; text-transform:uppercase; line-height:1.05; margin-top:auto; overflow-wrap:break-word}
+  .ctile.o1 .cname{color:var(--soft)}
+  .ctile.o2 .cname{color:var(--white)}
+  .ctile.o3 .cname{color:var(--orange)}
+  .ctile.o4 .cname{color:var(--green)}
+  .cf-back .crate{font-family:var(--mono); font-size:20px; font-weight:700; color:var(--green); margin-bottom:6px}
+  .cf-back .ccommit{font-size:11.5px; color:var(--soft); margin-bottom:8px; line-height:1.4}
+  .cf-back .cconstraint{font-size:11px; color:var(--grey); line-height:1.42; border-top:1px solid rgba(244,245,247,.12); padding-top:8px}
+
+  /* ---------- RULEBOOK: the currency ---------- */
+  .calc{margin-top:26px; border:1px solid rgba(244,245,247,.14); border-radius:12px; background:var(--panel); padding:22px 22px 24px; max-width:440px}
+  .calc-row{display:flex; gap:10px; margin-bottom:14px}
+  .calc select,.calc input{
+    background:var(--black); border:1px solid rgba(244,245,247,.18); border-radius:8px; color:var(--white);
+    font-family:inherit; font-size:14px; padding:11px 12px; flex:1;
+  }
+  .calc-out{border-top:1px solid rgba(244,245,247,.12); padding-top:14px; margin-top:4px}
+  .calc-out .co-row{display:flex; justify-content:space-between; font-size:13.5px; color:var(--soft); margin-bottom:6px}
+  .calc-out .co-row b{color:var(--green); font-family:var(--mono); font-size:15px}
+
+  /* ---------- RULEBOOK: the score ---------- */
+  .statblock{margin-top:26px; display:flex; flex-direction:column; gap:2px; max-width:540px}
+  .stat-term{display:flex; justify-content:space-between; align-items:baseline; padding:14px 18px; background:var(--panel); border:1px solid rgba(244,245,247,.08)}
+  .stat-term .sn{font-family:var(--mono); font-size:20px; font-weight:700; color:var(--green)}
+  .stat-term .sl{font-size:14px; color:var(--soft)}
+  .stat-term.neg .sn{color:var(--orange)}
+
+  /* ---------- RULEBOOK: how you win ---------- */
+  .win-flat{border:1px solid var(--green); border-radius:10px; padding:26px 24px; margin-top:28px; max-width:600px; background:rgba(140,240,96,.03)}
+  .win-flat .wtitle{font-family:var(--mono); font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--green); font-weight:700; margin-bottom:12px}
+  .win-flat p{color:var(--soft); font-size:15px; line-height:1.6; margin-bottom:0}
+  .win-rule{margin-top:16px; font-size:14px; color:var(--white); font-weight:600; border-top:1px solid rgba(140,240,96,.25); padding-top:14px}
+
   @media (max-width:520px){
     .rail{display:none}
     .body{max-width:none}
@@ -422,10 +496,136 @@
       <h2 class="rv d1">Many hands.<br>One graph.</h2>
       <p class="body rv d2">Work routes across the network by proven capability, not by chance. Every contribution is weighted by reputation, recorded, and settled on-chain. Two peers today. A network by design.</p>
     </div>
-    <a class="skip" href="#recruit">Skip this section &nbsp;↓</a>
+    <a class="skip" href="#rb-hero">Skip this section &nbsp;↓</a>
   </section>
 
-  <!-- 04.5 SIGN UP FOR TUTORING -->
+  <!-- 04.1 RULEBOOK — HERO -->
+  <section class="scene" id="rb-hero" data-rail>
+    <div class="inner" style="max-width:760px">
+      <div class="label rv">The Rulebook</div>
+      <h2 class="kinetic rv d1">It's a game.<br>It's also <span class="o">your paycheck.</span></h2>
+      <div class="rb-roles rv d2">
+        <span>Apprentice</span><span>Wrangler</span><span>Architect</span><span>Operator</span>
+      </div>
+    </div>
+    <a class="skip" href="#board">Skip this section &nbsp;↓</a>
+  </section>
+
+  <!-- 04.2 RULEBOOK — THE BOARD -->
+  <section class="scene" id="board" data-rail>
+    <div class="inner" style="max-width:660px">
+      <div class="label rv">The rules, revealed</div>
+      <h2 class="rv d1"><span class="flip"><span class="fa">28-Day Cycle</span><span class="fb">The Board</span></span></h2>
+      <p class="body rv d2">Hover — or tap on mobile — anything on this page that looks like a game term. It flips to what it actually means. Nothing here is invented; every flip is the same real thing, said two ways.</p>
+      <div class="rv d3" style="margin-top:8px">
+        <div class="board-label">Loading cycle…</div>
+        <div class="board-track" id="boardTrack"></div>
+        <div class="board-meta">Genesis <b>Feb 27, 2025</b> &nbsp;·&nbsp; every cycle runs 28 days, lunar-paced</div>
+      </div>
+    </div>
+    <a class="skip" href="#classes">Skip this section &nbsp;↓</a>
+  </section>
+
+  <!-- 04.3 RULEBOOK — THE CLASSES -->
+  <section class="scene" id="classes" data-rail>
+    <div class="inner" style="max-width:900px">
+      <div class="label rv">The Classes</div>
+      <h2 class="rv d1">Four roles.<br>One ladder.</h2>
+      <p class="body rv d2">Every member starts at Apprentice and climbs on delivered work — never on anything else. Tap or hover a tile for the real terms.</p>
+    </div>
+    <div class="classgrid rv d3">
+      <div class="ctile o1" tabindex="0">
+        <div class="cface cf-front"><div class="cnum">01</div><div class="cname">Apprentice</div></div>
+        <div class="cface cf-back">
+          <div class="crate">$39<span style="font-size:11px;color:var(--grey)">/LOG</span></div>
+          <div class="ccommit">Sponsored by an Architect or Operator — no fixed cycle quota</div>
+          <div class="cconstraint">Can't bid on work without a sponsor. 2–6 cycles before graduating to Wrangler.</div>
+        </div>
+      </div>
+      <div class="ctile o2" tabindex="0">
+        <div class="cface cf-front"><div class="cnum">02</div><div class="cname">Wrangler</div></div>
+        <div class="cface cf-back">
+          <div class="crate">$65<span style="font-size:11px;color:var(--grey)">/LOG</span></div>
+          <div class="ccommit">116-LOG cycle commitment</div>
+          <div class="cconstraint">No client contact — all client communication routes through the Operator.</div>
+        </div>
+      </div>
+      <div class="ctile o3" tabindex="0">
+        <div class="cface cf-front"><div class="cnum">03</div><div class="cname">Architect</div></div>
+        <div class="cface cf-back">
+          <div class="crate">$85<span style="font-size:11px;color:var(--grey)">/LOG</span></div>
+          <div class="ccommit">232-LOG cycle commitment</div>
+          <div class="cconstraint">Decomposes engagements into scoped work. Doesn't both decompose and execute the same one.</div>
+        </div>
+      </div>
+      <div class="ctile o4" tabindex="0">
+        <div class="cface cf-front"><div class="cnum">04</div><div class="cname">Operator</div></div>
+        <div class="cface cf-back">
+          <div class="crate">$100<span style="font-size:11px;color:var(--grey)">/LOG</span></div>
+          <div class="ccommit">348-LOG cycle commitment, governance time included</div>
+          <div class="cconstraint">Single point of client contact. Holds voting weight on network governance.</div>
+        </div>
+      </div>
+    </div>
+    <a class="skip" href="#currency">Skip this section &nbsp;↓</a>
+  </section>
+
+  <!-- 04.4 RULEBOOK — THE CURRENCY -->
+  <section class="scene" id="currency" data-rail>
+    <div class="inner" style="max-width:600px">
+      <div class="label rv">The Currency</div>
+      <h2 class="rv d1">1 LOG = 1 confirmed hour.</h2>
+      <p class="body rv d2">Every hour of verified work becomes exactly one LOG. What a LOG is worth depends only on tier. Try it below.</p>
+      <div class="calc rv d3">
+        <div class="calc-row">
+          <select id="calcTier" aria-label="Tier">
+            <option value="39">Apprentice — $39/LOG</option>
+            <option value="65" selected>Wrangler — $65/LOG</option>
+            <option value="85">Architect — $85/LOG</option>
+            <option value="100">Operator — $100/LOG</option>
+          </select>
+          <input id="calcLogs" type="number" min="0" step="1" value="10" placeholder="LOGs" aria-label="Number of LOGs">
+        </div>
+        <div class="calc-out">
+          <div class="co-row"><span>Member payout</span><b id="calcPayout">$0</b></div>
+          <div class="co-row"><span>What it bills the client</span><b id="calcClient">$0</b></div>
+        </div>
+      </div>
+    </div>
+    <a class="skip" href="#score">Skip this section &nbsp;↓</a>
+  </section>
+
+  <!-- 04.5 RULEBOOK — THE SCORE -->
+  <section class="scene" id="score" data-rail>
+    <div class="inner" style="max-width:600px">
+      <div class="label rv">The Score</div>
+      <h2 class="rv d1">One formula.<br>No hidden stats.</h2>
+      <p class="body rv d2">Reputation is computed the same way for every member, every cycle. Nothing decorative layered on top.</p>
+    </div>
+    <div class="statblock rv d3">
+      <div class="stat-term"><span class="sl">Delivery — work that shipped</span><span class="sn">0.50</span></div>
+      <div class="stat-term"><span class="sl">Timeliness — on time, no exceptions</span><span class="sn">0.25</span></div>
+      <div class="stat-term"><span class="sl">Streak — consecutive cycles at commitment</span><span class="sn">0.15</span></div>
+      <div class="stat-term neg"><span class="sl">Disputes — lost or partially lost</span><span class="sn">−0.10</span></div>
+    </div>
+    <a class="skip" href="#win">Skip this section &nbsp;↓</a>
+  </section>
+
+  <!-- 04.6 RULEBOOK — HOW YOU WIN -->
+  <section class="scene" id="win" data-rail>
+    <div class="inner" style="max-width:600px">
+      <div class="label rv">How You Win</div>
+      <h2 class="rv d1">There's no shortcut.</h2>
+      <div class="win-flat rv d2">
+        <div class="wtitle">The only way up</div>
+        <p>Wrangler → Architect takes six cycles of good standing, real decomposition experience on at least three engagements, and an endorsement from someone who's worked with you. Architect → Operator takes nine cycles, a reputation floor of 0.80 held for six straight cycles, twelve engagements decomposed, and a panel review.</p>
+        <div class="win-rule">Advancement comes from verified, delivered work — full stop. Never from recruiting other members. Never from a fee.</div>
+      </div>
+    </div>
+    <a class="skip" href="#recruit">Continue &nbsp;↓</a>
+  </section>
+
+  <!-- 04.7 SIGN UP FOR TUTORING -->
   <section class="scene" id="recruit" data-rail style="background:radial-gradient(1200px 600px at 20% 15%, rgba(255,92,76,.10), transparent 60%), radial-gradient(1000px 500px at 85% 85%, rgba(23,190,187,.09), transparent 55%);">
     <div class="about-grid">
       <div class="label rv" style="color:#FF5C4C">Real Skills For Real Kids</div>
@@ -588,6 +788,58 @@
   /* mark first scene immediately */
   if(scenes[0]){ scenes[0].classList.add('in'); scenes[0].querySelectorAll('.rv').forEach(function(el){el.classList.add('in');}); if(ticks[0]) ticks[0].classList.add('on'); }
 
+  /* ----- rulebook: tap-to-flip for touch (hover already handles desktop) ----- */
+  var flippables = document.querySelectorAll('.flip, .ctile');
+  flippables.forEach(function(el){
+    el.addEventListener('click', function(){
+      var already = el.classList.contains('flipped');
+      flippables.forEach(function(o){ if(o!==el) o.classList.remove('flipped'); });
+      el.classList.toggle('flipped', !already);
+    });
+  });
+  document.addEventListener('click', function(e){
+    if(!e.target.closest('.flip') && !e.target.closest('.ctile')){
+      flippables.forEach(function(o){ o.classList.remove('flipped'); });
+    }
+  });
+
+  /* ----- rulebook: the board — dynamic cycle ticks (Genesis Feb 27, 2025, 28-day cycles) ----- */
+  (function(){
+    var track = document.getElementById('boardTrack');
+    if(!track) return;
+    var GENESIS = Date.UTC(2025,1,27);
+    var daysSince = Math.floor((Date.now() - GENESIS) / 86400000);
+    var cycleNum = Math.floor(daysSince / 28) + 1;
+    var dayInCycle = (daysSince % 28) + 1;
+    for(var i=1;i<=28;i++){
+      var t = document.createElement('div');
+      t.className = 'board-tick' + (i < dayInCycle ? ' past' : i === dayInCycle ? ' now' : '');
+      track.appendChild(t);
+    }
+    var label = document.querySelector('.board-label');
+    if(label) label.textContent = 'Cycle ' + cycleNum + ' · day ' + dayInCycle + ' of 28';
+  })();
+
+  /* ----- rulebook: the currency — live LOG calculator ----- */
+  (function(){
+    var tierSel = document.getElementById('calcTier');
+    var logsInp = document.getElementById('calcLogs');
+    var payoutEl = document.getElementById('calcPayout');
+    var clientEl = document.getElementById('calcClient');
+    if(!tierSel) return;
+    function fmt(n){ return '$' + Math.round(n).toLocaleString('en-US'); }
+    function recalc(){
+      var rate = parseFloat(tierSel.value) || 0;
+      var logs = parseFloat(logsInp.value) || 0;
+      var payout = rate * logs;
+      var client = payout / 0.75;
+      payoutEl.textContent = fmt(payout);
+      clientEl.textContent = fmt(client);
+    }
+    tierSel.addEventListener('change', recalc);
+    logsInp.addEventListener('input', recalc);
+    recalc();
+  })();
 
 })();
 </script>
