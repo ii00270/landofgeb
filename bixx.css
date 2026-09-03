@@ -1,17 +1,117 @@
 /* ==========================================================================
    BIXXVILLE — shared design system
    Land of Geb, LLC · Christiansted, St. Croix · USVI
+
+   Dark is the brand default. Visitors whose OS prefers light get light
+   automatically; the nav toggle overrides either direction and persists.
+   Every colour below is a token — never hard-code a hex in a component.
    ========================================================================== */
 
 :root{
-  --black:#0A0B0C; --panel:#111316; --panel2:#0D0F11;
-  --white:#F4F5F7; --soft:#CDCFD3; --grey:#A6ADB4;
-  --green:#8CF060; --orange:#F45E26;
-  --rail:#2C482A; --gold:#AA8C4E;
-  --line:rgba(244,245,247,.12);
-  --line2:rgba(244,245,247,.07);
+  /* ground & surface */
+  --black:#0A0B0C;          /* page ground */
+  --panel:#111316;          /* raised surface — cards, fields */
+  --panel2:#0D0F11;         /* alternating section ground */
+
+  /* type */
+  --white:#F4F5F7;          /* primary text */
+  --soft:#CDCFD3;           /* body text */
+  --grey:#A6ADB4;           /* muted, labels, captions */
+
+  /* accents */
+  --green:#8CF060;
+  --orange:#F45E26;
+  --gold:#AA8C4E;
+  --rail:#2C482A;
+
+  /* derived — flip with the theme */
+  --on-green:#08110C;                     /* text sitting on a green fill */
+  --green-tint:rgba(140,240,96,.04);
+  --green-tint-2:rgba(140,240,96,.06);
+  --green-edge:rgba(140,240,96,.40);
+  --green-edge-soft:rgba(140,240,96,.20);
+  --green-edge-strong:rgba(140,240,96,.55);
+  --gold-edge:rgba(170,140,78,.40);
+  --line:rgba(244,245,247,.12);           /* visible divider */
+  --line2:rgba(244,245,247,.07);          /* faint divider */
+  --line3:rgba(244,245,247,.02);          /* table header wash */
+  --field:rgba(244,245,247,.16);          /* form control border */
+  --nav-bg:rgba(10,11,12,.88);
+  --menu-bg:rgba(10,11,12,.975);
+  --card-shadow:none;
+  --sun:block;                            /* which toggle icon shows */
+  --moon:none;
+
   --mono:'Poppins',sans-serif;
   --nav-h:64px;
+}
+
+/* ---- light: automatic for a light-preferring OS, unless dark was chosen ---- */
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){
+    --black:#FAFBF8;
+    --panel:#FFFFFF;
+    --panel2:#F2F5EF;
+
+    --white:#0D1110;
+    --soft:#39423E;
+    --grey:#697370;
+
+    --green:#2A7314;
+    --orange:#C4431A;
+    --gold:#7D6428;
+    --rail:#C7D3C2;
+
+    --on-green:#FFFFFF;
+    --green-tint:rgba(42,115,20,.05);
+    --green-tint-2:rgba(42,115,20,.09);
+    --green-edge:rgba(42,115,20,.34);
+    --green-edge-soft:rgba(42,115,20,.17);
+    --green-edge-strong:rgba(42,115,20,.45);
+    --gold-edge:rgba(125,100,40,.38);
+    --line:rgba(13,17,16,.14);
+    --line2:rgba(13,17,16,.08);
+    --line3:rgba(13,17,16,.025);
+    --field:rgba(13,17,16,.20);
+    --nav-bg:rgba(250,251,248,.90);
+    --menu-bg:rgba(250,251,248,.98);
+    --card-shadow:0 1px 2px rgba(13,17,16,.05);
+    --sun:none;
+    --moon:block;
+  }
+}
+
+/* ---- light: chosen explicitly ---- */
+:root[data-theme="light"]{
+  --black:#FAFBF8;
+  --panel:#FFFFFF;
+  --panel2:#F2F5EF;
+
+  --white:#0D1110;
+  --soft:#39423E;
+  --grey:#697370;
+
+  --green:#2A7314;
+  --orange:#C4431A;
+  --gold:#7D6428;
+  --rail:#C7D3C2;
+
+  --on-green:#FFFFFF;
+  --green-tint:rgba(42,115,20,.05);
+  --green-tint-2:rgba(42,115,20,.09);
+  --green-edge:rgba(42,115,20,.34);
+  --green-edge-soft:rgba(42,115,20,.17);
+  --green-edge-strong:rgba(42,115,20,.45);
+  --gold-edge:rgba(125,100,40,.38);
+  --line:rgba(13,17,16,.14);
+  --line2:rgba(13,17,16,.08);
+  --line3:rgba(13,17,16,.025);
+  --field:rgba(13,17,16,.20);
+  --nav-bg:rgba(250,251,248,.90);
+  --menu-bg:rgba(250,251,248,.98);
+  --card-shadow:0 1px 2px rgba(13,17,16,.05);
+  --sun:none;
+  --moon:block;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -27,7 +127,7 @@ img{max-width:100%}
 nav{
   position:fixed; top:0; left:0; right:0; z-index:60;
   display:flex; align-items:center; justify-content:space-between;
-  padding:16px 22px; background:rgba(10,11,12,.88);
+  padding:16px 22px; background:var(--nav-bg);
   backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
   border-bottom:1px solid var(--line2);
 }
@@ -43,7 +143,7 @@ nav{
 .navlinks a.on{color:var(--green)}
 .navactions{display:flex; align-items:center; gap:12px}
 .pill{
-  border:1px solid rgba(140,240,96,.55); color:var(--green);
+  border:1px solid var(--green-edge-strong); color:var(--green);
   border-radius:40px; padding:8px 18px; font-size:13px; font-weight:600;
   background:transparent; cursor:pointer; text-decoration:none; white-space:nowrap;
   transition:background .25s, color .25s;
@@ -59,7 +159,7 @@ nav{
 
 /* ---------- slide-out menu ---------- */
 .menu{
-  position:fixed; inset:0; z-index:80; background:rgba(10,11,12,.975);
+  position:fixed; inset:0; z-index:80; background:var(--menu-bg);
   backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
   display:flex; flex-direction:column; justify-content:center; align-items:flex-start;
   padding:0 34px; gap:2px; opacity:0; pointer-events:none; transition:opacity .3s ease;
@@ -118,8 +218,8 @@ h3{font-size:clamp(19px,3.4vw,26px); line-height:1.15}
   font-weight:600; padding:5px 11px; border-radius:4px; border:1px solid var(--line);
   color:var(--grey);
 }
-.tag.live{color:var(--green); border-color:rgba(140,240,96,.4); background:rgba(140,240,96,.06)}
-.tag.soon{color:var(--gold); border-color:rgba(170,140,78,.4)}
+.tag.live{color:var(--green); border-color:var(--green-edge); background:var(--green-tint-2)}
+.tag.soon{color:var(--gold); border-color:var(--gold-edge)}
 
 /* ---------- reveal ---------- */
 .rv{opacity:0; transform:translateY(24px); transition:opacity .8s ease, transform .8s ease}
@@ -139,13 +239,13 @@ h3{font-size:clamp(19px,3.4vw,26px); line-height:1.15}
 }
 .card{
   border:1px solid var(--line); border-radius:12px; background:var(--panel);
-  padding:24px 22px; transition:border-color .25s, transform .25s, background .25s;
+  box-shadow:var(--card-shadow); padding:24px 22px; transition:border-color .25s, transform .25s, background .25s;
 }
 .card .ck{font-family:var(--mono); font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--green); font-weight:600; margin-bottom:12px}
 .card h3{margin-bottom:10px}
 .card p{color:var(--soft); font-size:14px; line-height:1.55}
 a.card{display:block; text-decoration:none; color:var(--white)}
-a.card:hover{border-color:var(--green); background:rgba(140,240,96,.04); transform:translateY(-2px)}
+a.card:hover{border-color:var(--green); background:var(--green-tint); transform:translateY(-2px)}
 a.card .arr{color:var(--green); font-size:15px; margin-top:14px; display:block; font-weight:600}
 
 /* stat tiles */
@@ -175,7 +275,7 @@ table{width:100%; border-collapse:collapse; min-width:520px}
 th,td{text-align:left; padding:14px 16px; font-size:13.5px; border-bottom:1px solid var(--line2)}
 th{
   font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--grey);
-  font-weight:600; background:rgba(244,245,247,.02);
+  font-weight:600; background:var(--line3);
 }
 td{color:var(--soft)}
 tr:last-child td{border-bottom:none}
@@ -184,7 +284,7 @@ td.num{font-family:var(--mono); color:var(--green); font-weight:600; white-space
 
 /* ---------- formula block ---------- */
 .formula{
-  border:1px solid rgba(140,240,96,.35); border-radius:10px; background:rgba(140,240,96,.04);
+  border:1px solid var(--green-edge); border-radius:10px; background:var(--green-tint);
   padding:22px 20px; margin-top:26px; max-width:660px;
 }
 .formula .fl{font-family:var(--mono); font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--green); font-weight:600; margin-bottom:12px}
@@ -192,7 +292,7 @@ td.num{font-family:var(--mono); color:var(--green); font-weight:600; white-space
   font-family:var(--mono); font-size:clamp(14px,3.6vw,19px); font-weight:600; color:var(--white);
   line-height:1.5; letter-spacing:-.01em; overflow-x:auto;
 }
-.formula .fn{font-size:13px; color:var(--soft); line-height:1.55; margin-top:14px; border-top:1px solid rgba(140,240,96,.2); padding-top:13px}
+.formula .fn{font-size:13px; color:var(--soft); line-height:1.55; margin-top:14px; border-top:1px solid var(--green-edge-soft); padding-top:13px}
 
 /* callout */
 .note{
@@ -206,15 +306,15 @@ td.num{font-family:var(--mono); color:var(--green); font-weight:600; white-space
 
 /* ---------- CTA ---------- */
 .ctabox{
-  border:1px solid rgba(140,240,96,.4); border-radius:14px; padding:34px 28px;
-  background:rgba(140,240,96,.03); max-width:660px; margin-top:8px;
+  border:1px solid var(--green-edge); border-radius:14px; padding:34px 28px;
+  background:var(--green-tint); max-width:660px; margin-top:8px;
 }
 .biglink{
   display:block; text-align:center; text-decoration:none; margin-top:24px;
-  background:var(--green); color:#08110C; border-radius:10px; padding:17px;
+  background:var(--green); color:var(--on-green); border-radius:10px; padding:17px;
   font-size:16px; font-weight:700; transition:transform .1s, background .15s;
 }
-.biglink:hover{background:#9ff06f} .biglink:active{transform:scale(.99)}
+.biglink:hover{filter:brightness(1.08)} .biglink:active{transform:scale(.99)}
 .biglink.ghost{background:transparent; border:1px solid var(--line); color:var(--white)}
 .biglink.ghost:hover{border-color:var(--green); color:var(--green); background:transparent}
 .ctanote{margin-top:13px; font-size:12px; color:var(--grey); text-align:center; line-height:1.6}
@@ -254,3 +354,17 @@ footer .ftitle{color:var(--white); font-size:11px; letter-spacing:.2em; text-tra
   html{scroll-behavior:auto}
   .rv,.pop{opacity:1;transform:none;transition:none}
 }
+
+/* ---------- theme toggle ---------- */
+.themetog{
+  width:34px; height:34px; border-radius:50%; border:1px solid var(--line);
+  background:transparent; color:var(--soft); cursor:pointer; flex-shrink:0;
+  display:flex; align-items:center; justify-content:center; padding:0;
+  transition:color .2s, border-color .2s;
+}
+.themetog:hover{color:var(--green); border-color:var(--green-edge)}
+.themetog:focus-visible{outline:2px solid var(--green); outline-offset:2px}
+.themetog svg{width:16px; height:16px; fill:none; stroke:currentColor;
+  stroke-width:1.9; stroke-linecap:round; stroke-linejoin:round}
+.themetog .i-sun{display:var(--sun)}
+.themetog .i-moon{display:var(--moon)}

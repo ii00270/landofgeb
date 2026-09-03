@@ -4,6 +4,43 @@
 (function(){
   'use strict';
 
+  /* ----- theme toggle: OS preference by default, explicit choice wins ----- */
+  (function(){
+    var root = document.documentElement;
+    var btn  = document.getElementById('themeTog');
+    var read = function(){
+      try { return localStorage.getItem('bx-theme'); } catch(e){ return null; }
+    };
+    var current = function(){
+      var set = root.getAttribute('data-theme');
+      if(set) return set;
+      return (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches)
+        ? 'light' : 'dark';
+    };
+    var label = function(){
+      if(!btn) return;
+      var next = current() === 'dark' ? 'light' : 'dark';
+      btn.setAttribute('aria-label', 'Switch to ' + next + ' theme');
+      btn.setAttribute('title', 'Switch to ' + next + ' theme');
+    };
+    if(btn){
+      btn.addEventListener('click', function(){
+        var next = current() === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        try { localStorage.setItem('bx-theme', next); } catch(e){}
+        label();
+      });
+      label();
+    }
+    /* follow the OS while the visitor has expressed no preference of their own */
+    if(window.matchMedia){
+      var mq = window.matchMedia('(prefers-color-scheme: light)');
+      var onChange = function(){ if(!read()) label(); };
+      if(mq.addEventListener) mq.addEventListener('change', onChange);
+      else if(mq.addListener) mq.addListener(onChange);
+    }
+  })();
+
   /* ----- slide-out menu ----- */
   var menu = document.getElementById('menu');
   var hamBtn = document.getElementById('hamBtn');

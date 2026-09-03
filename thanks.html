@@ -9,6 +9,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="bixx.css">
+<script>(function(){try{var t=localStorage.getItem('bx-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}})();</script>
+
 <style>
   .tick{
     width:62px; height:62px; border-radius:50%; border:2px solid var(--green);
@@ -22,7 +24,7 @@
 <nav>
   <a class="brand" href="index.html" aria-label="Bixxville home">
     <svg class="glyph" viewBox="0 0 40 24" aria-hidden="true">
-      <polyline points="2,12 9,12 14,4 20,20 26,8 31,12 38,12" fill="none" stroke="#8CF060" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+      <polyline points="2,12 9,12 14,4 20,20 26,8 31,12 38,12" fill="none" stroke="var(--green)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
     </svg>
     <b>Bixxville</b>
   </a>
@@ -34,6 +36,10 @@
     <a href="network.html">The Network</a>
   </div>
   <div class="navactions">
+    <button class="themetog" id="themeTog" type="button" aria-label="Switch between light and dark" title="Switch theme">
+      <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.4M12 19v2.4M4.6 12H2.2M21.8 12h-2.4M6.5 6.5 4.8 4.8M19.2 19.2l-1.7-1.7M17.5 6.5l1.7-1.7M4.8 19.2l1.7-1.7"/></svg>
+      <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 14.4A8.4 8.4 0 0 1 9.6 3.8a8.6 8.6 0 1 0 10.6 10.6z"/></svg>
+    </button>
     <a class="pill" href="https://ii00270.github.io/Bixxvillenode/" target="_blank" rel="noopener">Log in</a>
     <button class="ham" id="hamBtn" aria-label="Open menu"><span></span><span></span></button>
   </div>
@@ -57,7 +63,7 @@
   <section class="scene hero">
     <div class="wrap narrow">
       <div class="tick rv">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#8CF060" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <polyline points="20 6 9 17 4 12"></polyline>
         </svg>
       </div>

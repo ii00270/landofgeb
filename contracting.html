@@ -9,12 +9,14 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="bixx.css">
+<script>(function(){try{var t=localStorage.getItem('bx-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}})();</script>
+
 <style>
   .scope2{display:grid; gap:14px; grid-template-columns:1fr; margin-top:26px}
   @media(min-width:720px){.scope2{grid-template-columns:1fr 1fr}}
   .sbox{border:1px solid var(--line); border-radius:12px; padding:22px; background:var(--panel)}
-  .sbox.yes{border-color:rgba(140,240,96,.4); background:rgba(140,240,96,.04)}
-  .sbox.no{border-color:rgba(244,94,38,.35); background:rgba(244,94,38,.03)}
+  .sbox.yes{border-color:var(--green-edge); background:var(--green-tint)}
+  .sbox.no{border-color:var(--orange); background:transparent}
   .sbox .sh{font-family:var(--mono); font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; font-weight:700; margin-bottom:14px}
   .sbox.yes .sh{color:var(--green)} .sbox.no .sh{color:var(--orange)}
   .sbox ul{list-style:none; display:flex; flex-direction:column; gap:11px}
@@ -26,7 +28,7 @@
   .sbox .sf{margin-top:16px; padding-top:14px; border-top:1px solid var(--line2); font-size:12.5px; color:var(--grey); line-height:1.55}
   .path{display:flex; flex-direction:column; gap:2px; margin-top:28px}
   .prow{display:flex; gap:14px; align-items:flex-start; padding:16px 18px; background:var(--panel); border:1px solid var(--line2)}
-  .prow.key{border-color:rgba(170,140,78,.45); background:rgba(170,140,78,.05)}
+  .prow.key{border-color:var(--gold-edge); background:transparent}
   .prow .pn{font-family:var(--mono); font-size:12px; font-weight:700; color:var(--green); width:22px; flex-shrink:0; padding-top:2px}
   .prow.key .pn{color:var(--gold)}
   .prow .pb{flex:1; min-width:0}
@@ -40,7 +42,7 @@
 <nav>
   <a class="brand" href="index.html" aria-label="Bixxville home">
     <svg class="glyph" viewBox="0 0 40 24" aria-hidden="true">
-      <polyline points="2,12 9,12 14,4 20,20 26,8 31,12 38,12" fill="none" stroke="#8CF060" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+      <polyline points="2,12 9,12 14,4 20,20 26,8 31,12 38,12" fill="none" stroke="var(--green)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
     </svg>
     <b>Bixxville</b>
   </a>
@@ -52,6 +54,10 @@
     <a href="network.html">The Network</a>
   </div>
   <div class="navactions">
+    <button class="themetog" id="themeTog" type="button" aria-label="Switch between light and dark" title="Switch theme">
+      <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.4M12 19v2.4M4.6 12H2.2M21.8 12h-2.4M6.5 6.5 4.8 4.8M19.2 19.2l-1.7-1.7M17.5 6.5l1.7-1.7M4.8 19.2l1.7-1.7"/></svg>
+      <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 14.4A8.4 8.4 0 0 1 9.6 3.8a8.6 8.6 0 1 0 10.6 10.6z"/></svg>
+    </button>
     <a class="pill" href="https://ii00270.github.io/Bixxvillenode/" target="_blank" rel="noopener">Log in</a>
     <button class="ham" id="hamBtn" aria-label="Open menu"><span></span><span></span></button>
   </div>
