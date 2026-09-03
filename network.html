@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>The Network — Bixxville</title>
+<meta name="description" content="Four tiers, standing computed from delivered work, and lanes running from St. Croix outward. Advancement comes from verified work — never from recruiting, never from a fee.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="bixx.css">
+<style>
+  .taphint{
+    display:inline-flex; align-items:center; gap:9px; margin-top:14px;
+    font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--green); font-weight:600;
+  }
+  .taphint .dot{width:8px; height:8px; border-radius:50%; background:var(--green); animation:tapPulse 1.6s ease-in-out infinite}
+  @keyframes tapPulse{0%,100%{opacity:1; transform:scale(1)} 50%{opacity:.35; transform:scale(.7)}}
+  @media (prefers-reduced-motion:reduce){.taphint .dot{animation:none}}
+  .classgrid{display:grid; grid-template-columns:repeat(2,1fr); gap:2px; width:100%; margin-top:24px}
+  @media(min-width:700px){.classgrid{grid-template-columns:repeat(4,1fr)}}
+  .ctile{position:relative; aspect-ratio:3/4; background:var(--panel); border:1px solid var(--line); overflow:hidden; cursor:pointer; -webkit-tap-highlight-color:transparent}
+  .ctile .cface{position:absolute; inset:0; display:flex; flex-direction:column; padding:15px 15px 17px; transition:opacity .28s ease, transform .28s ease}
+  .ctile .cf-front{justify-content:flex-end}
+  .ctile .cf-back{opacity:0; transform:translateY(6px); justify-content:flex-end}
+  .ctile:hover .cf-front,.ctile.flipped .cf-front{opacity:0; transform:translateY(-6px)}
+  .ctile:hover .cf-back,.ctile.flipped .cf-back{opacity:1; transform:none}
+  .ctile .cnum{font-family:var(--mono); font-size:11px; color:var(--grey); letter-spacing:.14em}
+  .ctile .cname{font-size:clamp(13px,2.6vw,21px); font-weight:700; letter-spacing:-.02em; text-transform:uppercase; line-height:1.05; margin-top:auto; overflow-wrap:break-word}
+  .ctile.o1 .cname{color:var(--soft)} .ctile.o2 .cname{color:var(--white)}
+  .ctile.o3 .cname{color:var(--orange)} .ctile.o4 .cname{color:var(--green)}
+  .cf-back .crate{font-family:var(--mono); font-size:19px; font-weight:700; color:var(--green); margin-bottom:6px}
+  .cf-back .ccommit{font-size:11.5px; color:var(--soft); margin-bottom:8px; line-height:1.4}
+  .cf-back .cconstraint{font-size:11px; color:var(--grey); line-height:1.42; border-top:1px solid var(--line); padding-top:8px}
+  .lanes{display:flex; flex-direction:column; gap:2px; margin-top:26px}
+  .lane{display:flex; justify-content:space-between; gap:14px; align-items:center; padding:16px 18px; background:var(--panel); border:1px solid var(--line2)}
+  .lane .ln{font-size:15px; font-weight:600; color:var(--white)}
+  .lane .ld{font-size:13px; color:var(--grey); margin-top:3px; line-height:1.45}
+  .lane .lb{flex:1; min-width:0}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="brand" href="index.html" aria-label="Bixxville home">
+    <svg class="glyph" viewBox="0 0 40 24" aria-hidden="true">
+      <polyline points="2,12 9,12 14,4 20,20 26,8 31,12 38,12" fill="none" stroke="#8CF060" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+    </svg>
+    <b>Bixxville</b>
+  </a>
+  <div class="navlinks">
+    <a href="model.html">The Model</a>
+    <a href="contracting.html">Contracting</a>
+    <a href="learning.html">Learning</a>
+    <a href="network.html">The Network</a>
+  </div>
+  <div class="navactions">
+    <a class="pill" href="https://ii00270.github.io/Bixxvillenode/" target="_blank" rel="noopener">Log in</a>
+    <button class="ham" id="hamBtn" aria-label="Open menu"><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <button class="menuclose" id="menuClose" aria-label="Close menu"></button>
+  <a href="index.html"><span class="mi">00</span> Home</a>
+  <a href="model.html"><span class="mi">01</span> The Model</a>
+  <a href="contracting.html"><span class="mi">02</span> Contracting</a>
+  <a href="learning.html"><span class="mi">03</span> Learning</a>
+  <a href="network.html"><span class="mi">04</span> The Network</a>
+  <a href="work.html"><span class="mi">05</span> Work with us</a>
+  <a href="https://ii00270.github.io/Bixxvillenode/" target="_blank" rel="noopener"><span class="mi">06</span> Log in</a>
+  <div class="mfoot">SCOPED <span>·</span> VERIFIED <span>·</span> SETTLED<br>Land of Geb, LLC — Christiansted, St. Croix, USVI</div>
+</div>
+
+<main>
+
+  <!-- HERO -->
+  <section class="scene hero">
+    <div class="wrap">
+      <div class="eyebrow rv">The Network &nbsp;·&nbsp; <span data-cycle="full">Cycle —</span></div>
+      <h1 class="rv d1">Standing is earned.<br><span class="g">Never granted.</span></h1>
+      <p class="lead rv d2">Members hold a tier, a fixed rate, and a reputation computed from what they actually delivered. Work routes by that record. Nobody enters near the top, nobody buys their way up, and nobody advances by bringing other people in.</p>
+      <div class="spine rv d3">THE MATH DECIDES, NOT THE RELATIONSHIP</div>
+    </div>
+  </section>
+
+  <!-- WHO -->
+  <section class="scene alt">
+    <div class="wrap narrow">
+      <div class="eyebrow rv"><span class="n">01</span> &nbsp;— &nbsp;This is for</div>
+      <h2 class="rv d1">The operator doing real work<br>from a place the world <span class="g">underestimates.</span></h2>
+      <p class="body rv d2">The person with the skill, the judgment, and the discipline — who never had the infrastructure to match. The ones who will build the next economy if someone hands them the right tools first.</p>
+      <p class="body rv d3">If you already know how to work and what you've been missing is structure — a system that shows the steps, orders them, names the price before you start, and makes sure you get paid for what you delivered — this was built for you. Read the rules below and you'll either recognize yourself or you won't. Both answers are the right answer.</p>
+      <div class="quote rv d4">
+        A member is not inventory. No member is a resource to be exploited, and no mechanism of the network may treat one as stock.
+        <cite>The Known · Clause I</cite>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIERS -->
+  <section class="scene">
+    <div class="wrap">
+      <div class="eyebrow rv"><span class="n">02</span> &nbsp;— &nbsp;The tiers</div>
+      <h2 class="rv d1">Four roles.<br>One ladder.</h2>
+      <p class="body rv d2">Every member starts at Apprentice. Your rate is fixed and disclosed to you in writing before you accept anything — and it does not change mid-engagement.</p>
+      <div class="taphint rv d2"><span class="dot"></span>Tap a tile — it flips to the commitment</div>
+      <div class="classgrid rv d3">
+        <div class="ctile o1" tabindex="0" role="button" aria-label="Apprentice tier details">
+          <div class="cface cf-front"><div class="cnum">01</div><div class="cname">Apprentice</div></div>
+          <div class="cface cf-back">
+            <div class="crate">58 LOGs</div>
+            <div class="ccommit">per cycle</div>
+            <div class="cconstraint">Supervised execution while building standing. Under Real Skills, Apprentices are W-2 employees. 2–6 cycles before graduating.</div>
+          </div>
+        </div>
+        <div class="ctile o2" tabindex="0" role="button" aria-label="Wrangler tier details">
+          <div class="cface cf-front"><div class="cnum">02</div><div class="cname">Wrangler</div></div>
+          <div class="cface cf-back">
+            <div class="crate">116 LOGs</div>
+            <div class="ccommit">per cycle</div>
+            <div class="cconstraint">Execution — defined work, done. Client communication routes through the Operator.</div>
+          </div>
+        </div>
+        <div class="ctile o3" tabindex="0" role="button" aria-label="Architect tier details">
+          <div class="cface cf-front"><div class="cnum">03</div><div class="cname">Architect</div></div>
+          <div class="cface cf-back">
+            <div class="crate">232 LOGs</div>
+            <div class="ccommit">per cycle</div>
+            <div class="cconstraint">Design &amp; structure — owns the decomposition itself. Architect labor is its own leaf, never an overhead multiple.</div>
+          </div>
+        </div>
+        <div class="ctile o4" tabindex="0" role="button" aria-label="Operator tier details">
+          <div class="cface cf-front"><div class="cnum">04</div><div class="cname">Operator</div></div>
+          <div class="cface cf-back">
+            <div class="crate">348 LOGs</div>
+            <div class="ccommit">per cycle</div>
+            <div class="cconstraint">Judgment &amp; ownership — the calls that carry consequence. Single point of client contact.</div>
+          </div>
+        </div>
+      </div>
+      <div class="note rv d4"><b>Commitments run 1 : 2 : 3</b> across the top three tiers — 116, 232, 348. The rate is what an hour converts to; the commitment is what the tier asks of you per cycle.</div>
+    </div>
+  </section>
+
+  <!-- ADVANCEMENT -->
+  <section class="scene alt">
+    <div class="wrap">
+      <div class="eyebrow rv"><span class="n">03</span> &nbsp;— &nbsp;Advancement</div>
+      <h2 class="rv d1">There is no shortcut,<br>because none was <span class="g">built.</span></h2>
+      <p class="body rv d2">Standing is recomputed at every cycle close on one formula, applied identically to everyone.</p>
+      <div class="formula rv d3">
+        <div class="fl">The standing formula</div>
+        <div class="fx">R&nbsp;=&nbsp;0.50·Delivery&nbsp;+&nbsp;0.25·Timeliness&nbsp;+&nbsp;0.15·Streak&nbsp;−&nbsp;0.10·Disputes</div>
+        <div class="fn">Delivery caps at 1.00. Streak caps at nine cycles. Dispute rate caps at five per six cycles. There are no hidden inputs and no discretionary adjustment.</div>
+      </div>
+      <p class="body rv d4">Standing bands run from provisional at entry up through the network's highest tier of trust. Where a member sits is visible to them at all times, and it moves only on the formula above.</p>
+
+      <div class="note hard rv d5" style="margin-top:28px">
+        <b>No member advances by recruitment or fee payment.</b> Advancement is earned only through verified, delivered work. This is written into the network's constitution as a member right — not offered as a policy that could quietly change later.
+      </div>
+      <div class="note good rv d5">
+        <b>Standing never touches active work.</b> It does not direct, pace, or discipline you during an engagement. It applies only to future matching eligibility, after the engagement concludes — and it's scored against a small collapsed set of checkpoints, never against the fine-grained pricing breakdown.
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW WORK ROUTES -->
+  <section class="scene">
+    <div class="wrap">
+      <div class="eyebrow rv"><span class="n">04</span> &nbsp;— &nbsp;How work reaches you</div>
+      <h2 class="rv d1">Offered, not assigned.</h2>
+      <div class="steps rv d2">
+        <div class="step"><span class="sn">01</span><div class="sb"><div class="st">An engagement is decomposed</div><div class="sd">Before anyone is approached, the work exists as a graph of defined units, each with an hour estimate and a tier.</div></div></div>
+        <div class="step"><span class="sn">02</span><div class="sb"><div class="st">The system matches on record</div><div class="sd">Units route to members whose computed standing and lane fit the work. Matching is on the record, not on relationships.</div></div></div>
+        <div class="step"><span class="sn">03</span><div class="sb"><div class="st">You see the full terms first</div><div class="sd">Rate, hours, deliverable definition, and window — all fixed and disclosed before you decide. <em>Declining costs you nothing.</em></div></div></div>
+        <div class="step"><span class="sn">04</span><div class="sb"><div class="st">You do the work</div><div class="sd">Coordination happens inside the OS by text and voice, next to the task. No pace enforcement, no automated supervision.</div></div></div>
+        <div class="step"><span class="sn">05</span><div class="sb"><div class="st">It closes binary</div><div class="sd">Done or not done, against the definition written at scoping. Hours credit only to the verified assignee — the person who actually did it.</div></div></div>
+        <div class="step"><span class="sn">06</span><div class="sb"><div class="st">You're paid in what you elect</div><div class="sd">Bank transfer, card, cash, or a digital asset if you want one. Nobody is ever compelled to take crypto in place of fiat.</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LANES -->
+  <section class="scene alt">
+    <div class="wrap">
+      <div class="eyebrow rv"><span class="n">05</span> &nbsp;— &nbsp;Lanes</div>
+      <h2 class="rv d1">Peers by lane,<br>not by rank.</h2>
+      <p class="body rv d2">Members holding equal standing within a shared lane of work constitute a node. The distinction between peers is the lane they run — not a hierarchy over one another. Work supply and labor supply both count toward standing inside a node.</p>
+      <div class="lanes rv d3">
+        <div class="lane"><div class="lb"><div class="ln">Build &amp; Facility — St. Croix</div><div class="ld">Renovation, repair, and alteration. The origin lane, and the one the contracting practice runs through.</div></div><span class="tag live">Live</span></div>
+        <div class="lane"><div class="lb"><div class="ln">Real Estate — Florida</div><div class="ld">The founding peer lane. Deals scoped, sequenced, and run on the same operating system.</div></div><span class="tag live">Live</span></div>
+        <div class="lane"><div class="lb"><div class="ln">Education — Real Skills</div><div class="ld">Markets, sales psychology, marketing and brand, mathematics. The live Apprentice pathway.</div></div><span class="tag live">Live</span></div>
+        <div class="lane"><div class="lb"><div class="ln">Land — Constitution Hill</div><div class="ld">1.4 acres in Christiansted. The first physical production node — land work converted into hours through the same mechanism as knowledge work.</div></div><span class="tag live">Live</span></div>
+        <div class="lane"><div class="lb"><div class="ln">Distribution — Caribbean</div><div class="ld">How product gets routed, shipped, and placed in front of people.</div></div><span class="tag soon">Growing</span></div>
+      </div>
+      <p class="body rv d4" style="margin-top:26px">Each node operates within its own radius, on the same principles, along a shared spine. A node that demonstrates the method earns the right to extend the network — and the math ensures no node can corrupt another.</p>
+    </div>
+  </section>
+
+  <!-- GOVERNANCE -->
+  <section class="scene">
+    <div class="wrap narrow">
+      <div class="eyebrow rv"><span class="n">06</span> &nbsp;— &nbsp;Governance</div>
+      <h2 class="rv d1">Who decides what.</h2>
+      <p class="body rv d2">All governance decisions — including the pace, prioritization, and discipline of labor — are made by human members acting in a governing capacity. The runtime's role is limited to matching, pricing, decomposition assistance, and keeping the historical record. It does not supervise, pace, or discipline anyone in real time.</p>
+      <div class="pts rv d3">
+        <div class="pt"><span class="b">→</span><span class="t"><b>Land of Geb, LLC</b> conducts operations, engages members, and executes on behalf of the network.</span></div>
+        <div class="pt"><span class="b">→</span><span class="t"><b>Whoever brings the work</b> holds the rights and the responsibility for that engagement. The Executive Operator controls intake and owns the system's fairness — not every engagement's individual risk.</span></div>
+        <div class="pt"><span class="b">→</span><span class="t"><b>Governance is human.</b> No transaction inside the network is decided by a single interested party, and no automated process sets the pace or discipline of anyone's labor.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="scene alt">
+    <div class="wrap">
+      <div class="ctabox rv">
+        <div class="eyebrow" style="margin-bottom:12px">Join</div>
+        <h2 style="font-size:clamp(26px,5.5vw,40px)">Come in at the bottom.<br><span class="g">Climb on the record.</span></h2>
+        <p class="body" style="margin-top:8px">Everyone starts provisional. Tell us what you can actually do and what you want to be doing — the network tests capability in small executions where strength and preference show up, then widens the pathway where you perform and keep preferring the work.</p>
+        <a class="biglink" href="work.html">Apply to the network →</a>
+        <a class="biglink ghost" href="https://ii00270.github.io/Bixxvillenode/" target="_blank" rel="noopener">Already a member — log in →</a>
+        <div class="ctanote">Role emerges from your own nature, preference, and demonstrated capability — never from top-down assignment.</div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="fwrap">
+    <div>
+      <b>SCOPED <span class="sx">·</span> VERIFIED <span class="sx">·</span> SETTLED</b><br>
+      Land of Geb, LLC — Christiansted, St. Croix, USVI<br>
+      Bixxville OS v1.1 · <span class="sx">St. Croix to the world</span><br>
+      <span style="color:var(--gold);font-family:Lora,Georgia,serif;font-style:italic">We trust the math.</span>
+    </div>
+    <div class="fnav">
+      <span class="ftitle">The system</span>
+      <a href="model.html">The Model</a>
+      <a href="contracting.html">Contracting</a>
+      <a href="learning.html">Learning</a>
+      <a href="network.html">The Network</a>
+    </div>
+    <div class="fnav">
+      <span class="ftitle">Get started</span>
+      <a href="work.html">Work with us</a>
+      <a href="https://ii00270.github.io/Bixxvillenode/" target="_blank" rel="noopener">Log in to the OS</a>
+      <a href="mailto:bixxville@proton.me">bixxville@proton.me</a>
+    </div>
+  </div>
+</footer>
+
+<script src="bixx.js"></script>
+</body>
+</html>

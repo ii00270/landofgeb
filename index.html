@@ -3,447 +3,283 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Bixxville — one operating system for people</title>
+<title>Bixxville — the operating system for organized work</title>
+<meta name="description" content="Bixxville is an operating system that organizes people to complete work. Every engagement decomposed, priced from the breakdown, verified deliverable by deliverable, settled on math. Land of Geb, LLC — St. Croix, USVI.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --black:#0A0B0C; --panel:#111316;
-    --white:#F4F5F7; --soft:#CDCFD3; --grey:#A6ADB4;
-    --green:#8CF060; --orange:#F45E26;
-    --rail:#2C482A; --gold:#AA8C4E;
-    --mono:'Poppins',sans-serif;
-  }
-  *{margin:0;padding:0;box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{
-    background:var(--black); color:var(--white);
-    font-family:'Poppins',sans-serif; -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
-  }
-  ::selection{background:var(--green);color:var(--black)}
-
-  .scene{
-    position:relative;
-    display:flex; flex-direction:column; justify-content:flex-end;
-    padding:84px 26px 60px; overflow:hidden;
-  }
-  #mission{min-height:92svh; min-height:92vh; justify-content:center}
-
-  /* ---------- top nav ---------- */
-  nav{
-    position:fixed; top:0; left:0; right:0; z-index:50;
-    display:flex; align-items:center; justify-content:space-between;
-    padding:18px 22px;
-    background:linear-gradient(180deg, rgba(10,11,12,.92), rgba(10,11,12,0));
-  }
-  .brand{display:flex; align-items:center; gap:10px; text-decoration:none}
-  .glyph{width:30px;height:18px;display:block}
-  .brand b{
-    font-weight:600; font-size:12px; letter-spacing:.22em;
-    color:var(--white); text-transform:uppercase;
-  }
-  .pill{
-    border:1px solid rgba(140,240,96,.55); color:var(--green);
-    border-radius:40px; padding:9px 20px; font-size:13px; font-weight:600;
-    background:transparent; cursor:pointer; text-decoration:none;
-    transition:background .25s, color .25s;
-  }
-  .pill:hover{background:var(--green); color:var(--black)}
-
-  /* ---------- progress rail ---------- */
-  .rail{
-    position:fixed; left:18px; top:50%; transform:translateY(-50%);
-    z-index:40; display:flex; flex-direction:column; gap:10px;
-  }
-  .rail i{
-    display:block; width:2px; height:26px; background:var(--rail);
-    border-radius:2px; transition:background .4s, height .4s;
-  }
-  .rail i.on{background:var(--green); height:40px}
-
-  /* ---------- text system ---------- */
-  .label{
-    font-size:12px; letter-spacing:.26em; text-transform:uppercase;
-    color:var(--grey); margin-bottom:18px; font-weight:500;
-  }
-  .label .n{color:var(--green)}
-  h1,h2{font-weight:600; letter-spacing:-.02em; line-height:.98}
-  h1{font-size:clamp(44px,11.5vw,104px)}
-  h2{font-size:clamp(34px,8.5vw,72px); margin-bottom:22px}
-  h1 .g,h2 .g{color:var(--green)}
-  .body{
-    color:var(--soft); font-size:clamp(15px,4.2vw,19px); line-height:1.55;
-    max-width:560px; margin-top:18px;
-  }
-  .body b{color:var(--white); font-weight:600}
-  .serif{
-    font-family:'Lora',Georgia,serif; font-style:italic;
-    font-size:clamp(17px,4vw,22px); color:var(--green);
-  }
-  .spine{
-    margin-top:26px; font-size:11px; letter-spacing:.32em; font-weight:600;
-    color:var(--grey);
-  }
-  .spine span{color:var(--green)}
-
-  /* reveal */
-  .rv{opacity:0; transform:translateY(26px); transition:opacity .9s ease, transform .9s ease}
-  .rv.in{opacity:1; transform:none}
-  .d1{transition-delay:.08s}.d2{transition-delay:.18s}.d3{transition-delay:.30s}.d4{transition-delay:.42s}.d5{transition-delay:.56s}
-
-  /* ---------- OS panel (shared frame for mock slices) ---------- */
-  .os-snip{
-    width:100%; max-width:560px; margin-top:34px; border:1px solid rgba(244,245,247,.14);
-    border-radius:12px; background:#0D0F11; overflow:hidden; font-family:var(--mono);
-  }
-  .os-top{display:flex; justify-content:space-between; align-items:center; padding:12px 14px; border-bottom:1px solid rgba(244,245,247,.08)}
-  .os-top b{font-size:12px; letter-spacing:.14em; color:var(--green); font-weight:700}
-  .os-top span{display:flex; align-items:center; gap:7px; font-size:9px; letter-spacing:.14em; text-transform:uppercase; color:var(--grey)}
-  .os-top span:before{content:''; width:7px; height:7px; border-radius:50%; background:var(--green)}
-  .os-tabs{display:flex; gap:6px; padding:10px 12px; border-bottom:1px solid rgba(244,245,247,.08)}
-  .os-tabs span{font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--grey); padding:6px 10px; border:1px solid transparent; border-radius:5px}
-  .os-tabs span.on{color:var(--green); border-color:rgba(140,240,96,.4); background:rgba(140,240,96,.06)}
-
-  /* chat rows */
-  .chat{padding:14px; display:flex; flex-direction:column; gap:10px}
-  .msg{max-width:82%; border-radius:10px; padding:10px 13px; font-size:12.5px; line-height:1.45; color:var(--soft); background:var(--panel); border:1px solid rgba(244,245,247,.08)}
-  .msg .who{font-size:9px; letter-spacing:.14em; text-transform:uppercase; color:var(--grey); margin-bottom:4px}
-  .msg.me{align-self:flex-end; background:rgba(140,240,96,.07); border-color:rgba(140,240,96,.3)}
-  .msg.me .who{color:var(--green)}
-  .voice{display:flex; align-items:center; gap:10px}
-  .voice .play{width:26px; height:26px; border-radius:50%; border:1px solid var(--green); flex-shrink:0; position:relative}
-  .voice .play:before{content:''; position:absolute; left:9px; top:7px; border-left:9px solid var(--green); border-top:6px solid transparent; border-bottom:6px solid transparent}
-  .wave{display:flex; align-items:center; gap:2.5px; height:22px}
-  .wave i{width:3px; border-radius:2px; background:var(--green); opacity:.85}
-  .voice .len{font-size:10px; color:var(--grey); font-family:var(--mono)}
-  .sysrow{align-self:center; font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--gold); padding:4px 0}
-
-  /* ---------- roles (classes) ---------- */
-  .taphint{
-    display:inline-flex; align-items:center; gap:9px; margin-top:6px;
-    font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase;
-    color:var(--green); font-weight:600;
-  }
-  .taphint .dot{width:8px; height:8px; border-radius:50%; background:var(--green); animation:tapPulse 1.6s ease-in-out infinite}
-  @keyframes tapPulse{0%,100%{opacity:1; transform:scale(1)} 50%{opacity:.35; transform:scale(.7)}}
-  @media (prefers-reduced-motion:reduce){.taphint .dot{animation:none}}
-
-  .classgrid{display:grid; grid-template-columns:repeat(2,1fr); gap:2px; width:100%; max-width:900px; margin-top:26px}
-  @media(min-width:640px){.classgrid{grid-template-columns:repeat(4,1fr)}}
-  .ctile{
-    position:relative; aspect-ratio:3/4; background:var(--panel); border:1px solid rgba(244,245,247,.1);
-    overflow:hidden; cursor:pointer; -webkit-tap-highlight-color:transparent;
-  }
-  .ctile .cface{position:absolute; inset:0; display:flex; flex-direction:column; padding:14px 14px 16px; transition:opacity .28s ease, transform .28s ease}
-  .ctile .cf-front{justify-content:flex-end}
-  .ctile .cf-back{opacity:0; transform:translateY(6px); justify-content:flex-end}
-  .ctile:hover .cf-front,.ctile.flipped .cf-front{opacity:0; transform:translateY(-6px)}
-  .ctile:hover .cf-back,.ctile.flipped .cf-back{opacity:1; transform:none}
-  .ctile .cnum{font-family:var(--mono); font-size:11px; color:var(--grey); letter-spacing:.14em}
-  .ctile .cname{font-size:clamp(14px,2.6vw,22px); font-weight:700; letter-spacing:-.02em; text-transform:uppercase; line-height:1.05; margin-top:auto; overflow-wrap:break-word}
-  .ctile.o1 .cname{color:var(--soft)}
-  .ctile.o2 .cname{color:var(--white)}
-  .ctile.o3 .cname{color:var(--orange)}
-  .ctile.o4 .cname{color:var(--green)}
-  .cf-back .crate{font-family:var(--mono); font-size:20px; font-weight:700; color:var(--green); margin-bottom:6px}
-  .cf-back .ccommit{font-size:11.5px; color:var(--soft); margin-bottom:8px; line-height:1.4}
-  .cf-back .cconstraint{font-size:11px; color:var(--grey); line-height:1.42; border-top:1px solid rgba(244,245,247,.12); padding-top:8px}
-
-  /* ---------- wallet / settlement ---------- */
-  .settle{padding:16px 14px; display:flex; flex-direction:column; gap:0}
-  .set-row{display:flex; justify-content:space-between; align-items:baseline; gap:12px; padding:11px 2px; border-bottom:1px solid rgba(244,245,247,.06); font-size:12.5px}
-  .set-row:last-child{border-bottom:none}
-  .set-row .k{color:var(--grey); font-size:11px; letter-spacing:.08em; text-transform:uppercase}
-  .set-row .v{color:var(--white); font-family:var(--mono); font-weight:600; text-align:right}
-  .set-row .v.g{color:var(--green)}
-  .set-row .v.addr{color:var(--gold); letter-spacing:.04em}
-
-  /* ---------- anywhere map ---------- */
-  .stage{position:relative; z-index:1; width:100%; display:flex;
-    align-items:center; justify-content:center; margin:6px 0 26px}
-  .stage svg{width:100%; height:auto; max-width:640px; overflow:visible}
-  .anno{fill:var(--grey); font-family:var(--mono); font-size:11px; letter-spacing:.05em}
-  .edge{fill:none; stroke:var(--rail); stroke-width:1.3; opacity:.9}
-  .edge.lit{stroke:var(--green); stroke-width:1.6; opacity:1}
-  .pop{opacity:0; transform:scale(.82); transform-origin:center; transition:opacity .55s ease, transform .55s ease}
-  .in .pop{opacity:1; transform:none}
-  .in .p1{transition-delay:.05s}.in .p2{transition-delay:.18s}.in .p3{transition-delay:.31s}
-  .in .p4{transition-delay:.44s}.in .p5{transition-delay:.57s}.in .p6{transition-delay:.70s}
-
-  /* ---------- login CTA ---------- */
-  #login{justify-content:center; min-height:70svh; min-height:70vh}
-  .login-box{border:1px solid rgba(140,240,96,.4); border-radius:14px; padding:34px 28px; max-width:560px; background:rgba(140,240,96,.03)}
-  .login-box h2{margin-bottom:14px}
-  .biglink{
-    display:block; text-align:center; text-decoration:none; margin-top:26px;
-    background:var(--green); color:#08110C; border-radius:10px; padding:18px;
-    font-size:16px; font-weight:700; transition:transform .1s, background .15s;
-  }
-  .biglink:hover{background:#9ff06f} .biglink:active{transform:scale(.99)}
-  .login-note{margin-top:14px; font-size:12px; color:var(--grey); text-align:center; line-height:1.6}
-
-  footer{
-    padding:30px 26px 60px; border-top:1px solid var(--rail);
-    color:var(--grey); font-size:12px; letter-spacing:.04em; line-height:1.8;
-  }
-  footer b{color:var(--soft); font-weight:500; letter-spacing:.18em}
-  footer .sx{color:var(--green)}
-
-  @media (max-width:520px){
-    .rail{display:none}
-    .body{max-width:none}
-  }
-  @media (prefers-reduced-motion:reduce){
-    html{scroll-behavior:auto}
-    .rv,.pop{opacity:1;transform:none;transition:none}
-  }
-</style>
+<link rel="stylesheet" href="bixx.css">
 </head>
 <body>
 
 <nav>
-  <a class="brand" href="#mission" aria-label="Bixxville home">
+  <a class="brand" href="index.html" aria-label="Bixxville home">
     <svg class="glyph" viewBox="0 0 40 24" aria-hidden="true">
       <polyline points="2,12 9,12 14,4 20,20 26,8 31,12 38,12" fill="none" stroke="#8CF060" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
     </svg>
-    <b>Land&nbsp;of&nbsp;Geb</b>
+    <b>Bixxville</b>
   </a>
-  <a class="pill" href="https://ii00270.github.io/Bixxvillenode/" target="_blank" rel="noopener">Log in</a>
+  <div class="navlinks">
+    <a href="model.html">The Model</a>
+    <a href="contracting.html">Contracting</a>
+    <a href="learning.html">Learning</a>
+    <a href="network.html">The Network</a>
+  </div>
+  <div class="navactions">
+    <a class="pill" href="https://ii00270.github.io/Bixxvillenode/" target="_blank" rel="noopener">Log in</a>
+    <button class="ham" id="hamBtn" aria-label="Open menu"><span></span><span></span></button>
+  </div>
 </nav>
 
-<div class="rail" id="rail" aria-hidden="true"></div>
+<div class="menu" id="menu" aria-hidden="true">
+  <button class="menuclose" id="menuClose" aria-label="Close menu"></button>
+  <a href="index.html" class="on"><span class="mi">00</span> Home</a>
+  <a href="model.html"><span class="mi">01</span> The Model</a>
+  <a href="contracting.html"><span class="mi">02</span> Contracting</a>
+  <a href="learning.html"><span class="mi">03</span> Learning</a>
+  <a href="network.html"><span class="mi">04</span> The Network</a>
+  <a href="work.html"><span class="mi">05</span> Work with us</a>
+  <a href="https://ii00270.github.io/Bixxvillenode/" target="_blank" rel="noopener"><span class="mi">06</span> Log in</a>
+  <div class="mfoot">SCOPED <span>·</span> VERIFIED <span>·</span> SETTLED<br>Land of Geb, LLC — Christiansted, St. Croix, USVI</div>
+</div>
 
 <main>
 
-  <!-- 00 MISSION -->
-  <section class="scene" id="mission" data-rail>
-    <div style="max-width:720px">
-      <div class="label rv">Bixxville &nbsp;·&nbsp; an operating system for people</div>
-      <h1 class="rv d1">People, <span class="g">organized.</span></h1>
-      <p class="body rv d2" style="margin-top:30px">Bixxville organizes people under one operating system to fulfill tasks. Not a company you work for — a system you work <b>inside</b>. Tasks come in, get broken into clear pieces, get done by the right hands, and get paid. All in one place.</p>
-      <p class="serif rv d3" style="margin-top:34px">No person gets left behind as technology advances.</p>
+  <!-- HERO -->
+  <section class="scene hero">
+    <div class="wrap">
+      <div class="eyebrow rv">Land of Geb, LLC &nbsp;·&nbsp; Christiansted, St. Croix, USVI</div>
+      <h1 class="rv d1">We don't estimate.<br><span class="g">We decompose.</span></h1>
+      <p class="lead rv d2">Bixxville is an operating system for organizing people to complete work. Every engagement is broken into dependency-ordered units before anyone names a price. Every deliverable is binary — done or not done. Every settlement reconciles to the cent before the books close.</p>
+      <p class="lead rv d3">We take the contract. The system carries the coordination.</p>
       <div class="spine rv d4">SCOPED <span>·</span> VERIFIED <span>·</span> SETTLED</div>
     </div>
   </section>
 
-  <!-- 01 THE OPERATING SYSTEM -->
-  <section class="scene" id="os" data-rail>
-    <div style="max-width:640px">
-      <div class="label rv"><span class="n">01</span> &nbsp;— &nbsp;The Operating System</div>
-      <h2 class="rv d1">One system.<br>Every task.</h2>
-      <p class="body rv d2">The OS is where everything lives. A task enters, gets scoped into hours, gets claimed, gets verified, gets settled. Who's doing what, what's done, what's owed — one screen, one truth. No group chats to dig through, no spreadsheet nobody updates, no boss to chase for your check.</p>
-      <p class="body rv d3">Every hour of confirmed work is a <b>LOG</b>. LOGs are the unit everything else runs on: assignment, reputation, pay.</p>
-    </div>
-  </section>
-
-  <!-- 02 TEXTING + VOICE -->
-  <section class="scene" id="comms" data-rail>
-    <div style="max-width:640px">
-      <div class="label rv"><span class="n">02</span> &nbsp;— &nbsp;Communication</div>
-      <h2 class="rv d1">Text it.<br>Or just <span class="g">say it.</span></h2>
-      <p class="body rv d2">Texting and voice memos are built into the OS. Coordination happens next to the work — not scattered across five apps. Type a message, or hold to record and send your voice. The task hears about it either way.</p>
-      <div class="os-snip rv d3" role="img" aria-label="A slice of the Bixxville OS Messages tab — texting and a voice memo inside the system">
-        <div class="os-top"><b>BIXXVILLE</b><span>the OS · live</span></div>
-        <div class="os-tabs"><span>Market</span><span class="on">Messages</span><span>Work</span><span>Sidekick</span></div>
-        <div class="chat">
-          <div class="msg"><div class="who">B — Operator</div>Route 3 is clear. Who's on the pickup?</div>
-          <div class="msg me"><div class="who">You</div><div class="voice"><span class="play"></span><span class="wave" aria-hidden="true"></span><span class="len">0:12</span></div></div>
-          <div class="msg"><div class="who">B — Operator</div>Got it. Marking it done.</div>
-          <div class="sysrow">task #114 · verified · queued to settle</div>
+  <!-- THE THESIS -->
+  <section class="scene alt">
+    <div class="wrap">
+      <div class="eyebrow rv"><span class="n">01</span> &nbsp;— &nbsp;The thesis</div>
+      <h2 class="rv d1">Efficiency isn't a claim.<br>It's the <span class="g">architecture.</span></h2>
+      <p class="body rv d2">Most operations price work before they understand it, then spend the engagement discovering what they agreed to. The overrun was written into the quote. Bixxville inverts the order: understand the work, then derive the number from it. The price is an output, never an input.</p>
+      <div class="grid g2">
+        <div class="card rv d3">
+          <div class="ck">Scope before price</div>
+          <h3>The number follows the work.</h3>
+          <p>No engagement is priced before it is decomposed. Every unit of work carries an hour estimate and an owner, and the price is what those add up to — not a guess dressed as a quote.</p>
         </div>
+        <div class="card rv d3">
+          <div class="ck">The refusal gate</div>
+          <h3>We decline what the calendar can't hold.</h3>
+          <p>If the work cannot fit the window, the network declines to quote and says so. A hard stop — not a rush fee. Not overridable by a client's willingness to pay more, or a member's willingness to absorb it.</p>
+        </div>
+        <div class="card rv d4">
+          <div class="ck">Binary deliverables</div>
+          <h3>Done, or not done.</h3>
+          <p>Every deliverable is defined before work starts, with no partial credit and no ambiguity about what triggers payment. There is nothing to argue about at the end, because the argument happened at the beginning.</p>
+        </div>
+        <div class="card rv d4">
+          <div class="ck">Arithmetic integrity</div>
+          <h3>The books check themselves.</h3>
+          <p>Every ID carries mod-97 check digits. Before any cycle closes, a casting-out-nines audit confirms member pay, reserve, and remainder sum exactly to gross. Sealed cycles are immutable.</p>
+        </div>
+      </div>
+      <div class="note good rv d5">
+        <b>Why this matters on a contract.</b> Schedule slip and scope dispute are the two things that kill a job and a reputation. The refusal gate is designed to make the first one structurally unlikely, and binary deliverables are designed to make the second one impossible to have.
       </div>
     </div>
   </section>
 
-  <!-- 03 THE ROLES -->
-  <section class="scene" id="roles" data-rail>
-    <div style="max-width:900px">
-      <div class="label rv"><span class="n">03</span> &nbsp;— &nbsp;The Roles</div>
-      <h2 class="rv d1">Four roles.<br>One ladder.</h2>
-      <p class="body rv d2">Everyone starts at Apprentice and climbs on delivered work — never on recruiting, never on a fee.</p>
-      <div class="taphint rv d2"><span class="dot"></span>Tap a tile — it flips to the terms</div>
-    </div>
-    <div class="classgrid rv d3">
-      <div class="ctile o1" tabindex="0">
-        <div class="cface cf-front"><div class="cnum">01</div><div class="cname">Apprentice</div></div>
-        <div class="cface cf-back">
-          <div class="crate">$39<span style="font-size:11px;color:var(--grey)">/LOG</span></div>
-          <div class="ccommit">Sponsored by an Architect or Operator — no fixed cycle quota</div>
-          <div class="cconstraint">Can't bid on work without a sponsor. 2–6 cycles before graduating to Wrangler.</div>
-        </div>
-      </div>
-      <div class="ctile o2" tabindex="0">
-        <div class="cface cf-front"><div class="cnum">02</div><div class="cname">Wrangler</div></div>
-        <div class="cface cf-back">
-          <div class="crate">$65<span style="font-size:11px;color:var(--grey)">/LOG</span></div>
-          <div class="ccommit">116-LOG cycle commitment</div>
-          <div class="cconstraint">No client contact — all client communication routes through the Operator.</div>
-        </div>
-      </div>
-      <div class="ctile o3" tabindex="0">
-        <div class="cface cf-front"><div class="cnum">03</div><div class="cname">Architect</div></div>
-        <div class="cface cf-back">
-          <div class="crate">$85<span style="font-size:11px;color:var(--grey)">/LOG</span></div>
-          <div class="ccommit">232-LOG cycle commitment</div>
-          <div class="cconstraint">Decomposes engagements into scoped work. Doesn't both decompose and execute the same one.</div>
-        </div>
-      </div>
-      <div class="ctile o4" tabindex="0">
-        <div class="cface cf-front"><div class="cnum">04</div><div class="cname">Operator</div></div>
-        <div class="cface cf-back">
-          <div class="crate">$100<span style="font-size:11px;color:var(--grey)">/LOG</span></div>
-          <div class="ccommit">348-LOG cycle commitment, governance time included</div>
-          <div class="cconstraint">Single point of client contact. Holds voting weight on network governance.</div>
-        </div>
+  <!-- WHAT RUNS ON IT -->
+  <section class="scene">
+    <div class="wrap">
+      <div class="eyebrow rv"><span class="n">02</span> &nbsp;— &nbsp;What runs on it</div>
+      <h2 class="rv d1">One system.<br>Four directions.</h2>
+      <p class="body rv d2">The same method — decompose it, order it, verify it, settle it — applied to contracts, to teaching, and to the network that carries both.</p>
+      <div class="grid g2">
+        <a class="card rv d3" href="contracting.html">
+          <div class="ck">01 &nbsp;· &nbsp;Contracting</div>
+          <h3>Government &amp; commercial work, delivered on the model.</h3>
+          <p>Facility repair, renovation, and task-order work — scoped as a dependency graph, priced firm-fixed, delivered by the network, and settled against an audit. Efficiency is what we're selling.</p>
+          <span class="arr">See the contracting practice →</span>
+        </a>
+        <a class="card rv d3" href="model.html">
+          <div class="ck">02 &nbsp;· &nbsp;The Model</div>
+          <h3>The mechanics, in full.</h3>
+          <p>Decomposition, the LOG, the tiers, the standing formula, the four-stamp settlement, and the line where automation stops and a human decides.</p>
+          <span class="arr">Read how it works →</span>
+        </a>
+        <a class="card rv d4" href="learning.html">
+          <div class="ck">03 &nbsp;· &nbsp;Learning</div>
+          <h3>Markets, sales, branding, mathematics.</h3>
+          <p>We teach the fundamentals the school system treats as electives — trading and market structure, the psychology of sales, marketing and brand, and the mathematics underneath all of it.</p>
+          <span class="arr">See what we teach →</span>
+        </a>
+        <a class="card rv d4" href="network.html">
+          <div class="ck">04 &nbsp;· &nbsp;The Network</div>
+          <h3>Four tiers. Standing earned, never granted.</h3>
+          <p>Members hold a tier, a rate, and a computed standing. Work routes by proven capability. Advancement comes from delivered work — never from recruiting, never from a fee.</p>
+          <span class="arr">Join the network →</span>
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- 04 WEB3 PAY -->
-  <section class="scene" id="pay" data-rail>
-    <div style="max-width:640px">
-      <div class="label rv"><span class="n">04</span> &nbsp;— &nbsp;Getting Paid</div>
-      <h2 class="rv d1">Your wallet.<br><span class="g">Your money.</span></h2>
-      <p class="body rv d2">Pay settles through <b>web3</b> — straight to your own private wallet. Nobody in Bixxville holds your money, and nobody can. When work verifies, the settlement routes wallet-to-wallet, on-chain, and it's yours the moment it lands.</p>
-      <div class="os-snip rv d3" role="img" aria-label="A settlement receipt — verified work paid to a private wallet">
-        <div class="os-top"><b>SETTLEMENT</b><span>on-chain</span></div>
-        <div class="settle">
-          <div class="set-row"><span class="k">Task</span><span class="v">#114 — verified</span></div>
-          <div class="set-row"><span class="k">Work</span><span class="v">4 LOG × $65</span></div>
-          <div class="set-row"><span class="k">Settles</span><span class="v g">$260 USDC</span></div>
-          <div class="set-row"><span class="k">To</span><span class="v addr">your wallet · 0x9f…a41</span></div>
-          <div class="set-row"><span class="k">Held by</span><span class="v">no one but you</span></div>
-        </div>
+  <!-- HOW A JOB RUNS -->
+  <section class="scene alt">
+    <div class="wrap">
+      <div class="eyebrow rv"><span class="n">03</span> &nbsp;— &nbsp;How a job runs</div>
+      <h2 class="rv d1">Intake to settlement.</h2>
+      <p class="body rv d2">The same six moves on every engagement, whether it's a federal task order or a kitchen renovation.</p>
+
+      <div class="stage rv d3">
+        <svg viewBox="0 0 700 150" role="img" aria-label="Six stages: intake, decompose, gate, price, execute and verify, settle">
+          <defs>
+            <marker id="ar" markerWidth="8" markerHeight="8" refX="6.5" refY="4" orient="auto">
+              <path d="M0,0 L8,4 L0,8 z" fill="#8CF060"/>
+            </marker>
+          </defs>
+          <g stroke="#8CF060" stroke-width="1.3" fill="none" opacity=".8">
+            <line x1="96" y1="60" x2="120" y2="60" marker-end="url(#ar)"/>
+            <line x1="216" y1="60" x2="240" y2="60" marker-end="url(#ar)"/>
+            <line x1="336" y1="60" x2="360" y2="60" marker-end="url(#ar)"/>
+            <line x1="456" y1="60" x2="480" y2="60" marker-end="url(#ar)"/>
+            <line x1="576" y1="60" x2="600" y2="60" marker-end="url(#ar)"/>
+          </g>
+          <g class="pop p1"><rect class="nd" x="8" y="38" width="88" height="44" rx="7"/><text class="ntext" x="52" y="58" text-anchor="middle">Intake</text><text class="anno" x="52" y="73" text-anchor="middle">the goal</text></g>
+          <g class="pop p2"><rect class="nd" x="128" y="38" width="88" height="44" rx="7"/><text class="ntext" x="172" y="58" text-anchor="middle">Decompose</text><text class="anno" x="172" y="73" text-anchor="middle">to leaves</text></g>
+          <g class="pop p3"><rect class="nd warn" x="248" y="38" width="88" height="44" rx="7"/><text class="ntext" x="292" y="58" text-anchor="middle">Gate</text><text class="nsub o" x="292" y="73" text-anchor="middle">fits or refuse</text></g>
+          <g class="pop p4"><rect class="nd" x="368" y="38" width="88" height="44" rx="7"/><text class="ntext" x="412" y="58" text-anchor="middle">Price</text><text class="anno" x="412" y="73" text-anchor="middle">from the map</text></g>
+          <g class="pop p5"><rect class="nd" x="488" y="38" width="88" height="44" rx="7"/><text class="ntext" x="532" y="58" text-anchor="middle">Execute</text><text class="anno" x="532" y="73" text-anchor="middle">&amp; verify</text></g>
+          <g class="pop p6"><rect class="nd" x="608" y="38" width="88" height="44" rx="7"/><text class="ntext" x="652" y="58" text-anchor="middle">Settle</text><text class="nsub" x="652" y="73" text-anchor="middle">audited</text></g>
+          <text class="anno pop p7" x="350" y="120" text-anchor="middle">the price is derived at step four — never before step two</text>
+        </svg>
+      </div>
+
+      <div class="steps rv d4">
+        <div class="step"><span class="sn">01</span><div class="sb"><div class="st">Intake</div><div class="sd">The goal is stated in the client's own words, along with the window it has to happen in.</div></div></div>
+        <div class="step"><span class="sn">02</span><div class="sb"><div class="st">Decomposition</div><div class="sd">The goal becomes a dependency graph. Leaves are the priced, estimated units of work; branches are pure containers that roll up and are never separately billed. <em>No oversight multiple. No consumption surcharge.</em></div></div></div>
+        <div class="step"><span class="sn">03</span><div class="sb"><div class="st">The gate</div><div class="sd">Estimated work is measured against the available window. If the critical path alone can't fit, the network declines and says what it would take — more people, or more time.</div></div></div>
+        <div class="step"><span class="sn">04</span><div class="sb"><div class="st">Price</div><div class="sd">The sized work becomes the price, with the reserve funded off the top rather than added on afterward. The client sees one flat number, and the derivation behind it is available on request.</div></div></div>
+        <div class="step"><span class="sn">05</span><div class="sb"><div class="st">Execute &amp; verify</div><div class="sd">Work is claimed by members at their tier. Each deliverable closes binary against the definition written at scoping. Communication runs inside the system, next to the work.</div></div></div>
+        <div class="step"><span class="sn">06</span><div class="sb"><div class="st">Settle</div><div class="sd">A four-stamp protocol closes the engagement. Before the cycle seals, the arithmetic audit confirms every figure reconciles to gross. Sealed cycles are immutable.</div></div></div>
       </div>
     </div>
   </section>
 
-  <!-- 05 ANYWHERE -->
-  <section class="scene" id="anywhere" data-rail>
-    <div class="stage" id="st-any">
-      <svg viewBox="0 0 640 300" role="img" aria-label="Bixxville nodes running the same system across the world">
-        <g class="edge-set">
-          <path class="edge" d="M320,150 C250,80 180,60 110,64"/>
-          <path class="edge lit" d="M320,150 C400,90 470,70 540,60"/>
-          <path class="edge" d="M320,150 C240,200 160,226 90,224"/>
-          <path class="edge" d="M320,150 C410,200 480,230 552,236"/>
-        </g>
-        <g class="pop p2"><circle cx="110" cy="64" r="8" fill="none" stroke="#8CF060" stroke-width="1.4"/><text class="anno" x="110" y="42" text-anchor="middle">Florida</text></g>
-        <g class="pop p3"><circle cx="540" cy="60" r="8" fill="#8CF060"/><text class="anno" x="540" y="38" text-anchor="middle" fill="#8CF060">anywhere</text></g>
-        <g class="pop p4"><circle cx="90" cy="224" r="8" fill="none" stroke="#AA8C4E" stroke-width="1.4"/><text class="anno" x="90" y="254" text-anchor="middle">anywhere</text></g>
-        <g class="pop p5"><circle cx="552" cy="236" r="8" fill="none" stroke="#F45E26" stroke-width="1.4"/><text class="anno" x="552" y="266" text-anchor="middle">anywhere</text></g>
-        <g class="pop p1">
-          <circle cx="320" cy="150" r="26" fill="none" stroke="#8CF060" stroke-width="1.6"/>
-          <circle cx="320" cy="150" r="5" fill="#8CF060"/>
-          <text class="anno" x="320" y="196" text-anchor="middle">ST. CROIX · GENESIS</text>
-        </g>
-      </svg>
-    </div>
-    <div style="max-width:640px">
-      <div class="label rv"><span class="n">05</span> &nbsp;— &nbsp;Anywhere</div>
-      <h2 class="rv d1">Sound anywhere.<br>Placed <span class="g">anywhere.</span></h2>
-      <p class="body rv d2">The system doesn't care where you stand. The rules are the same rules, the LOG is the same LOG, and the money settles the same way — in St. Croix, in Florida, or anywhere in the world someone decides to run it. Drop the OS on any group of people, and it organizes them.</p>
+  <!-- THE CONSTANTS -->
+  <section class="scene">
+    <div class="wrap">
+      <div class="eyebrow rv"><span class="n">04</span> &nbsp;— &nbsp;The constants</div>
+      <h2 class="rv d1">The numbers that<br>don't move.</h2>
+      <p class="body rv d2">Published, fixed, and identical for every engagement and every member. They are not adjusted to win a price-sensitive client.</p>
+      <div class="grid g4 rv d3">
+        <div class="stat"><div class="sv">1 LOG</div><div class="sl">One hour of qualified work — the atomic unit of account</div></div>
+        <div class="stat"><div class="sv">25%</div><div class="sl">Reserve, off the top, every engagement, every pathway</div></div>
+        <div class="stat"><div class="sv">28 days</div><div class="sl">One cycle — work, verification, settlement. Thirteen a year</div></div>
+        <div class="stat"><div class="sv">4</div><div class="sl">Tiers: Apprentice, Wrangler, Architect, Operator</div></div>
+      </div>
+      <div class="formula rv d4">
+        <div class="fl">The standing formula</div>
+        <div class="fx">R&nbsp;=&nbsp;0.50·Delivery&nbsp;+&nbsp;0.25·Timeliness&nbsp;+&nbsp;0.15·Streak&nbsp;−&nbsp;0.10·Disputes</div>
+        <div class="fn">Recomputed at every cycle close, identically for every member. No one enters the network at a high standing. The math decides, not the relationship.</div>
+      </div>
     </div>
   </section>
 
-  <!-- 06 LOG IN -->
-  <section class="scene" id="login" data-rail>
-    <div class="login-box rv">
-      <div class="label" style="margin-bottom:12px">Enter the system</div>
-      <h2>The OS is <span class="g">live.</span></h2>
-      <p class="body rv d1" style="margin-top:6px">Everything on this page is running right now. Log in and see it.</p>
-      <a class="biglink rv d2" href="https://ii00270.github.io/Bixxvillenode/" target="_blank" rel="noopener">Log in to Bixxville →</a>
-      <div class="login-note">Works on any phone or computer, anywhere in the world.</div>
+  <!-- WHO IT'S FOR -->
+  <section class="scene alt">
+    <div class="wrap narrow">
+      <div class="eyebrow rv"><span class="n">05</span> &nbsp;— &nbsp;Who this is for</div>
+      <h2 class="rv d1">Smart people in places<br>the world <span class="g">underestimates.</span></h2>
+      <p class="body rv d2">The problem was never effort. The people this network is built for already know how to work. What they never had is the structure that protects them while they do it — the system that shows each step, lines it in order, names the price before the work starts, and makes sure everyone gets paid for what they actually delivered.</p>
+      <p class="body rv d3">Without that structure, capable people spend their energy on the wrong things in the wrong order. They undercharge because they never scoped the work. They go unpaid because there was no record. They burn out because the coordination fell on them instead of on a system built to carry it.</p>
+      <p class="serif rv d4" style="margin-top:30px">Bixxville is the system built to carry it.</p>
+      <div class="quote rv d5">
+        The mission: to build a union and a chamber of commerce inside one operating system — so the people who do the work have the security, the structure, and the standing they were never given.
+        <cite>North Star Document · Land of Geb, LLC</cite>
+      </div>
     </div>
   </section>
 
-  <footer>
-    <b>SCOPED <span class="sx">·</span> VERIFIED <span class="sx">·</span> SETTLED</b><br>
-    Land of Geb, LLC — Christiansted, St. Croix, USVI<br>
-    Bixxville OS · <span class="sx">St. Croix to the world</span>
-  </footer>
+  <!-- WHERE -->
+  <section class="scene">
+    <div class="wrap">
+      <div class="eyebrow rv"><span class="n">06</span> &nbsp;— &nbsp;Where it runs</div>
+      <h2 class="rv d1">St. Croix is the proof.<br>The world is the <span class="g">scale.</span></h2>
+      <p class="body rv d2">The island is not a limitation — it's the vantage point. If a self-sustaining operating network can be built from Christiansted, it can be built from anywhere. The rules are the same rules, the unit is the same unit, and the settlement works the same way wherever a node stands.</p>
+
+      <div class="stage rv d3">
+        <svg viewBox="0 0 640 260" role="img" aria-label="St. Croix as origin node with the network extending outward">
+          <g class="edge-set">
+            <path class="edge" d="M320,130 C250,70 180,52 108,56"/>
+            <path class="edge lit" d="M320,130 C398,74 466,56 536,48"/>
+            <path class="edge" d="M320,130 C240,180 164,204 92,202"/>
+            <path class="edge" d="M320,130 C408,180 476,208 548,214"/>
+          </g>
+          <g class="pop p2"><circle cx="108" cy="56" r="8" fill="none" stroke="#AA8C4E" stroke-width="1.4"/><text class="anno" x="108" y="36" text-anchor="middle">Florida · Real Estate</text></g>
+          <g class="pop p3"><circle cx="536" cy="48" r="8" fill="#8CF060"/><text class="anno" x="536" y="28" text-anchor="middle" fill="#8CF060">USVI · Education</text></g>
+          <g class="pop p4"><circle cx="92" cy="202" r="8" fill="none" stroke="#2C482A" stroke-width="1.6"/><text class="anno" x="92" y="226" text-anchor="middle">Caribbean · Distribution</text></g>
+          <g class="pop p5"><circle cx="548" cy="214" r="8" fill="none" stroke="#2C482A" stroke-width="1.6"/><text class="anno" x="548" y="238" text-anchor="middle">Diaspora · Build</text></g>
+          <g class="pop p1">
+            <circle cx="320" cy="130" r="26" fill="none" stroke="#8CF060" stroke-width="1.6"/>
+            <circle cx="320" cy="130" r="5" fill="#8CF060"/>
+            <text class="anno" x="320" y="176" text-anchor="middle">ST. CROIX · ORIGIN NODE</text>
+          </g>
+        </svg>
+      </div>
+      <p class="body rv d4" style="margin-top:22px">Nodes operate within their own radius, on the same principles, along a shared spine. Each node that demonstrates the method earns the right to extend the network — and the math ensures no node can corrupt another.</p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="scene alt">
+    <div class="wrap">
+      <div class="grid g2">
+        <div class="ctabox rv">
+          <div class="eyebrow" style="margin-bottom:12px">Bring us a goal</div>
+          <h2 style="font-size:clamp(26px,5.5vw,38px)">Have work that<br>needs running?</h2>
+          <p class="body" style="margin-top:8px">Tell us the goal and the window. You'll get a partial map back — the real first steps and the order that matters — before anyone talks about a number.</p>
+          <a class="biglink" href="work.html">Start an intake →</a>
+          <div class="ctanote">Takes about three minutes.</div>
+        </div>
+        <div class="ctabox rv d2">
+          <div class="eyebrow" style="margin-bottom:12px">Enter the system</div>
+          <h2 style="font-size:clamp(26px,5.5vw,38px)">The OS is <span class="g">live.</span></h2>
+          <p class="body" style="margin-top:8px">Members coordinate, claim work, message by text and voice, and settle inside the operating system itself. Everything on this site is running right now.</p>
+          <a class="biglink ghost" href="https://ii00270.github.io/Bixxvillenode/" target="_blank" rel="noopener">Log in to Bixxville →</a>
+          <div class="ctanote">Any phone or computer, anywhere in the world.</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
 </main>
 
-<script>
-(function(){
-  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+<footer>
+  <div class="fwrap">
+    <div>
+      <b>SCOPED <span class="sx">·</span> VERIFIED <span class="sx">·</span> SETTLED</b><br>
+      Land of Geb, LLC — Christiansted, St. Croix, USVI<br>
+      Bixxville OS v1.1 · <span class="sx">St. Croix to the world</span><br>
+      <span style="color:var(--gold);font-family:Lora,Georgia,serif;font-style:italic">We trust the math.</span>
+    </div>
+    <div class="fnav">
+      <span class="ftitle">The system</span>
+      <a href="model.html">The Model</a>
+      <a href="contracting.html">Contracting</a>
+      <a href="learning.html">Learning</a>
+      <a href="network.html">The Network</a>
+    </div>
+    <div class="fnav">
+      <span class="ftitle">Get started</span>
+      <a href="work.html">Work with us</a>
+      <a href="https://ii00270.github.io/Bixxvillenode/" target="_blank" rel="noopener">Log in to the OS</a>
+      <a href="mailto:bixxville@proton.me">bixxville@proton.me</a>
+    </div>
+  </div>
+</footer>
 
-  /* ----- progress rail ----- */
-  var scenes = Array.prototype.slice.call(document.querySelectorAll('[data-rail]'));
-  var rail = document.getElementById('rail');
-  scenes.forEach(function(){ var i=document.createElement('i'); rail.appendChild(i); });
-  var ticks = rail.querySelectorAll('i');
-
-  /* ----- reveal + rail sync ----- */
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      var idx = scenes.indexOf(e.target);
-      if(e.isIntersecting){
-        e.target.classList.add('in');
-        e.target.querySelectorAll('.rv').forEach(function(el){ el.classList.add('in'); });
-        if(idx>-1){ ticks.forEach(function(t,i){ t.classList.toggle('on', i===idx); }); }
-      }
-    });
-  }, {threshold:0.18});
-  scenes.forEach(function(s){ io.observe(s); });
-
-  var rvIO = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); } });
-  }, {threshold:0.12});
-  document.querySelectorAll('.rv').forEach(function(el){ rvIO.observe(el); });
-
-  if(scenes[0]){ scenes[0].classList.add('in'); scenes[0].querySelectorAll('.rv').forEach(function(el){el.classList.add('in');}); if(ticks[0]) ticks[0].classList.add('on'); }
-
-  /* ----- voice memo waveform bars ----- */
-  document.querySelectorAll('.wave').forEach(function(w){
-    var heights = [6,12,8,18,10,16,7,14,20,9,15,6,11,17,8];
-    heights.forEach(function(h){
-      var b = document.createElement('i');
-      b.style.height = h + 'px';
-      w.appendChild(b);
-    });
-  });
-
-  /* ----- roles: one-time auto-flip demo ----- */
-  (function(){
-    var cs = document.getElementById('roles');
-    if(!cs || reduce || !('IntersectionObserver' in window)) return;
-    var tiles = cs.querySelectorAll('.ctile');
-    var done = false;
-    var demoIO = new IntersectionObserver(function(entries){
-      entries.forEach(function(en){
-        if(en.isIntersecting && !done){
-          done = true;
-          tiles.forEach(function(t,i){
-            setTimeout(function(){ t.classList.add('flipped'); }, 600 + i*420);
-            setTimeout(function(){ t.classList.remove('flipped'); }, 600 + i*420 + 1600);
-          });
-          demoIO.disconnect();
-        }
-      });
-    }, {threshold:.35});
-    demoIO.observe(cs);
-  })();
-
-  /* ----- roles: tap-to-flip for touch ----- */
-  var flippables = document.querySelectorAll('.ctile');
-  flippables.forEach(function(el){
-    el.addEventListener('click', function(){
-      var already = el.classList.contains('flipped');
-      flippables.forEach(function(o){ if(o!==el) o.classList.remove('flipped'); });
-      el.classList.toggle('flipped', !already);
-    });
-  });
-  document.addEventListener('click', function(e){
-    if(!e.target.closest('.ctile')){
-      flippables.forEach(function(o){ o.classList.remove('flipped'); });
-    }
-  });
-
-})();
-</script>
+<script src="bixx.js"></script>
 </body>
 </html>

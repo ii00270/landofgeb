@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Learning — Bixxville</title>
+<meta name="description" content="We teach markets and trading, the psychology of sales, marketing and brand, and the mathematics underneath all of it — to communities that were never offered it, and to individuals who want to learn.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="bixx.css">
+<style>
+  .seq{display:grid; grid-template-columns:1fr; gap:12px; margin-top:30px}
+  @media(min-width:760px){.seq{grid-template-columns:repeat(4,1fr)}}
+  .sq{border:1px solid var(--line); border-radius:11px; background:var(--panel); padding:20px 18px; position:relative}
+  .sq .sqn{font-family:var(--mono); font-size:10px; letter-spacing:.2em; color:var(--gold); font-weight:700; margin-bottom:10px; text-transform:uppercase}
+  .sq h3{font-size:18px; margin-bottom:8px}
+  .sq p{font-size:13px; color:var(--soft); line-height:1.5}
+  .sq:nth-child(4){border-color:rgba(140,240,96,.4); background:rgba(140,240,96,.04)}
+  .sq:nth-child(4) .sqn{color:var(--green)}
+  .subj{display:flex; flex-direction:column; gap:2px; margin-top:28px}
+  .sj{display:flex; gap:18px; padding:22px 20px; background:var(--panel); border:1px solid var(--line2); align-items:flex-start}
+  .sj .sjb{width:12px; height:12px; border-radius:3px; flex-shrink:0; margin-top:6px}
+  .sj .sjc{flex:1; min-width:0}
+  .sj h3{font-size:19px; margin-bottom:8px}
+  .sj p{font-size:14.5px; color:var(--soft); line-height:1.58}
+  .sj .sjw{margin-top:11px; font-size:12.5px; color:var(--grey); line-height:1.5; border-top:1px solid var(--line2); padding-top:10px}
+  .sj .sjw b{color:var(--gold); font-weight:600}
+  .pill4{display:grid; grid-template-columns:1fr; gap:12px; margin-top:28px}
+  @media(min-width:700px){.pill4{grid-template-columns:1fr 1fr}}
+  .p4{border:1px solid var(--line); border-radius:11px; padding:20px; background:var(--panel)}
+  .p4 .p4n{font-family:var(--mono); font-size:10px; letter-spacing:.2em; color:var(--green); font-weight:700; margin-bottom:9px}
+  .p4 h3{font-size:17px; margin-bottom:7px}
+  .p4 p{font-size:13.5px; color:var(--soft); line-height:1.52}
+  .p4 .p4q{margin-top:11px; font-family:'Lora',Georgia,serif; font-style:italic; font-size:13.5px; color:var(--gold)}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="brand" href="index.html" aria-label="Bixxville home">
+    <svg class="glyph" viewBox="0 0 40 24" aria-hidden="true">
+      <polyline points="2,12 9,12 14,4 20,20 26,8 31,12 38,12" fill="none" stroke="#8CF060" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+    </svg>
+    <b>Bixxville</b>
+  </a>
+  <div class="navlinks">
+    <a href="model.html">The Model</a>
+    <a href="contracting.html">Contracting</a>
+    <a href="learning.html">Learning</a>
+    <a href="network.html">The Network</a>
+  </div>
+  <div class="navactions">
+    <a class="pill" href="https://ii00270.github.io/Bixxvillenode/" target="_blank" rel="noopener">Log in</a>
+    <button class="ham" id="hamBtn" aria-label="Open menu"><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <button class="menuclose" id="menuClose" aria-label="Close menu"></button>
+  <a href="index.html"><span class="mi">00</span> Home</a>
+  <a href="model.html"><span class="mi">01</span> The Model</a>
+  <a href="contracting.html"><span class="mi">02</span> Contracting</a>
+  <a href="learning.html"><span class="mi">03</span> Learning</a>
+  <a href="network.html"><span class="mi">04</span> The Network</a>
+  <a href="work.html"><span class="mi">05</span> Work with us</a>
+  <a href="https://ii00270.github.io/Bixxvillenode/" target="_blank" rel="noopener"><span class="mi">06</span> Log in</a>
+  <div class="mfoot">SCOPED <span>·</span> VERIFIED <span>·</span> SETTLED<br>Land of Geb, LLC — Christiansted, St. Croix, USVI</div>
+</div>
+
+<main>
+
+  <!-- HERO -->
+  <section class="scene hero">
+    <div class="wrap">
+      <div class="eyebrow rv">Learning &nbsp;·&nbsp; the fundamentals</div>
+      <h1 class="rv d1">The things nobody<br><span class="g">taught you.</span></h1>
+      <p class="lead rv d2">How markets actually move. Why people say yes. What a brand is underneath the logo. And the mathematics sitting under all three, which was presented to most people as a subject to pass rather than a language to read.</p>
+      <p class="lead rv d3">We teach these to communities that were never offered them, and to individuals who decided they want them.</p>
+      <div class="spine rv d4">GROUND <span>·</span> ORIENT <span>·</span> APPLY <span>·</span> EARN</div>
+    </div>
+  </section>
+
+  <!-- THE PROBLEM -->
+  <section class="scene alt">
+    <div class="wrap narrow">
+      <div class="eyebrow rv"><span class="n">01</span> &nbsp;— &nbsp;Why we teach</div>
+      <h2 class="rv d1">Information without ground.</h2>
+      <p class="body rv d2">The education system teaches content but not principles. It hands people facts to retain and skips the structures that would let them read a situation they've never seen before. Mathematics, geometry, proportion, the mechanics of persuasion — the actual languages that reality and commerce speak in — get treated as electives, or as subjects that end at graduation.</p>
+      <p class="body rv d3">So people arrive at adulthood able to work hard, and without the perceptual tools to tell which hard work compounds. They're behind not for lack of effort but for lack of order, and nobody ever showed them how to find the order themselves.</p>
+      <p class="body rv d4">The friction is heaviest in the places the world pays the least attention to — islands, inner cities, rural communities, the places the system was not built for. There is no shortage of capable people in those places. There is a shortage of structure.</p>
+      <p class="serif rv d5" style="margin-top:30px">The curriculum that was never offered becomes the foundation to stand on.</p>
+    </div>
+  </section>
+
+  <!-- WHAT WE TEACH -->
+  <section class="scene">
+    <div class="wrap">
+      <div class="eyebrow rv"><span class="n">02</span> &nbsp;— &nbsp;What we teach</div>
+      <h2 class="rv d1">Four subjects.<br>One lens.</h2>
+      <p class="body rv d2">Each is taught the way the network runs work: decompose it, find the pattern, read the gap. The material changes. The method doesn't.</p>
+
+      <div class="subj rv d3">
+        <div class="sj">
+          <span class="sjb" style="background:#8CF060"></span>
+          <div class="sjc">
+            <h3>Markets &amp; trading</h3>
+            <p>How a market is actually structured — who is on the other side of a trade, what moves price, what a position costs you in risk before it pays you in return. Day trading taught as a discipline with rules, position sizing, and a written plan, not as a way to get lucky quickly.</p>
+            <div class="sjw"><b>The honest part:</b> most people who trade lose money, and we teach that as the first lesson rather than the footnote. The goal is a person who understands market structure and can size risk — whether or not they ever place a trade.</div>
+          </div>
+        </div>
+        <div class="sj">
+          <span class="sjb" style="background:#F45E26"></span>
+          <div class="sjc">
+            <h3>The psychology of sales</h3>
+            <p>Why people buy, what actually builds trust, and how to have a conversation that ends in a decision instead of a maybe. Objections as information rather than rejection. Reading a room, qualifying honestly, and knowing when the answer should be no.</p>
+            <div class="sjw"><b>Taught as a two-way skill:</b> the same material that lets you sell well is the material that lets you notice when something is being sold to you.</div>
+          </div>
+        </div>
+        <div class="sj">
+          <span class="sjb" style="background:#AA8C4E"></span>
+          <div class="sjc">
+            <h3>Marketing &amp; branding</h3>
+            <p>What a brand is underneath the logo — the promise, who it's for, and what happens when the promise and the delivery disagree. Positioning, channel fit, and the difference between attention and demand. How to say the true thing in a way that lands.</p>
+            <div class="sjw"><b>Built on the same color and proportion work</b> that runs through everything else we teach — because a brand is a signal system, and signal systems obey rules.</div>
+          </div>
+        </div>
+        <div class="sj">
+          <span class="sjb" style="background:#CDCFD3"></span>
+          <div class="sjc">
+            <h3>Mathematics</h3>
+            <p>Not homework — the language. Ratio and proportion, growth and compounding, probability and expected value, and the arithmetic that lets a person check a number instead of accepting it. The math that decides whether a deal is good, a rate is fair, or a claim is possible.</p>
+            <div class="sjw"><b>This is the spine of the other three.</b> Position sizing is arithmetic. Pricing is arithmetic. Compounding is why order matters. Everything else gets easier once this is solid.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE SEQUENCE -->
+  <section class="scene alt">
+    <div class="wrap">
+      <div class="eyebrow rv"><span class="n">03</span> &nbsp;— &nbsp;The sequence</div>
+      <h2 class="rv d1">Ground, orient,<br>apply, <span class="g">earn.</span></h2>
+      <p class="body rv d2">Subjects sit inside a progression. We don't start with the trade or the pitch — we start with the perceptual tools that make both readable, then move outward until the learning turns into work that pays.</p>
+
+      <div class="seq rv d3">
+        <div class="sq">
+          <div class="sqn">01 · Ground</div>
+          <h3>Music, color, geometry, sound</h3>
+          <p>Proportion taught where it can be heard and seen before it has to be calculated. A scale is a ratio system. Color is frequency. Geometry is the grammar every stable structure resolves to.</p>
+        </div>
+        <div class="sq">
+          <div class="sqn">02 · Orient</div>
+          <h3>Pattern recognition &amp; truth</h3>
+          <p>Stacked confirmations — evidence building on evidence until a conclusion can't be argued with. How to know rather than believe, and how to tell the difference under pressure.</p>
+        </div>
+        <div class="sq">
+          <div class="sqn">03 · Apply</div>
+          <h3>Decomposition &amp; sequencing</h3>
+          <p>The same logic the network uses to break down a contract, turned on a personal goal. Why progress stalls, why projects restart, and how order fixes both.</p>
+        </div>
+        <div class="sq">
+          <div class="sqn">04 · Earn</div>
+          <h3>Real work, real settlement</h3>
+          <p>The learning ends in the operating system: verified hours, computed standing, and settled pay. The last step of the curriculum is a paid engagement.</p>
+        </div>
+      </div>
+
+      <div class="note good rv d4">
+        <b>This is what separates it from a course.</b> The last step isn't a certificate — it's the Apprentice pathway into the network, where the hours are real and the settlement is real. A credential that mistakes a certificate for capability is the thing we're trying to replace.
+      </div>
+    </div>
+  </section>
+
+  <!-- APPRENTICE PATHWAY -->
+  <section class="scene">
+    <div class="wrap">
+      <div class="eyebrow rv"><span class="n">04</span> &nbsp;— &nbsp;Real Skills</div>
+      <h2 class="rv d1">The tutoring arm<br>is the front door.</h2>
+      <p class="body rv d2">Real Skills is the live Apprentice pathway. Members serving in it are <b>W-2 employees of Land of Geb, LLC</b> — with withholding, employer contributions, and statutory protections — not gig workers bidding for scraps. That status is written into the network's constitution as a right, not offered as a perk.</p>
+      <p class="body rv d3">It runs in two directions at once. Students get the fundamentals. The people teaching them are building verified hours and standing inside the same system that will route them paid work afterward.</p>
+      <div class="grid g3 rv d4">
+        <div class="stat"><div class="sv">W-2</div><div class="sl">Apprentices under Real Skills hold employee status and protections</div></div>
+        <div class="stat"><div class="sv">Paid</div><div class="sl">Apprentice hours are paid at a fixed rate, disclosed in writing before acceptance</div></div>
+        <div class="stat"><div class="sv">2–6</div><div class="sl">Cycles of supervised execution before graduating to Wrangler</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOUR PILLARS -->
+  <section class="scene alt">
+    <div class="wrap">
+      <div class="eyebrow rv"><span class="n">05</span> &nbsp;— &nbsp;The lens</div>
+      <h2 class="rv d1">Four directions,<br>one method.</h2>
+      <p class="body rv d2">Everything we publish and everything we teach sits inside one of four pillars. The lens is always the same — decompose it, find the pattern, read the gap.</p>
+      <div class="pill4 rv d3">
+        <div class="p4">
+          <div class="p4n">01</div>
+          <h3>The Pattern</h3>
+          <p>History as a lens. Two points in time, one pattern running through both. The same mechanics that built empires are still running — in markets, platforms, neighborhoods. Once you see it, you can't unsee it.</p>
+          <div class="p4q">How did we get here?</div>
+        </div>
+        <div class="p4">
+          <div class="p4n">02</div>
+          <h3>The Decomposition</h3>
+          <p>The logic used to sequence a business goal applied to a personal one. Why you keep restarting the same project. Why progress stalls. Order is the answer, and order can be found in anything.</p>
+          <div class="p4q">What do you do first?</div>
+        </div>
+        <div class="p4">
+          <div class="p4n">03</div>
+          <h3>The Observation</h3>
+          <p>The view from St. Croix. What the world looks like from an island the center ignores — nature, water, tradewinds, the way time moves differently here. The margin has a clarity the middle never gets.</p>
+          <div class="p4q">What do you see from here?</div>
+        </div>
+        <div class="p4">
+          <div class="p4n">04</div>
+          <h3>The Container</h3>
+          <p>The invisible walls people accept as real. The mental models, the stories told so often they stopped feeling like stories. The room is smaller than your ability, and the walls are imaginary.</p>
+          <div class="p4q">Who built the container?</div>
+        </div>
+      </div>
+      <div class="quote rv d4">
+        The world was built a certain way, on purpose, by people who had a system. You can see the pattern if you know where to look. The only thing between you and what you are capable of is a container someone else built — and told you was permanent.
+        <cite>The Four Pillars · Content Architecture</cite>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="scene">
+    <div class="wrap">
+      <div class="grid g2">
+        <div class="ctabox rv">
+          <div class="eyebrow" style="margin-bottom:12px">For individuals</div>
+          <h2 style="font-size:clamp(24px,5vw,34px)">Learn it properly.</h2>
+          <p class="body" style="margin-top:8px">Tell us which of the four you want and where you're starting from. Sessions run one-on-one or in small groups, on the island or remote.</p>
+          <a class="biglink" href="work.html">Ask about a program →</a>
+        </div>
+        <div class="ctabox rv d2">
+          <div class="eyebrow" style="margin-bottom:12px">For communities</div>
+          <h2 style="font-size:clamp(24px,5vw,34px)">Bring it to your people.</h2>
+          <p class="body" style="margin-top:8px">Schools, community organizations, and groups working with people the system was not built for. Tell us who you serve and we'll scope a program around them.</p>
+          <a class="biglink ghost" href="mailto:bixxville@proton.me?subject=Community%20program%20inquiry">Start a conversation →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="fwrap">
+    <div>
+      <b>SCOPED <span class="sx">·</span> VERIFIED <span class="sx">·</span> SETTLED</b><br>
+      Land of Geb, LLC — Christiansted, St. Croix, USVI<br>
+      Bixxville OS v1.1 · <span class="sx">St. Croix to the world</span><br>
+      <span style="color:var(--gold);font-family:Lora,Georgia,serif;font-style:italic">We trust the math.</span>
+    </div>
+    <div class="fnav">
+      <span class="ftitle">The system</span>
+      <a href="model.html">The Model</a>
+      <a href="contracting.html">Contracting</a>
+      <a href="learning.html">Learning</a>
+      <a href="network.html">The Network</a>
+    </div>
+    <div class="fnav">
+      <span class="ftitle">Get started</span>
+      <a href="work.html">Work with us</a>
+      <a href="https://ii00270.github.io/Bixxvillenode/" target="_blank" rel="noopener">Log in to the OS</a>
+      <a href="mailto:bixxville@proton.me">bixxville@proton.me</a>
+    </div>
+  </div>
+</footer>
+
+<script src="bixx.js"></script>
+</body>
+</html>
