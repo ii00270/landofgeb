@@ -88,10 +88,10 @@
         <b>What you get back.</b> A short conversation, and from it a <b>partial map</b> of the work — the real first steps and the order that matters most. Before anyone talks about a number. If it's a fit, we scope the rest.
       </div>
 
-      <!-- FormSubmit: emails submissions to bixxville@proton.me. No backend needed.
-           NOTE: the FIRST submission triggers a one-time FormSubmit confirmation email
-           to bixxville@proton.me — click the link in it once to activate, then it just works. -->
-      <form class="rv d4" action="https://formsubmit.co/bixxville@proton.me" method="POST">
+      <!-- FormSubmit: delivers to bixxville@proton.me via a hashed endpoint, so the
+           address is not exposed in the page source to scrapers. Activated 4 Sep 2026.
+           To change the destination inbox you must re-activate and swap the hash. -->
+      <form class="rv d4" action="https://formsubmit.co/f20c3e4a2b55740f665ed45facac5830" method="POST">
         <input type="hidden" name="_subject" value="New Bixxville intake">
         <input type="hidden" name="_template" value="table">
         <input type="hidden" name="_captcha" value="true">
