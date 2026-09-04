@@ -21,6 +21,7 @@
   :root{
     --ground:var(--cream);
     --surface:#FFFFFF;
+    --teal-text:#0F7C7A;
     --surface-2:var(--plum);
     --text:var(--ink);
     --text-body:var(--body-l);
@@ -36,6 +37,7 @@
     :root:not([data-theme="light"]){
       --ground:#171220;
       --surface:#211A2C;
+      --teal-text:var(--teal);
       --surface-2:#0F0B16;
       --text:#F6F1EA;
       --text-body:var(--body-d);
@@ -51,6 +53,7 @@
   :root[data-theme="dark"]{
     --ground:#171220;
     --surface:#211A2C;
+    --teal-text:var(--teal);
     --surface-2:#0F0B16;
     --text:#F6F1EA;
     --text-body:var(--body-d);
@@ -193,32 +196,32 @@
   .card h3{font-family:var(--display); font-size:19px; text-transform:uppercase; color:var(--text); margin-bottom:10px}
   .price{font-family:var(--display); font-size:26px; margin-bottom:4px}
   .card.c1 .price{color:var(--coral)} .card.c2 .price{color:var(--teal)} .card.c3 .price{color:var(--gold)}
-  .duration{font-size:13px; color:var(--mute-l); margin-bottom:18px}
+  .duration{font-size:13px; color:var(--text-mute); margin-bottom:18px}
   .leaves{list-style:none; margin:0 0 18px}
-  .leaves li{font-size:13.5px; color:var(--body-l); padding-left:20px; position:relative; margin-bottom:9px; line-height:1.4}
+  .leaves li{font-size:13.5px; color:var(--text-body); padding-left:20px; position:relative; margin-bottom:9px; line-height:1.4}
   .leaves li::before{content:"✓"; position:absolute; left:0; font-weight:700}
   .card.c1 .leaves li::before{color:var(--coral)} .card.c2 .leaves li::before{color:var(--teal)} .card.c3 .leaves li::before{color:var(--gold)}
   .sliding-note{
     font-family:var(--serif-i); font-style:italic; font-size:13px; padding-top:14px;
     border-top:1px solid var(--line-l);
   }
-  .card.c1 .sliding-note{color:var(--coral)} .card.c2 .sliding-note{color:var(--teal)} .card.c3 .sliding-note{color:#B8860B}
+  .card.c1 .sliding-note{color:var(--coral)} .card.c2 .sliding-note{color:var(--teal-text)} .card.c3 .sliding-note{color:#B8860B}
 
   /* ---------- sliding scale ---------- */
-  #scale{background:var(--gold-tint); max-width:none; padding:64px 28px; border-radius:0}
+  #scale{background:var(--gold-wash); max-width:none; padding:64px 28px; border-radius:0}
   #scale .wrap2{max-width:820px;margin:0 auto}
   .scale-steps{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:24px; margin-top:32px}
   .step{display:flex; gap:14px; align-items:flex-start}
   .step-num{
-    width:32px;height:32px;border-radius:50%;background:var(--ink);color:#fff;
+    width:32px;height:32px;border-radius:50%;background:var(--text);color:var(--ground);
     display:flex;align-items:center;justify-content:center;font-family:var(--display);
     font-size:13px; flex-shrink:0;
   }
-  .step-txt{font-size:14px; line-height:1.5; color:var(--body-l)}
-  .step-txt b{color:var(--ink); display:block; font-size:14.5px; margin-bottom:3px}
+  .step-txt{font-size:14px; line-height:1.5; color:var(--text-body)}
+  .step-txt b{color:var(--text); display:block; font-size:14.5px; margin-bottom:3px}
 
   /* ---------- footer ---------- */
-  footer{background:var(--ink); max-width:none; padding:56px 28px 40px; text-align:center}
+  footer{background:var(--surface-2); max-width:none; padding:56px 28px 40px; text-align:center}
   footer .wrap2{max-width:600px;margin:0 auto}
   footer h2{color:#fff}
   footer p{color:var(--body-d); font-size:15px; margin-bottom:28px; line-height:1.6}
@@ -464,9 +467,9 @@
 
 <section id="scale" style="max-width:none">
   <div class="wrap2">
-    <div class="label" style="color:var(--ink)">Access First</div>
+    <div class="label" style="color:var(--text)">Access First</div>
     <h2>Nobody turned away.</h2>
-    <p class="section-sub" style="color:var(--body-l)">If a family genuinely can't reach the price, we work it out. No child should stop learning over a bill.</p>
+    <p class="section-sub" style="color:var(--text-body)">If a family genuinely can't reach the price, we work it out. No child should stop learning over a bill.</p>
     <div class="scale-steps">
       <div class="step">
         <div class="step-num">1</div>
