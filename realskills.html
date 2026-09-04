@@ -266,8 +266,8 @@
     font-family:var(--serif-i); font-style:italic; font-size:13.5px; color:var(--mute-d)}
 
   /* ---------- entrance exam ---------- */
-  .examgrid{display:grid; grid-template-columns:repeat(2,1fr); gap:2px; margin:26px 0 30px; max-width:660px}
-  @media(min-width:700px){.examgrid{grid-template-columns:repeat(4,1fr)}}
+  .examgrid{display:grid; grid-template-columns:repeat(2,1fr); gap:2px; margin:26px 0 30px; max-width:720px}
+  @media(min-width:700px){.examgrid{grid-template-columns:repeat(3,1fr)}}
   .exstat{background:var(--surface); border:1.5px solid var(--edge); padding:20px 16px; text-align:center}
   .exstat .exv{font-family:var(--display); font-size:clamp(24px,5vw,32px); color:var(--text); line-height:1}
   .exstat .exl{font-size:11.5px; color:var(--text-mute); margin-top:8px; line-height:1.4; font-weight:500}
@@ -409,10 +409,12 @@
         <div class="pk">Door two</div>
         <h3>Join the network<br>and work it off</h3>
         <p>Pass our entrance exam, come into the network, and put in real hours helping us close deals and deliver contracts. Your work covers your seat.</p>
+        <p style="font-size:13.5px;color:var(--text-mute);border-top:1px solid var(--line-d);padding-top:12px;margin-top:14px"><b style="color:var(--teal)">You must be 18 or older.</b> This door is paid work, not a class — so it carries the same age requirement any job does.</p>
         <ul>
           <li>Every hour you deliver is <b>recorded and verified</b> — the same way it is for any member</li>
           <li>You work alongside people running live contracts, not practice exercises</li>
           <li>Your seat is covered by delivered work, and <b>you build standing while you learn</b></li>
+          <li>We take a maximum of <b>52 members per region</b> — when a region is full, it is full</li>
         </ul>
         <div class="pathfoot">The longer door. Open to anyone who passes.</div>
       </div>
@@ -426,15 +428,21 @@
   <h2>One test.<br>Everybody takes it.</h2>
   <p class="section-sub">Door two runs through an exam, because the network routes real client work to whoever holds a seat in it. We have to know you can carry that before we hand it to you.</p>
 
+  <div class="exnote warn" style="margin-top:0;margin-bottom:26px">
+    <b>Before you register: you must be 18 or older, and your region must have a seat open.</b> We cap membership at <b>52 people per region</b>. That is a hard ceiling, not a launch promotion — when a region fills, registration for it closes until a seat comes free. Both are checked before you pay, so nobody spends $10 on an exam they were never eligible to sit.
+  </div>
+
   <div class="examgrid">
     <div class="exstat"><div class="exv">100</div><div class="exl">questions</div></div>
     <div class="exstat hot"><div class="exv">80</div><div class="exl">to pass</div></div>
     <div class="exstat"><div class="exv">$10</div><div class="exl">per attempt</div></div>
     <div class="exstat"><div class="exv">3&times;</div><div class="exl">per year, maximum</div></div>
+    <div class="exstat hot"><div class="exv">18+</div><div class="exl">to join &mdash; this is paid work</div></div>
+    <div class="exstat hot"><div class="exv">52</div><div class="exl">members per region, maximum</div></div>
   </div>
 
   <div class="examsteps">
-    <div class="exrow"><span class="exn">01</span><div class="exb"><div class="ext">Register and pay the $10 sitting fee</div><div class="exd">The fee covers administering and scoring that attempt. It is charged once per attempt, whether you pass or not.</div></div></div>
+    <div class="exrow"><span class="exn">01</span><div class="exb"><div class="ext">Confirm you are eligible, then pay the $10 sitting fee</div><div class="exd">18 or older, and a seat open in your region. The fee covers administering and scoring that attempt, and is charged once per attempt whether you pass or not.</div></div></div>
     <div class="exrow"><span class="exn">02</span><div class="exb"><div class="ext">Sit the 100-question exam</div><div class="exd">It covers the fundamentals we actually use: sequencing and decomposition, how the markets are structured, the mechanics of a sale, and the arithmetic underneath all three.</div></div></div>
     <div class="exrow"><span class="exn">03</span><div class="exb"><div class="ext">Score 80 or better</div><div class="exd">80 out of 100 is the passing line. It does not move for anyone, and there is no partial admission below it.</div></div></div>
     <div class="exrow"><span class="exn">04</span><div class="exb"><div class="ext">Come in at the bottom and start delivering</div><div class="exd">You enter provisional, like every member does, and begin building standing on hours you actually deliver.</div></div></div>
