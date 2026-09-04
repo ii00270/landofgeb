@@ -10,7 +10,7 @@
 <style>
   :root{
     --ink:#1A161E; --plum:#2B2236; --cream:#FAF5EC;
-    --coral:#FF5C4C; --teal:#17BEBB; --gold:#FFBE3C;
+    --coral:#FF5C4C; --teal:#17BEBB; --gold:#FFBE3C; --violet:#8B5FBF;
     --body-l:#463C50; --body-d:#E9E2DC; --mute-l:#8A8090; --mute-d:#9D93A8;
     --line-l:#E4DCD0; --line-d:#3E3348;
     --coral-tint:#FDE7E3; --teal-tint:#E0F5F4; --gold-tint:#FDF1D9;
@@ -186,7 +186,10 @@
     position:relative; overflow:hidden;
   }
   .card::before{content:"";position:absolute; top:0; left:0; right:0; height:5px}
-  .card.c1::before{background:var(--coral)} .card.c2::before{background:var(--teal)} .card.c3::before{background:var(--gold)}
+  .card.c1::before{background:var(--coral)} .card.c2::before{background:var(--teal)}
+  .card.c3::before{background:var(--gold)} .card.c4::before{background:var(--violet)}
+  .cdesc{font-size:14.5px; line-height:1.6; color:var(--text-body); margin-bottom:14px}
+  .card.c4 .price{color:var(--violet)} .card.c4 .sliding-note{color:var(--violet)}
   .card h3{font-family:var(--display); font-size:19px; text-transform:uppercase; color:var(--text); margin-bottom:10px}
   .price{font-family:var(--display); font-size:26px; margin-bottom:4px}
   .card.c1 .price{color:var(--coral)} .card.c2 .price{color:var(--teal)} .card.c3 .price{color:var(--gold)}
@@ -329,7 +332,7 @@
     <div class="quote-card">
       <div class="quote-who">If you're a parent saying&hellip;</div>
       <div class="quote-txt">&ldquo;He's smart, but he shuts down the second he sees math.&rdquo;</div>
-      <div class="quote-answer">That's not a math problem — it's a sequencing problem. He was moved forward before the base was built. We rebuild the base. He stops shutting down.</div>
+      <div class="quote-answer">That's not a math problem — it's a sequencing problem. He was moved forward before the base was built. We rebuild the base, then show him the numbers doing something he actually cares about. He stops shutting down.</div>
     </div>
 
     <div class="quote-card">
@@ -341,53 +344,43 @@
     <div class="quote-card">
       <div class="quote-who">If you're the student saying&hellip;</div>
       <div class="quote-txt">&ldquo;I want to make real money. I don't want a five-year plan.&rdquo;</div>
-      <div class="quote-answer">Then you don't need a lecture — you need a working website, a real product, and the scripts to sell it. That's what the Claude Code and Sales classes exist to hand you.</div>
+      <div class="quote-answer">Then you don't need a lecture — you need to know how a sale actually closes, how a market actually moves, and how to read both. That's what these four classes exist to hand you.</div>
     </div>
   </div>
 </section>
 
 <section id="programs">
   <div class="label" style="color:var(--coral)">The Programs</div>
-  <h2>Pick a path.<br>Every class is $50.</h2>
-  <p class="section-sub">Every class is <b>$50</b>. One price, everything included, no add-ons — and a second way in that costs no tuition at all.</p>
+  <h2>Four subjects.<br>One method.</h2>
+  <p class="section-sub">Every class is <b>$50</b>. Each subject is taught the same way we run work: take it apart, find the pattern, see what is missing. The material changes; the method does not.</p>
 
   <div class="cards">
     <div class="card c1">
-      <h3>Math Tutoring</h3>
+      <h3>Technical Analysis</h3>
       <div class="price">$50<span style="font-size:14px"> flat</span></div>
-      <div class="duration">3 weeks &middot; 2x/week &middot; Zoom</div>
-      <ul class="leaves">
-        <li>A rebuilt foundation, not just answers</li>
-        <li>The 4-step decomposition method</li>
-        <li>A cheat sheet after every session</li>
-        <li>A real assessment of where they stand</li>
-      </ul>
-      <div class="sliding-note">One price. Everything included.</div>
+      <p class="cdesc">How to read a chart and know what you are actually looking at. Price action, structure, support and resistance, volume, trend and range behaviour, and the indicators people lean on — including what each one is actually measuring and where it stops working. Taught as a method of reading, with rules written down before a position is ever considered.</p>
+      <div class="sliding-note">What this is not: a signal service, a system that predicts, or a promise that reading a chart well produces money. Analysis is a skill. Outcomes are not guaranteed by it.</div>
     </div>
 
     <div class="card c2">
-      <h3>Claude Code Class</h3>
+      <h3>How The Markets Work</h3>
       <div class="price">$50<span style="font-size:14px"> flat</span></div>
-      <div class="duration">4 weeks &middot; 1-on-1</div>
-      <ul class="leaves">
-        <li>A live website, built by them</li>
-        <li>A real understanding of what AI can (and can't) do</li>
-        <li>A build habit they can repeat on their own</li>
-      </ul>
-      <div class="sliding-note">One price. Everything included.</div>
+      <p class="cdesc">Forex, futures, and options — how each one is structured and how a person interacts with it. Contract specifications, tick and pip sizes, margin and leverage, expiry and settlement, spreads and commissions, order types, position sizing, and what a broker is doing on the other side of your order.</p>
+      <div class="sliding-note">Mechanics, not recommendations. The goal is a person who understands what these instruments are, what they cost, and what they risk — before they ever decide whether to touch one.</div>
     </div>
 
     <div class="card c3">
-      <h3>Sales Crash Course</h3>
+      <h3>Sales &amp; Psychology</h3>
       <div class="price">$50<span style="font-size:14px"> flat</span></div>
-      <div class="duration">1 week &middot; intensive</div>
-      <ul class="leaves">
-        <li>A live storefront that actually sells</li>
-        <li>Real sales scripts — first call to close</li>
-        <li>A product-market fit guide</li>
-        <li>A product-channel fit guide + ideal buyer profile</li>
-      </ul>
-      <div class="sliding-note">Recommended for 12th grade. 11th welcome.</div>
+      <p class="cdesc">Why people buy, what actually builds trust, and how to have a conversation that ends in a decision instead of a maybe. Objections as information rather than rejection. Reading a room, qualifying honestly, and knowing when the answer should be no. Alongside it, the psychology underneath the transaction — how people weigh risk and loss, and where judgment reliably breaks down under pressure.</p>
+      <div class="sliding-note">Taught as a two-way skill: the same material that lets you sell well is the material that lets you notice when something is being sold to you.</div>
+    </div>
+
+    <div class="card c4">
+      <h3>Marketing &amp; Branding</h3>
+      <div class="price">$50<span style="font-size:14px"> flat</span></div>
+      <p class="cdesc">What a brand is underneath the logo — the promise, who it is for, and what happens when the promise and the delivery disagree. Positioning, channel fit, and the difference between attention and demand. How to say the true thing in a way that lands.</p>
+      <div class="sliding-note">Built on the same proportion and colour work that runs through everything else we teach — a brand is a signal system, and signal systems obey rules.</div>
     </div>
   </div>
 </section>
