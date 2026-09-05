@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>(function(){try{var t=localStorage.getItem('bx-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}})();</script>
 <style>
   /* ============================================================
@@ -293,6 +294,60 @@
   }
   .note.restricted{border-left-color:var(--seal); color:var(--ink-2)}
   .note.restricted b{color:var(--seal)}
+  /* ---------- reading-desk sign in ---------- */
+  .deskwrap{
+    position:fixed; inset:0; z-index:80; background:rgba(25,23,18,.55);
+    backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);
+    display:none; align-items:center; justify-content:center; padding:24px;
+  }
+  .deskwrap.on{display:flex}
+  .desk{
+    width:100%; max-width:400px; background:var(--paper-2); border:1px solid var(--rule);
+    border-radius:4px; padding:34px 32px 30px; box-shadow:var(--lift-2);
+  }
+  .desk .dk{
+    font-family:var(--sans); font-size:10px; letter-spacing:.24em; text-transform:uppercase;
+    color:var(--seal); font-weight:600; margin-bottom:14px;
+  }
+  .desk h3{
+    font-family:var(--serif); font-weight:400; font-size:28px; color:var(--ink);
+    margin:0 0 10px; line-height:1.12; letter-spacing:-.01em;
+  }
+  .desk p.dsub{font-size:13.5px; line-height:1.6; color:var(--ink-2); margin:0 0 22px}
+  .fld{margin-bottom:14px}
+  .fld label{
+    display:block; font-family:var(--sans); font-size:10px; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--ink-3); margin-bottom:6px; font-weight:600;
+  }
+  .fld input{
+    width:100%; background:var(--paper); border:1px solid var(--rule); border-radius:3px;
+    padding:12px 13px; font-family:var(--sans); font-size:14px; color:var(--ink);
+  }
+  .fld input:focus{outline:none; border-color:var(--ink)}
+  .deskbtn{
+    width:100%; background:var(--ink); color:var(--paper); border:1px solid var(--ink);
+    border-radius:40px; padding:13px; font-family:var(--sans); font-size:13.5px;
+    font-weight:600; cursor:pointer; margin-top:6px;
+  }
+  .deskbtn:hover{background:var(--seal); border-color:var(--seal); color:#fff}
+  .deskbtn[disabled]{opacity:.5; cursor:default}
+  .deskmsg{font-size:12.5px; line-height:1.55; margin-top:14px; min-height:1em; color:var(--seal)}
+  .deskclose{
+    background:none; border:none; padding:0; margin-top:16px; cursor:pointer;
+    font-family:var(--sans); font-size:11.5px; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--ink-3);
+  }
+  .deskclose:hover{color:var(--ink)}
+  .who{
+    font-family:var(--sans); font-size:11.5px; color:var(--ink-3); white-space:nowrap;
+    display:none; align-items:center; gap:9px;
+  }
+  .who.on{display:flex}
+  .who b{color:var(--ink); font-weight:600}
+  .who button{
+    background:none;border:none;padding:0;cursor:pointer;font-family:var(--sans);
+    font-size:11.5px;color:var(--seal);text-decoration:underline;
+  }
   .note{
     border-left:2px solid var(--brass); padding:14px 0 14px 18px; margin-top:30px;
     font-size:13px; line-height:1.62; color:var(--ink-2); max-width:60ch;
@@ -331,7 +386,8 @@
       <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.4M12 19v2.4M4.6 12H2.2M21.8 12h-2.4M6.5 6.5 4.8 4.8M19.2 19.2l-1.7-1.7M17.5 6.5l1.7-1.7M4.8 19.2l1.7-1.7"/></svg>
       <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 14.4A8.4 8.4 0 0 1 9.6 3.8a8.6 8.6 0 1 0 10.6 10.6z"/></svg>
     </button>
-    <a class="enterbtn" href="https://ii00270.github.io/Bixxvillenode/" target="_blank" rel="noopener">Sign in</a>
+    <div class="who" id="who"><span>Reading as <b id="whoEmail"></b></span><button id="signOut" type="button">Sign out</button></div>
+    <button class="enterbtn" id="signInBtn" type="button">Sign in</button>
   </div>
 </div>
 
@@ -405,6 +461,21 @@
     </div>
   </div>
 
+</div>
+
+<div class="deskwrap" id="deskwrap" role="dialog" aria-modal="true" aria-labelledby="deskTitle">
+  <div class="desk">
+    <div class="dk">Reading room</div>
+    <h3 id="deskTitle">Sign in to open volumes</h3>
+    <p class="dsub">Use your Bixxville credentials — the same ones that get you into the operating system. The catalogue stays open either way.</p>
+    <form id="deskForm">
+      <div class="fld"><label for="dEmail">Email</label><input id="dEmail" type="email" autocomplete="email" required></div>
+      <div class="fld"><label for="dPass">Password</label><input id="dPass" type="password" autocomplete="current-password" required></div>
+      <button class="deskbtn" id="deskGo" type="submit">Enter the reading room</button>
+      <div class="deskmsg" id="deskMsg"></div>
+    </form>
+    <button class="deskclose" id="deskClose" type="button">Keep browsing the catalogue</button>
+  </div>
 </div>
 
 <footer>
@@ -788,6 +859,7 @@ function showShelf(){
   wingsNav.style.display='flex';
 }
 function openVol(acc){
+  lastAcc = acc;
   var v = CAT.filter(function(x){return x.acc===acc;})[0]; if(!v) return;
   document.getElementById('dcover').innerHTML = coverHTML(v,false);
   document.getElementById('dcaption').textContent = v.acc + ' · ' + (wingOf[v.w]?wingOf[v.w].name.replace(/&amp;/g,'&'):'');
@@ -798,17 +870,7 @@ function openVol(acc){
   var srcBtn = document.getElementById('dsource');
   if(v.src){ srcBtn.href = v.src; srcBtn.style.display=''; }
   else { srcBtn.style.display='none'; }
-  var restricted = /RESTRICTED/.test(v.note);
-  var openBtn = document.getElementById('dopen');
-  if(restricted){
-    openBtn.classList.add('restricted');
-    openBtn.removeAttribute('href');
-    openBtn.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10.5" rx="2"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/></svg> Restricted \u2014 not circulated';
-  } else {
-    openBtn.classList.remove('restricted');
-    openBtn.setAttribute('href','https://ii00270.github.io/Bixxvillenode/');
-    openBtn.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10.5" rx="2"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/></svg> Sign in to open';
-  }
+  paintOpen(v, document.getElementById('dopen'));
   var noteEl = document.getElementById('dnote');
   noteEl.className = 'note' + (/RESTRICTED/.test(v.note) ? ' restricted' : '');
   noteEl.innerHTML = '<b>Catalogue note.</b> ' + v.note;
@@ -823,6 +885,28 @@ function openVol(acc){
   wingsNav.style.display='none';
   window.scrollTo({top:0, behavior:'instant'});
 }
+
+var LOCK_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10.5" rx="2"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/></svg> ';
+var OPEN_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5h7a2 2 0 0 1 2 2V20a2 2 0 0 0-2-2H4z"/><path d="M20 5.5h-7a2 2 0 0 0-2 2V20a2 2 0 0 1 2-2h7z"/></svg> ';
+var lastAcc = null;
+
+function paintOpen(v, btn){
+  btn.onclick = null;
+  if(/RESTRICTED/.test(v.note)){
+    btn.classList.add('restricted'); btn.removeAttribute('href');
+    btn.innerHTML = LOCK_SVG + 'Restricted \u2014 not circulated';
+    return;
+  }
+  btn.classList.remove('restricted'); btn.removeAttribute('href');
+  if(member){
+    btn.innerHTML = OPEN_SVG + 'Open volume';
+    btn.onclick = function(e){ e.preventDefault(); fetchVolume(v, btn); };
+  } else {
+    btn.innerHTML = LOCK_SVG + 'Sign in to open';
+    btn.onclick = function(e){ e.preventDefault(); openDesk(); };
+  }
+}
+
 function row(k,val){ return '<div class="mrow"><dt>'+k+'</dt><dd>'+val+'</dd></div>'; }
 
 document.addEventListener('click', function(e){
@@ -831,6 +915,89 @@ document.addEventListener('click', function(e){
 document.getElementById('dback').addEventListener('click', function(){
   showShelf(); renderShelf(current);
 });
+
+
+/* ============================================================
+   Real entry. Same Supabase project and same accounts as the OS,
+   so a member signs in here with the credentials they already have.
+   The catalogue stays public; only opening a volume is gated.
+   ============================================================ */
+var SB_URL = 'https://deotcopartijomfveakr.supabase.co';
+var SB_KEY = 'sb_publishable_yi4AJEt5MLMafDBgTgXnBg_1gvB4gtz';
+var LIB_BUCKET = 'library';          // private bucket, RLS: authenticated read
+var sb = null, member = null;
+
+try { if(window.supabase) sb = window.supabase.createClient(SB_URL, SB_KEY); } catch(e){}
+
+var deskwrap=document.getElementById('deskwrap'), deskMsg=document.getElementById('deskMsg'),
+    who=document.getElementById('who'), whoEmail=document.getElementById('whoEmail'),
+    signInBtn=document.getElementById('signInBtn');
+
+function setMember(u){
+  member = u;
+  if(u){
+    who.classList.add('on'); whoEmail.textContent = u.email || 'member';
+    signInBtn.style.display='none';
+  } else {
+    who.classList.remove('on'); signInBtn.style.display='';
+  }
+  if(detail.classList.contains('on') && lastAcc) openVol(lastAcc);
+}
+function openDesk(){ deskwrap.classList.add('on'); deskMsg.textContent=''; setTimeout(function(){document.getElementById('dEmail').focus();},60); }
+function closeDesk(){ deskwrap.classList.remove('on'); }
+
+signInBtn.addEventListener('click', openDesk);
+document.getElementById('deskClose').addEventListener('click', closeDesk);
+deskwrap.addEventListener('click', function(e){ if(e.target===deskwrap) closeDesk(); });
+document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeDesk(); });
+
+document.getElementById('deskForm').addEventListener('submit', async function(e){
+  e.preventDefault();
+  if(!sb){ deskMsg.textContent='Sign-in is unavailable right now. Try again shortly.'; return; }
+  var btn=document.getElementById('deskGo');
+  btn.disabled=true; deskMsg.textContent='Checking credentials…';
+  try{
+    var res = await sb.auth.signInWithPassword({
+      email: document.getElementById('dEmail').value.trim(),
+      password: document.getElementById('dPass').value
+    });
+    if(res.error){ deskMsg.textContent = res.error.message || 'That did not work.'; }
+    else { setMember(res.data.user); closeDesk(); }
+  }catch(err){ deskMsg.textContent='Could not reach the reading room. Check your connection.'; }
+  btn.disabled=false;
+});
+
+document.getElementById('signOut').addEventListener('click', async function(){
+  if(sb) { try{ await sb.auth.signOut(); }catch(e){} }
+  setMember(null);
+});
+
+/* restore an existing session on load */
+(async function(){
+  if(!sb) return;
+  try{
+    var r = await sb.auth.getSession();
+    if(r && r.data && r.data.session) setMember(r.data.session.user);
+  }catch(e){}
+})();
+
+/* open a held volume: signed URL, valid for two minutes */
+async function fetchVolume(v, btn){
+  if(!sb || !member){ openDesk(); return; }
+  if(!v.file){
+    btn.textContent = 'Not yet digitised';
+    setTimeout(function(){ paintOpen(v, btn); }, 2200);
+    return;
+  }
+  var label = btn.innerHTML;
+  btn.innerHTML = 'Retrieving…';
+  try{
+    var r = await sb.storage.from(LIB_BUCKET).createSignedUrl(v.file, 120);
+    if(r.error || !r.data){ btn.innerHTML='Unavailable'; setTimeout(function(){btn.innerHTML=label;},2200); return; }
+    window.open(r.data.signedUrl, '_blank', 'noopener');
+    btn.innerHTML = label;
+  }catch(e){ btn.innerHTML='Unavailable'; setTimeout(function(){btn.innerHTML=label;},2200); }
+}
 
 /* theme */
 (function(){
