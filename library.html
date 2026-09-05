@@ -571,14 +571,26 @@ var CAT = [
  {w:'canon', acc:'BXV.C.012', t:'Proposal Template', a:'Land of Geb, LLC', y:'—', pg:3,
   blurb:'The client-facing proposal, in the form the network issues it.',
   body:'The standard proposal structure — scope, deliverable definitions, window, and the single flat number with its derivation available on request.',
-  cls:'Template', src:'', file:'canon/proposal-template.pdf',
-  note:'Internal template. Members only.'},
+  cls:'Template', src:'', url:'docs/proposal-template.pdf',
+  note:'Open to all. No sign-in required.'},
 
  {w:'canon', acc:'BXV.C.013', t:'Brand Kit', a:'Land of Geb, LLC', y:'—', pg:8,
   blurb:'Colour, type, and the reasoning behind both.',
   body:'The visual system: portal green means go, orange means attention, gold means wisdom. Colour is treated as signal value rather than taste, which is why the palette is fixed.',
-  cls:'Brand', src:'', file:'canon/brand-kit.pdf',
-  note:'Internal. Members only.'},
+  cls:'Brand', src:'', url:'docs/brand-kit.pdf',
+  note:'Open to all. No sign-in required.'},
+
+ {w:'canon', acc:'BXV.C.014', t:'Introduction', a:'Land of Geb, LLC', y:'—', pg:1,
+  blurb:'One page on what the network is and how an engagement begins.',
+  body:'The short client-facing introduction — what Bixxville does, what happens after you bring a goal, and what you get back before anyone names a price.',
+  cls:'Client-facing', src:'', url:'docs/introduction.pdf',
+  note:'Open to all. No sign-in required.'},
+
+ {w:'canon', acc:'BXV.C.015', t:'The Deliverable', a:'Land of Geb, LLC', y:'—', pg:3,
+  blurb:'What a finished piece of work looks like when it lands.',
+  body:'How a deliverable is defined before work starts and what the client actually receives at the end — the binary definition, the verification, and the settlement that follows it.',
+  cls:'Client-facing', src:'', url:'docs/deliverable.pdf',
+  note:'Open to all. No sign-in required.'},
 
  {w:'hermetic', acc:'BXV.L.001', t:'The Kybalion', a:'Three Initiates', y:'1908', pg:232,
   blurb:'Seven principles offered as the operating grammar of everything else in this room.',
@@ -957,7 +969,7 @@ function openVol(acc){
       row('Accession', v.acc) + row('Classification', v.cls)
     + row('Written', v.y)     + row('Extent', v.pg + ' pages')
     + row('Wing', wingOf[v.w]?wingOf[v.w].name:'—')
-    + row('Access', 'Members only');
+    + row('Access', v.url ? 'Open to all' : (/RESTRICTED/.test(v.note) ? 'Restricted' : 'Members only'));
   var others = CAT.filter(function(x){return x.w===v.w && x.acc!==v.acc;}).slice(0,6);
   document.getElementById('also').innerHTML = others.map(function(x){return volHTML(x,true);}).join('');
   shelfView.classList.add('off'); detail.classList.add('on');
@@ -977,6 +989,11 @@ function paintOpen(v, btn){
     return;
   }
   btn.classList.remove('restricted'); btn.removeAttribute('href');
+  if(v.url){
+    btn.innerHTML = OPEN_SVG + 'Open volume';
+    btn.onclick = function(e){ e.preventDefault(); window.open(v.url,'_blank','noopener'); };
+    return;
+  }
   if(member){
     btn.innerHTML = OPEN_SVG + 'Open volume';
     btn.onclick = function(e){ e.preventDefault(); fetchVolume(v, btn); };
