@@ -491,6 +491,7 @@
    rather than rehosting the file.
    ============================================================ */
 var WINGS = [
+ {id:'canon', name:'The Canon', hue:'#1F3A1A'},
  {id:'hermetic', name:'Hermetic &amp; Alchemical', hue:'#3E4A3A'},
  {id:'kabbalah', name:'Kabbalah', hue:'#2E3A4C'},
  {id:'masonic', name:'Masonic &amp; Fraternal', hue:'#4A3A2E'},
@@ -501,6 +502,84 @@ var WINGS = [
 ];
 
 var CAT = [
+ {w:'canon', acc:'BXV.C.001', t:'The LOG', a:'Land of Geb, LLC', y:'Rung 1', pg:10,
+  blurb:'The constitution of the network. What does not change between cycles.',
+  body:'Ten articles governing identity, the unit system, tiers, standing, settlement, governance, treasury and amendment — plus The Known, the ten guarantees no mechanism of the network may abridge. Where the runtime and The LOG conflict, The LOG governs. Amended only by append.',
+  cls:'Constitutional · Rung 1', src:'', file:'canon/the-log-v2.pdf',
+  note:'Internal canon. Members only.'},
+
+ {w:'canon', acc:'BXV.C.002', t:'Master Canon, Consolidated', a:'Land of Geb, LLC', y:'OS v1.1', pg:0,
+  blurb:'The consolidated current state of the system, in full.',
+  body:'Everything The LOG does not address: brand, strategy, product, runtime, pipeline, and open threads. Read together with The LOG — the constitution is the spine, this is the body.',
+  cls:'Canon · Rung 2', src:'', file:'canon/master-canon-consolidated.html',
+  note:'Internal canon. Members only.'},
+
+ {w:'canon', acc:'BXV.C.003', t:'Operating System v1.0', a:'Land of Geb, LLC', y:'v1.0',pg:17,
+  blurb:'The founding constitution document, kept for the record.',
+  body:'The earlier constitutional statement, superseded by The LOG but retained because amendment by append means nothing is overwritten — the prior text remains readable.',
+  cls:'Constitutional · superseded', src:'', file:'canon/operating-system-v1.0.pdf',
+  note:'Superseded by The LOG. Retained for the record. Members only.'},
+
+ {w:'canon', acc:'BXV.C.004', t:'North Star', a:'Land of Geb, LLC', y:'OS v1.1', pg:3,
+  blurb:'Mission, vision, and the operating principles the network behaves by.',
+  body:'Why this exists — smart people in environments that do not let them do what they are good at — and the principles that follow: time as the real unit, standing earned never granted, scope before price, the credential boundary, and the structural reserve.',
+  cls:'Foundational', src:'', file:'canon/north-star.pdf',
+  note:'Internal canon. Members only.'},
+
+ {w:'canon', acc:'BXV.C.005', t:'Founding Vision', a:'Land of Geb, LLC', y:'OS v1.1', pg:6,
+  blurb:'The operating system for human experience, in three layers.',
+  body:'Layer One is now: the OS, the network, the first node. Layer Two is the mesh. Layer Three is the felt reality of a life inside a fully realised node. Also the principles beneath the brand — mathematics, geometry, music and frequency, colour and light.',
+  cls:'Foundational', src:'', file:'canon/founding-vision.pdf',
+  note:'Internal canon. Members only.'},
+
+ {w:'canon', acc:'BXV.C.006', t:'The Four Pillars', a:'Land of Geb, LLC', y:'—', pg:1,
+  blurb:'One lens, four directions. The content architecture.',
+  body:'The Pattern, The Decomposition, The Observation, The Container. Every piece of published work sits inside one of them, and the lens never changes: decompose it, find the pattern, read the gap.',
+  cls:'Content architecture', src:'', file:'canon/four-pillars.pdf',
+  note:'Internal canon. Members only.'},
+
+ {w:'canon', acc:'BXV.C.007', t:'The Contract Blueprint', a:'Land of Geb, LLC', y:'Bridge Key 1', pg:7,
+  blurb:'One canon, per-participant classification. How to wrap work for W-2 and 1099.',
+  body:'Governs any work performed under a direct external contract, federal included. The unit of account does not fork; the contract wrapper reading off it does. Includes the two issues sharper than "can 1099 work" — similarly-situated workers, and the ABC-test states where Prong B is the one that bites.',
+  cls:'Operating guide', src:'', file:'canon/contract-blueprint.pdf',
+  note:'Internal canon. Does not amend LOG 4. Members only.'},
+
+ {w:'canon', acc:'BXV.C.008', t:'Federal Contracting Path', a:'Land of Geb, LLC', y:'—', pg:5,
+  blurb:'Solo to first federal contract, decomposed as a map rather than a to-do list.',
+  body:'Nine dependency-ordered nodes from SAM.gov registration to a second win, with the two keys flagged — HUBZone eligibility, which gates what set-asides are even visible, and the bonding relationship, which blocks nothing today and everything later.',
+  cls:'Strategy · internal', src:'', file:'canon/federal-contracting-path.pdf',
+  note:'Internal strategy. Deliberately not published on the contracting page. Members only.'},
+
+ {w:'canon', acc:'BXV.C.009', t:'Amendment I — Government Contracting', a:'Land of Geb, LLC', y:'proposed', pg:5,
+  blurb:'Three corrections that make a federal engagement safe to run through canon.',
+  body:'The contract-type boundary, the Service Contract Act wage floor, and the open question of sealed versus funded — a cashflow decision presented as two options rather than one answer, because it is a decision and not an arithmetic error.',
+  cls:'Amendment · proposed', src:'', file:'canon/amendment-i.pdf',
+  note:'Proposed under LOG 10. No force until appended. Members only.'},
+
+ {w:'canon', acc:'BXV.C.010', t:'Applied Example', a:'Land of Geb, LLC', y:'—', pg:6,
+  blurb:'One real engagement, decomposed start to finish.',
+  body:'The map, the keys, and the checkpoints worked in full on a three-unit rental gut, so the mechanics have somewhere to live besides the abstract.',
+  cls:'Worked example', src:'', file:'canon/applied-example.pdf',
+  note:'Internal canon. Members only.'},
+
+ {w:'canon', acc:'BXV.C.011', t:'Dry Run Guide', a:'Land of Geb, LLC', y:'—', pg:11,
+  blurb:'Running the system end to end before a client is on the line.',
+  body:'The rehearsal protocol: scope, sequence, verify and settle a full engagement internally, so the first real one is not the first one.',
+  cls:'Operating guide', src:'', file:'canon/dry-run-guide.pdf',
+  note:'Internal canon. Members only.'},
+
+ {w:'canon', acc:'BXV.C.012', t:'Proposal Template', a:'Land of Geb, LLC', y:'—', pg:3,
+  blurb:'The client-facing proposal, in the form the network issues it.',
+  body:'The standard proposal structure — scope, deliverable definitions, window, and the single flat number with its derivation available on request.',
+  cls:'Template', src:'', file:'canon/proposal-template.pdf',
+  note:'Internal template. Members only.'},
+
+ {w:'canon', acc:'BXV.C.013', t:'Brand Kit', a:'Land of Geb, LLC', y:'—', pg:8,
+  blurb:'Colour, type, and the reasoning behind both.',
+  body:'The visual system: portal green means go, orange means attention, gold means wisdom. Colour is treated as signal value rather than taste, which is why the palette is fixed.',
+  cls:'Brand', src:'', file:'canon/brand-kit.pdf',
+  note:'Internal. Members only.'},
+
  {w:'hermetic', acc:'BXV.L.001', t:'The Kybalion', a:'Three Initiates', y:'1908', pg:232,
   blurb:'Seven principles offered as the operating grammar of everything else in this room.',
   body:'A short book claiming to distil Hermetic teaching into seven principles — mentalism, correspondence, vibration, polarity, rhythm, cause and effect, gender. Whatever one makes of its provenance, it is the text standing behind the phrase "as above, so below," and where a great deal of later popular esoteric writing begins.',
@@ -985,7 +1064,7 @@ document.getElementById('signOut').addEventListener('click', async function(){
 async function fetchVolume(v, btn){
   if(!sb || !member){ openDesk(); return; }
   if(!v.file){
-    btn.textContent = 'Not yet digitised';
+    btn.textContent = 'Held in reserve';
     setTimeout(function(){ paintOpen(v, btn); }, 2200);
     return;
   }
