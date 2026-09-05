@@ -1021,7 +1021,7 @@ function openVol(acc){
   document.getElementById('dblurb').textContent = v.blurb;
   document.getElementById('dbody').textContent = v.body;
   var srcBtn = document.getElementById('dsource');
-  if(v.src){ srcBtn.href = v.src; srcBtn.style.display=''; }
+  if(v.src && (v.url || v.file)){ srcBtn.href = v.src; srcBtn.style.display=''; }
   else { srcBtn.style.display='none'; }
   paintOpen(v, document.getElementById('dopen'));
   var noteEl = document.getElementById('dnote');
@@ -1031,7 +1031,7 @@ function openVol(acc){
       row('Accession', v.acc) + row('Classification', v.cls)
     + row('Written', v.y)     + row('Extent', v.pg + ' pages')
     + row('Wing', wingOf[v.w]?wingOf[v.w].name:'—')
-    + row('Access', v.url ? 'Open to all' : (/RESTRICTED/.test(v.note) ? 'Restricted' : 'Members only'));
+    + row('Access', /RESTRICTED/.test(v.note) ? 'Restricted' : (v.url ? 'Open to all' : (v.file ? 'Members only' : (v.src ? 'Read at source' : 'Not held digitally'))));
   var others = CAT.filter(function(x){return x.w===v.w && x.acc!==v.acc;}).slice(0,6);
   document.getElementById('also').innerHTML = others.map(function(x){return volHTML(x,true);}).join('');
   shelfView.classList.add('off'); detail.classList.add('on');
@@ -1045,24 +1045,42 @@ var lastAcc = null;
 
 function paintOpen(v, btn){
   btn.onclick = null;
+  btn.classList.remove('restricted');
+  btn.removeAttribute('href');
+
+  // 1. never circulated, whoever is asking
   if(/RESTRICTED/.test(v.note)){
-    btn.classList.add('restricted'); btn.removeAttribute('href');
+    btn.classList.add('restricted');
     btn.innerHTML = LOCK_SVG + 'Restricted \u2014 not circulated';
     return;
   }
-  btn.classList.remove('restricted'); btn.removeAttribute('href');
+  // 2. closed room: nothing opens until you are through the door
+  if(!member){
+    btn.innerHTML = LOCK_SVG + 'Sign in to open';
+    btn.onclick = function(e){ e.preventDefault(); openDesk(); };
+    return;
+  }
+  // 3. held here, openly
   if(v.url){
     btn.innerHTML = OPEN_SVG + 'Open volume';
     btn.onclick = function(e){ e.preventDefault(); window.open(v.url,'_blank','noopener'); };
     return;
   }
-  if(member){
+  // 4. held here, privately \u2014 signed URL from the members bucket
+  if(v.file){
     btn.innerHTML = OPEN_SVG + 'Open volume';
     btn.onclick = function(e){ e.preventDefault(); fetchVolume(v, btn); };
-  } else {
-    btn.innerHTML = LOCK_SVG + 'Sign in to open';
-    btn.onclick = function(e){ e.preventDefault(); openDesk(); };
+    return;
   }
+  // 5. not held here, but readable at its home repository
+  if(v.src){
+    btn.innerHTML = OPEN_SVG + 'Read at source';
+    btn.onclick = function(e){ e.preventDefault(); window.open(v.src,'_blank','noopener'); };
+    return;
+  }
+  // 6. genuinely not available to open
+  btn.classList.add('restricted');
+  btn.innerHTML = LOCK_SVG + 'Held in reserve \u2014 no public copy';
 }
 
 function row(k,val){ return '<div class="mrow"><dt>'+k+'</dt><dd>'+val+'</dd></div>'; }
@@ -1161,19 +1179,19 @@ document.getElementById('signOut').addEventListener('click', async function(){
 /* open a held volume: signed URL, valid for two minutes */
 async function fetchVolume(v, btn){
   if(!sb || !member){ openDesk(); return; }
-  if(!v.file){
-    btn.textContent = 'Held in reserve';
-    setTimeout(function(){ paintOpen(v, btn); }, 2200);
-    return;
-  }
+  if(!v.file){ paintOpen(v, btn); return; }
   var label = btn.innerHTML;
   btn.innerHTML = 'Retrieving…';
   try{
     var r = await sb.storage.from(LIB_BUCKET).createSignedUrl(v.file, 120);
-    if(r.error || !r.data){ btn.innerHTML='Unavailable'; setTimeout(function(){btn.innerHTML=label;},2200); return; }
+    if(r.error || !r.data){
+      btn.innerHTML = 'Not uploaded yet';
+      setTimeout(function(){ paintOpen(v, btn); }, 2600);
+      return;
+    }
     window.open(r.data.signedUrl, '_blank', 'noopener');
     btn.innerHTML = label;
-  }catch(e){ btn.innerHTML='Unavailable'; setTimeout(function(){btn.innerHTML=label;},2200); }
+  }catch(e){ btn.innerHTML='Not uploaded yet'; setTimeout(function(){ paintOpen(v, btn); }, 2600); }
 }
 
 /* theme */
