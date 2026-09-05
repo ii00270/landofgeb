@@ -287,6 +287,12 @@
   }
   .mrow dd{margin:0; color:var(--ink); font-weight:500}
 
+  .openbtn.restricted{
+    background:transparent; color:var(--seal); border:1px solid var(--seal);
+    cursor:default; pointer-events:none;
+  }
+  .note.restricted{border-left-color:var(--seal); color:var(--ink-2)}
+  .note.restricted b{color:var(--seal)}
   .note{
     border-left:2px solid var(--brass); padding:14px 0 14px 18px; margin-top:30px;
     font-size:13px; line-height:1.62; color:var(--ink-2); max-width:60ch;
@@ -414,115 +420,321 @@
    rather than rehosting the file.
    ============================================================ */
 var WINGS = [
-  {id:'hermetic', name:'Hermetic &amp; Alchemical', hue:'#3E4A3A'},
-  {id:'kabbalah', name:'Kabbalah',                  hue:'#2E3A4C'},
-  {id:'masonic',  name:'Masonic History',           hue:'#4A3A2E'},
-  {id:'science',  name:'Science &amp; Invention',    hue:'#5A3430'},
-  {id:'records',  name:'Records &amp; Sources',      hue:'#33372E'}
+ {id:'hermetic', name:'Hermetic &amp; Alchemical', hue:'#3E4A3A'},
+ {id:'kabbalah', name:'Kabbalah', hue:'#2E3A4C'},
+ {id:'masonic', name:'Masonic &amp; Fraternal', hue:'#4A3A2E'},
+ {id:'science', name:'Science &amp; Invention', hue:'#5A3430'},
+ {id:'records', name:'Records &amp; Statutes', hue:'#33372E'},
+ {id:'mind', name:'Mind &amp; Perception', hue:'#3C3348'},
+ {id:'contested', name:'Contested Sources', hue:'#4A4038'}
 ];
 
 var CAT = [
  {w:'hermetic', acc:'BXV.L.001', t:'The Kybalion', a:'Three Initiates', y:'1908', pg:232,
   blurb:'Seven principles offered as the operating grammar of everything else in this room.',
-  body:'A short book claiming to distill Hermetic teaching into seven principles — mentalism, correspondence, vibration, polarity, rhythm, cause and effect, gender. Whatever one makes of its provenance, it is the text most often standing behind the phrase "as above, so below," and it is where a great deal of later popular esoteric writing begins.',
+  body:'A short book claiming to distil Hermetic teaching into seven principles — mentalism, correspondence, vibration, polarity, rhythm, cause and effect, gender. Whatever one makes of its provenance, it is the text standing behind the phrase "as above, so below," and where a great deal of later popular esoteric writing begins.',
   cls:'Hermeticism', src:'https://archive.org/details/kybalionstudyofh00init',
-  note:'Published anonymously by the Yogi Publication Society, Chicago. Public domain.'},
+  note:'Yogi Publication Society, Chicago. Public domain.'},
 
  {w:'hermetic', acc:'BXV.L.002', t:'The Secret Teachings of All Ages', a:'Manly P. Hall', y:'1928', pg:675,
   blurb:'The encyclopedia of the symbolic tradition, written by a man of twenty-seven.',
-  body:'Hall\'s attempt to gather the symbolic, Masonic, Qabalistic, Rosicrucian, and alchemical traditions into a single illustrated reference. It is not a careful academic history and does not pretend to be. It is the map most people are actually using when they talk about this material, which is reason enough to read the original rather than the summaries of it.',
+  body:'Hall’s attempt to gather the symbolic, Masonic, Qabalistic, Rosicrucian and alchemical traditions into one illustrated reference. Not a careful academic history and it does not pretend to be. It is the map most people are actually using when they discuss this material, which is reason enough to read the original rather than summaries of it.',
   cls:'Comparative symbolism', src:'https://archive.org/details/secretteachings00hall',
-  note:'Public domain in the United States. Originally issued in a subscriber folio edition.'},
+  note:'Public domain in the United States. Originally a subscriber folio.'},
 
- {w:'hermetic', acc:'BXV.L.003', t:'Azoth, or the Star in the East', a:'A. E. Waite', y:'1893', pg:265,
-  blurb:'Waite reading alchemy as a description of interior process rather than metallurgy.',
-  body:'An argument that the alchemical corpus is a psychological and spiritual literature written in chemical vocabulary. Waite is a useful guide precisely because he is sceptical — he spent his career separating what the sources actually say from what enthusiasts wished they said.',
+ {w:'hermetic', acc:'BXV.L.003', t:'The Lost Keys of Masonry', a:'Manly P. Hall', y:'1923', pg:128,
+  blurb:'Hall on the legend of Hiram Abiff, written before he was thirty.',
+  body:'A reading of the Masonic third-degree legend as a psychological and moral allegory rather than a history. Short, and useful as a companion to the ritual texts elsewhere in this wing.',
+  cls:'Symbolism', src:'https://archive.org/details/lostkeysofmasonr00hall',
+  note:'Public domain.'},
+
+ {w:'hermetic', acc:'BXV.L.004', t:'Azoth, or the Star in the East', a:'A. E. Waite', y:'1893', pg:265,
+  blurb:'Waite reading alchemy as interior process rather than metallurgy.',
+  body:'An argument that the alchemical corpus is a psychological and spiritual literature written in chemical vocabulary. Waite is a useful guide precisely because he is sceptical — he spent a career separating what the sources say from what enthusiasts wished they said.',
   cls:'Alchemy', src:'https://archive.org/details/azothorstarineas00wait',
   note:'Public domain.'},
 
- {w:'hermetic', acc:'BXV.L.004', t:'Collectanea Chymica', a:'Eirenaeus Philalethes and others', y:'1684', pg:250,
+ {w:'hermetic', acc:'BXV.L.005', t:'Collectanea Chymica', a:'Eirenaeus Philalethes and others', y:'1684', pg:250,
   blurb:'The oldest thing in the room. Working alchemical papers, printed in London.',
-  body:'A collection of alchemical treatises gathered and printed in the seventeenth century — the raw material, before anyone had organised it into a tradition. Read alongside Waite it shows how much interpretation sits between a primary source and the story later told about it.',
+  body:'Treatises gathered and printed in the seventeenth century — raw material, before anyone had organised it into a tradition. Read alongside Waite it shows how much interpretation sits between a primary source and the story later told about it.',
   cls:'Alchemy · primary', src:'https://archive.org/details/collectaneachymi00phil',
   note:'Earliest holding in the collection. Public domain.'},
 
- {w:'kabbalah', acc:'BXV.L.010', t:'The Holy Kabbalah', a:'A. E. Waite', y:'1929', pg:674,
+ {w:'hermetic', acc:'BXV.L.006', t:'The Alchemy Key', a:'Stuart Nettleton', y:'2002', pg:570,
+  blurb:'A modern attempt to read alchemical symbol against metallurgy and history.',
+  body:'Nettleton works through the alchemical corpus looking for the physical and historical referents behind the imagery. Held as a contemporary counterpoint to Waite’s psychological reading.',
+  cls:'Alchemy · modern', src:'',
+  note:'Modern work. Catalogued; not circulated.'},
+
+ {w:'hermetic', acc:'BXV.L.007', t:'Amulets and Superstitions', a:'E. A. Wallis Budge', y:'1930', pg:590,
+  blurb:'The British Museum’s keeper of Egyptian antiquities on protective objects.',
+  body:'Budge catalogues amulets, seals and charms across Egypt, Mesopotamia, and the Near East, with the texts inscribed on them. Whatever one thinks of Budge’s translations — and Egyptologists have thought a great deal — it remains a dense primary catalogue of objects and their inscriptions.',
+  cls:'Egyptology · catalogue', src:'https://archive.org/details/amuletssuperstit0000budg',
+  note:'Public domain in the United States.'},
+
+ {w:'hermetic', acc:'BXV.L.008', t:'Plantes Magiques et Inventaires des Sorcières', a:'Anonymous', y:'—', pg:187,
+  blurb:'A French herbal of magical plants and the inventories of those tried for using them.',
+  body:'Held in the original French. Interesting less for its botany than for what the inventories record: what ordinary people actually possessed, according to the courts that prosecuted them.',
+  cls:'Herbal · French', src:'',
+  note:'Language: French. Catalogued; not circulated.'},
+
+ {w:'kabbalah', acc:'BXV.L.020', t:'The Holy Kabbalah', a:'A. E. Waite', y:'1929', pg:674,
   blurb:'A survey of the Jewish esoteric tradition and its passage into Western occultism.',
-  body:'Waite traces the Zohar and its reception, then follows the material as it is absorbed, translated, and frequently distorted by Christian and occult writers. The distortion is the interesting part: it is a case study in how a body of thought changes shape as it crosses a cultural boundary.',
+  body:'Waite traces the Zohar and its reception, then follows the material as it is absorbed, translated and frequently distorted by Christian and occult writers. The distortion is the interesting part: a case study in how a body of thought changes shape crossing a cultural boundary.',
   cls:'Kabbalah', src:'https://archive.org/details/holykabbalah0000wait',
   note:'Public domain in the United States.'},
 
- {w:'kabbalah', acc:'BXV.L.011', t:'The Kabbalah Unveiled', a:'S. L. MacGregor Mathers', y:'1887', pg:386,
-  blurb:'Mathers\' translation of three books of the Zohar, by way of Latin.',
-  body:'The translation that carried Kabbalistic material into the Golden Dawn and from there into most of twentieth-century Western occultism. Mathers worked from Knorr von Rosenroth\'s Latin rather than the Aramaic, which matters: much of what English-speaking occultism believes about Kabbalah arrives through two layers of translation.',
+ {w:'kabbalah', acc:'BXV.L.021', t:'The Kabbalah Unveiled', a:'S. L. MacGregor Mathers', y:'1887', pg:386,
+  blurb:'Mathers’ translation of three books of the Zohar, by way of Latin.',
+  body:'The translation that carried Kabbalistic material into the Golden Dawn and from there into most of twentieth-century Western occultism. Mathers worked from Knorr von Rosenroth’s Latin rather than the Aramaic, which matters: much of what English-speaking occultism believes about Kabbalah arrives through two layers of translation.',
   cls:'Kabbalah · translation', src:'https://archive.org/details/kabbalahunveiled00math',
   note:'Public domain.'},
 
- {w:'masonic', acc:'BXV.L.020', t:'The Constitutions of the Free-Masons', a:'James Anderson', y:'1723', pg:112,
+ {w:'kabbalah', acc:'BXV.L.022', t:'The Greek Qabalah', a:'Kieren Barry', y:'1999', pg:803,
+  blurb:'Alphabetic numerology in the ancient Mediterranean world.',
+  body:'Barry traces isopsephy — the Greek practice of summing letter-values — through classical, Jewish and early Christian sources. A rare treatment of the Greek side of a subject usually approached only through Hebrew.',
+  cls:'Numerology · scholarly', src:'',
+  note:'Modern work. Catalogued; not circulated.'},
+
+ {w:'kabbalah', acc:'BXV.L.023', t:'The Qabalah of Aleister Crowley: Three Texts', a:'Aleister Crowley', y:'1973', pg:294,
+  blurb:'Crowley’s correspondence tables, collected.',
+  body:'Gathers 777 and related material — the tables mapping numbers, letters, gods, plants, and perfumes onto one another. Held as a reference for how the correspondence system is actually constructed, which is more arbitrary and more interesting than its users usually admit.',
+  cls:'Correspondence tables', src:'',
+  note:'Modern compilation. Catalogued; not circulated.'},
+
+ {w:'masonic', acc:'BXV.L.040', t:'The Constitutions of the Free-Masons', a:'James Anderson', y:'1723', pg:112,
   blurb:'The founding document of organised Freemasonry, and a lesson in written constitutions.',
-  body:'Anderson\'s Constitutions set out the charges, regulations, and invented history of the first Grand Lodge. It is worth reading structurally rather than devotionally: how a body writes its own origins, fixes its rules, and establishes who may amend them. Any constitution — including a network\'s — faces the same problems.',
+  body:'Anderson’s Constitutions set out the charges, regulations and invented history of the first Grand Lodge. Worth reading structurally rather than devotionally: how a body writes its own origins, fixes its rules, and establishes who may amend them. Any constitution — including a network’s — faces the same problems.',
   cls:'Constitutional', src:'https://archive.org/details/the-constitutions-of-the-free-masons',
   note:'Public domain. Relevant to how The LOG handles amendment by append.'},
 
- {w:'masonic', acc:'BXV.L.021', t:'History of Freemasonry, Vol. VII', a:'Albert G. Mackey', y:'1906', pg:406,
+ {w:'masonic', acc:'BXV.L.041', t:'History of Freemasonry, Vol. VII', a:'Albert G. Mackey', y:'1906', pg:406,
   blurb:'The standard nineteenth-century institutional history, written from inside.',
-  body:'Mackey is the reference most later writers argue with. Useful for the same reason any official history is useful — it records what an institution believed about itself at the moment of writing, which is a different and often more revealing thing than what happened.',
+  body:'Mackey is the reference most later writers argue with. Useful the way any official history is useful — it records what an institution believed about itself at the moment of writing, a different and often more revealing thing than what happened.',
   cls:'Institutional history', src:'https://archive.org/details/historyoffreemas07mack',
   note:'Public domain.'},
 
- {w:'masonic', acc:'BXV.L.022', t:'The Master’s Carpet', a:'Edmond Ronayne', y:'1879', pg:417,
+ {w:'masonic', acc:'BXV.L.042', t:'The Master’s Carpet', a:'Edmond Ronayne', y:'1879', pg:417,
   blurb:'An exposure, written by a former Master of his own lodge.',
-  body:'Ronayne left Freemasonry and published its ritual. Whether one reads it as betrayal or as disclosure, it is a primary account of ceremony and symbol from someone who had performed it — and a case study in what happens when an organisation\'s internal language reaches the outside.',
+  body:'Ronayne left Freemasonry and published its ritual. Whether read as betrayal or disclosure, it is a primary account of ceremony and symbol from someone who had performed it — and a case study in what happens when an organisation’s internal language reaches the outside.',
   cls:'Ritual · exposure', src:'https://archive.org/details/masterscarpet00rona',
   note:'Public domain.'},
 
- {w:'science', acc:'BXV.L.030', t:'Nikola Tesla Papers', a:'Nikola Tesla', y:'1904', pg:18,
+ {w:'masonic', acc:'BXV.L.043', t:'Text Book of Freemasonry', a:'Anonymous', y:'1870', pg:205,
+  blurb:'A working manual of the three degrees, published anonymously.',
+  body:'Plain instructional text rather than commentary: the ceremonies as they were taught. Held alongside Ronayne and Anderson so the ritual, the exposure, and the constitution can be read against one another.',
+  cls:'Ritual · manual', src:'',
+  note:'Public domain.'},
+
+ {w:'masonic', acc:'BXV.L.044', t:'The Temple of Solomon', a:'Osgood', y:'1910', pg:99,
+  blurb:'The architectural legend that sits underneath the whole fraternal tradition.',
+  body:'A study of the Temple as building and as symbol. The Temple is the organising metaphor of Masonic ritual, and the distance between the archaeological question and the symbolic one is itself instructive.',
+  cls:'Architecture · symbol', src:'https://archive.org/details/templesolomonas00osgogoog',
+  note:'Public domain.'},
+
+ {w:'masonic', acc:'BXV.L.045', t:'The Secret History of Freemasonry', a:'Paul Naudon', y:'1991', pg:297,
+  blurb:'A French historian tracing Masonic origins to medieval building corporations.',
+  body:'Naudon argues for real institutional continuity between operative stonemasons’ guilds and speculative Freemasonry — an argument about how trades organise, license and transmit skill. Read against Mackey it is a study in two incompatible origin stories.',
+  cls:'History · scholarly', src:'',
+  note:'In copyright. Catalogued; not circulated.'},
+
+ {w:'masonic', acc:'BXV.L.046', t:'United Traditionalist Grand Sanctuaries: Philosophical Statement', a:'Ancient and Primitive Rite of Memphis-Misraïm', y:'—', pg:9,
+  blurb:'A contemporary rite stating its own philosophical position.',
+  body:'A short self-description by a living fraternal body. Held as a primary document of how such organisations present themselves now, rather than how the nineteenth century described them.',
+  cls:'Primary · contemporary', src:'',
+  note:'Organisational document. Catalogued; not circulated.'},
+
+ {w:'masonic', acc:'BXV.L.047', t:'Freemasonry, Ancient Egypt and the Islamic Destiny', a:'Mustafa El-Amin', y:'1988', pg:180,
+  blurb:'An argument connecting fraternal symbol to Egyptian and Islamic sources.',
+  body:'El-Amin reads Masonic symbolism through an Islamic and Afrocentric lens. Held as one position among several in this wing on where the symbols came from.',
+  cls:'Comparative · modern', src:'',
+  note:'In copyright. Catalogued; not circulated.'},
+
+ {w:'science', acc:'BXV.L.060', t:'Nikola Tesla Papers', a:'Nikola Tesla', y:'1904', pg:18,
   blurb:'Tesla in his own hand on the transmission of energy without wires.',
-  body:'Primary papers rather than the mythology that has grown around him. Tesla is worth reading directly because the actual engineering arguments — resonance, standing waves, grounded transmission — are more specific and more interesting than the legend, and because he wrote clearly about what he had not yet solved.',
+  body:'Primary papers rather than the mythology grown around him. Tesla repays direct reading because the actual engineering arguments — resonance, standing waves, grounded transmission — are more specific and more interesting than the legend, and because he wrote clearly about what he had not solved.',
   cls:'Engineering · primary', src:'https://archive.org/details/nikolateslapapers',
   note:'Public domain.'},
 
- {w:'science', acc:'BXV.L.031', t:'The Edison Era, 1876–1892', a:'General Electric', y:'1976', pg:60,
+ {w:'science', acc:'BXV.L.061', t:'A Manual of Electricity', a:'Dionysius Lardner', y:'1841', pg:604,
+  blurb:'Electricity explained before anyone knew what an electron was.',
+  body:'Lardner writes at the moment when electricity is measurable but not yet understood. The value is in watching a careful mind describe phenomena precisely while working from a model we now know to be wrong — which is the ordinary condition of science, and of most work.',
+  cls:'Physics · historical', src:'https://archive.org/details/manualofelectric00lard',
+  note:'Public domain.'},
+
+ {w:'science', acc:'BXV.L.062', t:'Researches on Magnetism, Electricity, Heat and Light', a:'Karl von Reichenbach', y:'1850', pg:536,
+  blurb:'Reichenbach’s experiments on the force he named Od.',
+  body:'A careful experimentalist — he discovered paraffin and creosote — spending years on a vital force that does not exist. Held deliberately: it is the clearest available demonstration of rigorous method producing a confident wrong answer, which is worth more to a working person than another success story.',
+  cls:'Physics · historical', src:'https://archive.org/details/researchesonmagn00reic',
+  note:'Public domain.'},
+
+ {w:'science', acc:'BXV.L.063', t:'The Physics and Physiology of Spiritualism', a:'William A. Hammond', y:'1871', pg:98,
+  blurb:'A neurologist examines mediums and explains what he finds.',
+  body:'Hammond, a US Surgeon General and founding neurologist, investigates séance phenomena and accounts for them physiologically. An early and unusually rigorous instance of a scientist taking a claim seriously enough to test it properly.',
+  cls:'Neurology · historical', src:'https://archive.org/details/physicsphysiolog00hammuoft',
+  note:'Public domain.'},
+
+ {w:'science', acc:'BXV.L.064', t:'Magnetism and Magnetic Materials', a:'—', y:'—', pg:264,
+  blurb:'A technical reference on magnetic anisotropy and material behaviour.',
+  body:'Working materials-science text on how magnetic properties arise from structure. Held for the same reason the patents are: it is precise writing about physical constraint.',
+  cls:'Materials science', src:'',
+  note:'Technical reference. Catalogued; not circulated.'},
+
+ {w:'science', acc:'BXV.L.065', t:'The Edison Era, 1876–1892', a:'General Electric', y:'1976', pg:60,
   blurb:'A corporate history of the years electricity became an industry.',
   body:'How invention becomes infrastructure: patents, financing, standards wars, and the consolidation that produced General Electric. The technical story is well known; the organisational story — who structured the work, and how — is the one that repeats.',
-  cls:'Industrial history', src:'https://archive.org/search?query=edison+era+general+electric',
-  note:'Published by General Electric. Catalogued as a corporate record.'},
+  cls:'Industrial history', src:'',
+  note:'Published by General Electric. Corporate record.'},
 
- {w:'science', acc:'BXV.L.032', t:'United States Patents (six)', a:'United States Patent Office', y:'1868–2003', pg:65,
+ {w:'science', acc:'BXV.L.066', t:'The Key to Mental and Physical Power', a:'Anderson', y:'1897', pg:162,
+  blurb:'A late-Victorian manual of self-development.',
+  body:'Part physiology, part exhortation, of a genre that runs directly into modern self-improvement writing. Held as a specimen of how the promise has and has not changed in a century and a quarter.',
+  cls:'Self-development · historical', src:'',
+  note:'Public domain.'},
+
+ {w:'science', acc:'BXV.L.067', t:'Lives of the Great Scientists: Madame Curie', a:'Ladybird Books', y:'1966', pg:56,
+  blurb:'A children’s biography, held without irony.',
+  body:'The Ladybird series taught a generation what a scientist was. Held because how a subject is first presented to a child shapes what an adult believes is possible — which is the whole premise of the Real Skills programme.',
+  cls:'Biography · juvenile', src:'',
+  note:'In copyright. Catalogued; not circulated.'},
+
+ {w:'science', acc:'BXV.L.068', t:'The Natural Laws of the Universe: Understanding Fundamental Constants', a:'—', y:'—', pg:143,
+  blurb:'On the constants that fix the behaviour of everything else.',
+  body:'A survey of the fundamental constants and the question of why they hold the values they do. The nearest thing in this collection to a direct treatment of proportion as a physical fact rather than a symbolic one.',
+  cls:'Physics', src:'https://archive.org/details/TheNaturalLawsOfTheUniverseUnderstandingFundamentalConstants',
+  note:'Held at the Internet Archive.'},
+
+ {w:'science', acc:'BXV.L.069', t:'Free Energy Manual', a:'—', y:'—', pg:128,
+  blurb:'A compilation of over-unity device claims and schematics.',
+  body:'Held as a document of a persistent technical subculture. The devices described violate conservation of energy and none has produced a reproducible result; the interesting question is why the literature keeps regenerating.',
+  cls:'Claims · disputed', src:'',
+  note:'Claims are not supported by evidence. Catalogued; not circulated.'},
+
+ {w:'science', acc:'BXV.L.070', t:'United States Patents (six)', a:'United States Patent Office', y:'1868–2003', pg:65,
   blurb:'Six granted patents, read as documents rather than as inventions.',
-  body:'A patent is a peculiar literary form: it must describe a thing precisely enough that a stranger could build it, while claiming exactly as much territory as the office will allow and no more. That is decomposition under legal constraint — the same discipline the network applies to a scope of work.',
+  body:'A patent is a peculiar literary form: it must describe a thing precisely enough that a stranger could build it, while claiming exactly as much territory as the office will allow and no more. That is decomposition under legal constraint — the discipline the network applies to a scope of work.',
   cls:'Patents · primary', src:'https://patents.google.com/',
   note:'US patents are public domain. Nos. 79819, 387347, 674427, 1540998, 1962439, 6506148.'},
 
- {w:'records', acc:'BXV.L.040', t:'Enuma Elish', a:'Babylonian, anonymous', y:'c. 1750 BCE', pg:10,
-  blurb:'The oldest creation account in the room, and a study in how order is claimed.',
-  body:'The Babylonian creation epic, in which the world is made from a defeated body and a city\'s god is elevated over the others. Read for structure rather than devotion: it is a document about who has the right to organise things, written by the party that won.',
-  cls:'Primary text · translation', src:'https://www.sacred-texts.com/ane/enuma.htm',
-  note:'Ancient text. Modern translations vary in status; this record links a public edition.'},
-
- {w:'records', acc:'BXV.L.041', t:'Revised Organic Act of the Virgin Islands', a:'United States Congress', y:'1954', pg:105,
+ {w:'records', acc:'BXV.L.090', t:'Revised Organic Act of the Virgin Islands', a:'United States Congress', y:'1954', pg:105,
   blurb:'The document that defines the ground the network stands on.',
-  body:'The Act that establishes the government of the US Virgin Islands, its legislature, its courts, and the relationship between the territory and the federal government. Anyone operating a company from St. Croix is operating inside this document, and most people who do have never read it.',
+  body:'The Act establishing the government of the US Virgin Islands, its legislature, its courts, and the relationship between territory and federal government. Anyone operating a company from St. Croix operates inside this document, and most who do have never read it.',
   cls:'Statute', src:'https://www.usvieda.org/sites/default/files/RevOrganicAct_1954.pdf',
-  note:'United States government work. Public domain. Held by USVI EDA.'},
+  note:'United States government work. Public domain.'},
 
- {w:'records', acc:'BXV.L.042', t:'Bitcoin: A Peer-to-Peer Electronic Cash System', a:'Satoshi Nakamoto', y:'2008', pg:9,
+ {w:'records', acc:'BXV.L.091', t:'Bitcoin: A Peer-to-Peer Electronic Cash System', a:'Satoshi Nakamoto', y:'2008', pg:9,
   blurb:'Nine pages that proposed settlement without an intermediary.',
-  body:'The paper is short, plain, and almost entirely about one problem: how to order events without a trusted party. The network reads it for the same reason it reads Anderson\'s Constitutions — it is a design document about who is allowed to write the ledger, and what happens when nobody is in charge of it.',
+  body:'Short, plain, and almost entirely about one problem: how to order events without a trusted party. The network reads it for the same reason it reads Anderson’s Constitutions — a design document about who is allowed to write the ledger, and what happens when nobody is in charge of it.',
   cls:'Protocol · primary', src:'https://bitcoin.org/bitcoin.pdf',
   note:'Released under the MIT licence. Freely distributable.'},
 
- {w:'records', acc:'BXV.L.043', t:'The Greater Key of Solomon', a:'S. L. MacGregor Mathers, trans.', y:'1889', pg:166,
-  blurb:'A grimoire, catalogued here as a document in the history of procedure.',
+ {w:'records', acc:'BXV.L.092', t:'H.R. 8800, 119th Congress', a:'United States House of Representatives', y:'2026', pg:2586,
+  blurb:'Two and a half thousand pages of statute, held as an object lesson.',
+  body:'An engrossed bill in full. Held less for its subject than for its shape: what legislative drafting actually looks like at scale, and what happens to a document when many hands amend it without a rule for how amendment works.',
+  cls:'Legislation · primary', src:'https://www.congress.gov/119/bills/hr8800/BILLS-119hr8800eh.pdf',
+  note:'United States government work. Public domain.'},
+
+ {w:'records', acc:'BXV.L.093', t:'Encyclical: Magnifica Humanitas', a:'Pope Leo XIV', y:'2026', pg:56,
+  blurb:'The Holy See on safeguarding the human person in the time of artificial intelligence.',
+  body:'A papal encyclical addressing AI and human dignity. Held because it is one of the few institutional documents attempting to state a position on the automation boundary from outside the technology industry — a question The LOG also answers, differently.',
+  cls:'Encyclical · primary', src:'https://www.vatican.va/',
+  note:'Holy See document.'},
+
+ {w:'records', acc:'BXV.L.094', t:'Enuma Elish', a:'Babylonian, anonymous', y:'c. 1750 BCE', pg:10,
+  blurb:'The oldest creation account in the room, and a study in how order is claimed.',
+  body:'The Babylonian creation epic, in which the world is made from a defeated body and a city’s god elevated above the others. Read for structure rather than devotion: a document about who has the right to organise things, written by the party that won.',
+  cls:'Primary text · translation', src:'https://www.sacred-texts.com/ane/enuma.htm',
+  note:'Ancient text. Modern translations vary in status.'},
+
+ {w:'records', acc:'BXV.L.095', t:'The Greater Key of Solomon', a:'S. L. MacGregor Mathers, trans.', y:'1889', pg:166,
+  blurb:'A grimoire, catalogued as a document in the history of procedure.',
   body:'Instructions: exact materials, exact sequence, exact words, and the claim that deviation voids the result. Read as a historical artefact it is a striking early example of procedural writing — a specification in which the ordering of steps is held to be the entire operative content.',
   cls:'Grimoire · primary', src:'https://archive.org/details/greaterkeyofsolo00math',
   note:'Public domain. Catalogued for its structure, not its claims.'},
 
- {w:'records', acc:'BXV.L.044', t:'CIA Reading Room Releases', a:'Central Intelligence Agency', y:'declassified', pg:258,
-  blurb:'Two declassified files, read as government prose rather than as revelation.',
-  body:'Documents released through the CIA\'s public reading room. The value in reading primary declassified material is calibration: it shows what an internal government document actually looks like — hedged, procedural, frequently mundane — against the far more confident version that circulates second-hand.',
+ {w:'records', acc:'BXV.L.096', t:'CIA Reading Room Releases (two)', a:'Central Intelligence Agency', y:'declassified', pg:258,
+  blurb:'Declassified files, read as government prose rather than as revelation.',
+  body:'Documents released through the CIA’s public reading room. The value in reading primary declassified material is calibration: it shows what an internal government document actually looks like — hedged, procedural, frequently mundane — against the far more confident version that circulates second-hand.',
   cls:'Declassified · primary', src:'https://www.cia.gov/readingroom/',
-  note:'United States government work, released under FOIA. Public domain.'}
+  note:'United States government work, released under FOIA. Public domain.'},
+
+ {w:'records', acc:'BXV.L.097', t:'DHS Type III SWAT Self-Study Manual', a:'Department of Homeland Security', y:'—', pg:285,
+  blurb:'A federal tactical training manual, held as procedural writing.',
+  body:'Held for its structure: how a high-consequence procedure is written down so that it can be executed under stress by people who did not write it. The same problem every operating manual faces, with the stakes made explicit.',
+  cls:'Training manual', src:'',
+  note:'US government training material. Catalogued; not circulated.'},
+
+ {w:'mind', acc:'BXV.L.110', t:'Remote Viewing', a:'—', y:'—', pg:154,
+  blurb:'The protocol literature of a programme the government actually funded.',
+  body:'Whatever one concludes about the results — and the formal evaluations concluded against them — the programme produced an unusual body of writing about how to structure a perceptual task so its output can be scored. Held for the protocol design.',
+  cls:'Protocol · disputed', src:'',
+  note:'Claims are not supported by the programme’s own evaluations. Catalogued; not circulated.'},
+
+ {w:'mind', acc:'BXV.L.111', t:'Mind Control Technology', a:'Berserker Books', y:'—', pg:371,
+  blurb:'A survey of claimed behavioural and electronic influence techniques.',
+  body:'Held as a document of the genre. The historical core — MKUltra, documented and admitted — is real and sits in the declassified record; a great deal built on top of it is not. The two are worth being able to tell apart.',
+  cls:'Claims · disputed', src:'https://archive.org/details/mind-control-technology-berserker-books',
+  note:'Mixes documented history with unsupported claim. Catalogued; not circulated.'},
+
+ {w:'mind', acc:'BXV.L.112', t:'Satanic Ritual Abuse: Principles of Treatment', a:'Colin A. Ross, M.D.', y:'1995', pg:243,
+  blurb:'A clinical text from the centre of a moral panic.',
+  body:'Ross writes as a psychiatrist during the satanic ritual abuse panic of the 1980s and 90s — a period in which recovered-memory technique produced thousands of accusations that investigation did not support. Held as a document of how clinical authority and social panic can reinforce one another.',
+  cls:'Psychiatry · historical', src:'',
+  note:'In copyright. Catalogued; not circulated.'},
+
+ {w:'mind', acc:'BXV.L.113', t:'Revelations of the Dark Mother', a:'—', y:'—', pg:126,
+  blurb:'A modern devotional and mythographic text.',
+  body:'Held as a primary document of contemporary alternative religious writing.',
+  cls:'Primary · contemporary', src:'',
+  note:'Catalogued; not circulated.'},
+
+ {w:'mind', acc:'BXV.L.114', t:'Lilin Society Initiation', a:'Lilin Society', y:'—', pg:56,
+  blurb:'An initiatory document from a small contemporary order.',
+  body:'Held as a primary specimen of how such groups structure entry, obligation and progression — the same structural questions any membership body answers, in a very different register.',
+  cls:'Primary · contemporary', src:'',
+  note:'Organisational document. Catalogued; not circulated.'},
+
+ {w:'contested', acc:'BXV.L.130', t:'Proofs of a Conspiracy', a:'John Robison', y:'1797', pg:400,
+  blurb:'The book that started the Illuminati conspiracy literature.',
+  body:'Robison, a genuine professor of natural philosophy at Edinburgh, argued that the French Revolution was engineered by the Bavarian Illuminati through Masonic lodges. Historians do not accept the thesis. It is catalogued because nearly every later conspiracy text descends from this one, and reading the origin is more instructive than reading the descendants.',
+  cls:'Conspiracy · foundational', src:'https://archive.org/details/proofsofconspira00robi',
+  note:'Public domain. Thesis rejected by historians; held as the origin of a genre.'},
+
+ {w:'contested', acc:'BXV.L.131', t:'Babylon Mystery Religion', a:'Ralph Woodrow', y:'1966', pg:177,
+  blurb:'An anti-Catholic polemic its own author later retracted.',
+  body:'Woodrow argued that Roman Catholic practice derives from Babylonian paganism. He subsequently investigated his own sources, found the method unsound, withdrew the book and published a refutation of it. Catalogued together with that fact, because the retraction is the more valuable document.',
+  cls:'Polemic · retracted', src:'',
+  note:'In copyright. The author publicly retracted this work. Catalogued; not circulated.'},
+
+ {w:'contested', acc:'BXV.L.132', t:'The World Order: A Study in the Hegemony of Parasitism', a:'Eustace Mullins', y:'1985', pg:282,
+  blurb:'An antisemitic conspiracy text, catalogued as such.',
+  body:'Mullins was an open antisemite whose work advances the claim of a hidden Jewish financial conspiracy. The claim is false. It is held because the genre it belongs to has real historical consequence, and because studying propaganda requires access to it — not because its arguments merit consideration.',
+  cls:'Antisemitic conspiracy', src:'',
+  note:'Antisemitic propaganda. Held for study of the genre. Not circulated, not endorsed.'},
+
+ {w:'contested', acc:'BXV.L.133', t:'Judaism and the Vatican', a:'Vicomte Léon de Poncins', y:'1967', pg:100,
+  blurb:'A second antisemitic conspiracy text from the same tradition.',
+  body:'De Poncins advanced claims of Jewish subversion of the Catholic Church. The claims are false and the tradition they belong to has a documented body count. Catalogued for the same reason as the Mullins: the genre is a historical object worth being able to recognise.',
+  cls:'Antisemitic conspiracy', src:'',
+  note:'Antisemitic propaganda. Held for study of the genre. Not circulated, not endorsed.'},
+
+ {w:'contested', acc:'BXV.L.134', t:'A History of the Venetian Black Nobility', a:'—', y:'—', pg:6,
+  blurb:'A short text in the hidden-dynasty genre.',
+  body:'Asserts a continuous aristocratic conspiracy running from medieval Venice to the present. No historical support. Held as a compact specimen of the form.',
+  cls:'Conspiracy', src:'',
+  note:'Unsupported. Catalogued; not circulated.'},
+
+ {w:'contested', acc:'BXV.L.135', t:'Cannibalism, Blood Drinking and High-Adept Satanism', a:'Kerth Barker', y:'2014', pg:194,
+  blurb:'A recovered-memory abuse narrative from the modern conspiracy milieu.',
+  body:'A first-person account of the kind produced in volume during and after the satanic panic. Held beside the Ross volume so the clinical literature and the popular literature of that episode can be read against one another.',
+  cls:'Claims · disputed', src:'',
+  note:'In copyright. Claims unsupported. Catalogued; not circulated.'},
+
+ {w:'contested', acc:'BXV.L.136', t:'The Definitive Guide to the Order of Nine Angles', a:'Various', y:'7th ed.', pg:1460,
+  blurb:'The written corpus of a proscribed neo-Nazi occult network.',
+  body:'The Order of Nine Angles is a neo-Nazi accelerationist network whose texts advocate violence, including homicide, as spiritual practice. It is proscribed as a terrorist organisation in the United Kingdom and its material has featured in criminal prosecutions in several countries. It is catalogued here as a primary source for the study of violent extremism. No access link is provided and it is not circulated under any circumstances.',
+  cls:'Extremist · restricted', src:'',
+  note:'RESTRICTED. Neo-Nazi terrorist material. Held for study only — never distributed, never endorsed. No source link provided.'}
 ];
 
 /* ---------- build ---------- */
@@ -583,8 +795,23 @@ function openVol(acc){
   document.getElementById('dauthor').innerHTML = 'by <b>'+v.a+'</b>';
   document.getElementById('dblurb').textContent = v.blurb;
   document.getElementById('dbody').textContent = v.body;
-  document.getElementById('dsource').href = v.src;
-  document.getElementById('dnote').innerHTML = '<b>Catalogue note.</b> ' + v.note;
+  var srcBtn = document.getElementById('dsource');
+  if(v.src){ srcBtn.href = v.src; srcBtn.style.display=''; }
+  else { srcBtn.style.display='none'; }
+  var restricted = /RESTRICTED/.test(v.note);
+  var openBtn = document.getElementById('dopen');
+  if(restricted){
+    openBtn.classList.add('restricted');
+    openBtn.removeAttribute('href');
+    openBtn.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10.5" rx="2"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/></svg> Restricted \u2014 not circulated';
+  } else {
+    openBtn.classList.remove('restricted');
+    openBtn.setAttribute('href','https://ii00270.github.io/Bixxvillenode/');
+    openBtn.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10.5" rx="2"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/></svg> Sign in to open';
+  }
+  var noteEl = document.getElementById('dnote');
+  noteEl.className = 'note' + (/RESTRICTED/.test(v.note) ? ' restricted' : '');
+  noteEl.innerHTML = '<b>Catalogue note.</b> ' + v.note;
   document.getElementById('dmeta').innerHTML =
       row('Accession', v.acc) + row('Classification', v.cls)
     + row('Written', v.y)     + row('Extent', v.pg + ' pages')
