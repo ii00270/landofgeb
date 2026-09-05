@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>The Library — Bixxville</title>
+<meta name="description" content="The Bixxville reading room. A catalogue of primary sources on pattern, structure, and how the world was built. Entry by member credentials.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script>(function(){try{var t=localStorage.getItem('bx-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}})();</script>
+<style>
+  /* ============================================================
+     THE LIBRARY — a reading room, not a website.
+     Warm paper, generated series covers, catalogue metadata.
+     ============================================================ */
+  :root{
+    --paper:#F2EEE4;
+    --paper-2:#FBF9F4;
+    --shelf:#E7E1D3;
+    --ink:#191712;
+    --ink-2:#4A443A;
+    --ink-3:#8A8272;
+    --rule:#D8D0BE;
+    --rule-2:#EAE4D6;
+    --seal:#A8332A;
+    --brass:#9A7B37;
+    --green:#2A7314;
+    --lift:0 1px 2px rgba(25,23,18,.06), 0 8px 24px rgba(25,23,18,.08);
+    --lift-2:0 2px 4px rgba(25,23,18,.08), 0 18px 44px rgba(25,23,18,.14);
+    --serif:'Newsreader',Georgia,'Times New Roman',serif;
+    --sans:'Poppins',system-ui,sans-serif;
+    --sun:block; --moon:none;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#15130E; --paper-2:#1D1A14; --shelf:#221E17;
+      --ink:#F3EFE4; --ink-2:#C3BCAB; --ink-3:#8B8474;
+      --rule:#332E24; --rule-2:#262119;
+      --seal:#D4685C; --brass:#C9A455; --green:#8CF060;
+      --lift:0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.45);
+      --lift-2:0 2px 6px rgba(0,0,0,.5), 0 20px 48px rgba(0,0,0,.6);
+      --sun:none; --moon:block;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#15130E; --paper-2:#1D1A14; --shelf:#221E17;
+    --ink:#F3EFE4; --ink-2:#C3BCAB; --ink-3:#8B8474;
+    --rule:#332E24; --rule-2:#262119;
+    --seal:#D4685C; --brass:#C9A455; --green:#8CF060;
+    --lift:0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.45);
+    --lift-2:0 2px 6px rgba(0,0,0,.5), 0 20px 48px rgba(0,0,0,.6);
+    --sun:none; --moon:block;
+  }
+
+  *{box-sizing:border-box}
+  body{margin:0; background:var(--paper); color:var(--ink-2);
+       font-family:var(--sans); font-size:15px; line-height:1.6;
+       -webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  img{max-width:100%}
+
+  /* ---------- masthead ---------- */
+  .mast{
+    position:sticky; top:0; z-index:40; background:var(--paper);
+    border-bottom:1px solid var(--rule);
+    display:flex; align-items:center; justify-content:space-between; gap:16px;
+    padding:14px 26px;
+  }
+  .mast .back{
+    font-size:12.5px; font-weight:500; color:var(--ink-2); text-decoration:none;
+    display:flex; align-items:center; gap:7px; white-space:nowrap;
+  }
+  .mast .back:hover{color:var(--seal)}
+  .mast .wordmark{
+    font-family:var(--serif); font-size:16px; font-weight:500; color:var(--ink);
+    letter-spacing:.02em; white-space:nowrap;
+  }
+  .mast .wordmark i{font-style:italic; color:var(--ink-3)}
+  .mast .right{display:flex; align-items:center; gap:12px}
+  .tog{
+    width:32px;height:32px;border-radius:50%;border:1px solid var(--rule);
+    background:transparent;color:var(--ink-2);cursor:pointer;flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;padding:0;
+  }
+  .tog:hover{color:var(--seal);border-color:var(--seal)}
+  .tog svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.9;
+    stroke-linecap:round;stroke-linejoin:round}
+  .tog .i-sun{display:var(--sun)} .tog .i-moon{display:var(--moon)}
+  .enterbtn{
+    border:1px solid var(--ink); background:var(--ink); color:var(--paper);
+    border-radius:40px; padding:8px 17px; font-family:var(--sans);
+    font-size:12.5px; font-weight:600; cursor:pointer; white-space:nowrap;
+    text-decoration:none; display:inline-block;
+  }
+  .enterbtn:hover{background:var(--seal); border-color:var(--seal); color:#fff}
+
+  /* ---------- the room ---------- */
+  .room{max-width:1180px; margin:0 auto; padding:0 26px 96px}
+
+  .portal{padding:74px 0 46px; border-bottom:1px solid var(--rule); position:relative}
+  .kicker{
+    font-family:var(--sans); font-size:10.5px; letter-spacing:.28em;
+    text-transform:uppercase; color:var(--seal); font-weight:600; margin-bottom:20px;
+  }
+  .portal h1{
+    font-family:var(--serif); font-weight:400; color:var(--ink);
+    font-size:clamp(42px,8vw,86px); line-height:1.02; letter-spacing:-.02em;
+    margin:0 0 22px; text-wrap:balance;
+  }
+  .portal h1 i{font-style:italic; color:var(--ink-3)}
+  .portal .standfirst{
+    font-family:var(--serif); font-size:clamp(17px,2.6vw,21px); line-height:1.55;
+    color:var(--ink-2); max-width:56ch; margin:0 0 26px;
+  }
+  .portal .meta{
+    display:flex; flex-wrap:wrap; gap:10px 30px; font-family:var(--sans);
+    font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3);
+  }
+  .portal .meta b{color:var(--ink); font-weight:600}
+
+  /* ---------- entry notice ---------- */
+  .gate{
+    display:flex; gap:18px; align-items:flex-start;
+    border:1px solid var(--rule); background:var(--paper-2);
+    padding:22px 24px; margin:34px 0 0; border-radius:3px;
+  }
+  .gate .keyhole{
+    width:38px;height:38px;border-radius:50%;border:1.5px solid var(--brass);
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--brass);
+  }
+  .gate .keyhole svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.7}
+  .gate .gt{flex:1; min-width:0}
+  .gate .gt h4{
+    font-family:var(--serif); font-size:18px; font-weight:500; color:var(--ink);
+    margin:0 0 6px;
+  }
+  .gate .gt p{margin:0; font-size:13.5px; line-height:1.6; color:var(--ink-2); max-width:62ch}
+
+  /* ---------- wing navigation ---------- */
+  .wings{
+    display:flex; gap:4px; flex-wrap:wrap; padding:30px 0 4px;
+    position:sticky; top:60px; background:var(--paper); z-index:30;
+  }
+  .wings button{
+    font-family:var(--sans); font-size:11.5px; letter-spacing:.08em;
+    border:1px solid transparent; background:transparent; color:var(--ink-3);
+    padding:7px 14px; border-radius:40px; cursor:pointer; white-space:nowrap;
+    font-weight:500;
+  }
+  .wings button:hover{color:var(--ink)}
+  .wings button.on{background:var(--ink); color:var(--paper); border-color:var(--ink)}
+
+  /* ---------- the shelf ---------- */
+  .shelfhead{
+    display:flex; align-items:baseline; justify-content:space-between; gap:20px;
+    padding:34px 0 4px; border-bottom:1px solid var(--rule); margin-bottom:34px;
+  }
+  .shelfhead h2{
+    font-family:var(--serif); font-weight:400; font-size:clamp(24px,4vw,34px);
+    color:var(--ink); margin:0; letter-spacing:-.01em;
+  }
+  .shelfhead .count{
+    font-family:var(--sans); font-size:11px; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--ink-3); white-space:nowrap;
+  }
+
+  .shelf{
+    display:grid; gap:38px 26px;
+    grid-template-columns:repeat(auto-fill, minmax(158px,1fr));
+  }
+
+  .vol{cursor:pointer; background:none; border:none; padding:0; text-align:left;
+       font-family:inherit; display:flex; flex-direction:column}
+  .vol:focus-visible{outline:2px solid var(--seal); outline-offset:6px}
+
+  /* generated series cover — no image assets needed */
+  .cover{
+    position:relative; aspect-ratio:5/7; border-radius:2px; overflow:hidden;
+    box-shadow:var(--lift); transition:transform .35s cubic-bezier(.2,.7,.3,1), box-shadow .35s;
+    display:flex; align-items:center; justify-content:center; padding:13%;
+  }
+  .vol:hover .cover{transform:translateY(-6px); box-shadow:var(--lift-2)}
+  .cover:after{ /* spine shadow */
+    content:''; position:absolute; left:0; top:0; bottom:0; width:9%;
+    background:linear-gradient(90deg, rgba(0,0,0,.20), rgba(0,0,0,0));
+  }
+  .plate{
+    position:relative; z-index:1; width:100%; background:#F7F4EC;
+    padding:11px 10px 10px; border-radius:1px; text-align:center;
+    box-shadow:0 1px 3px rgba(0,0,0,.14);
+  }
+  .plate .pt{
+    font-family:var(--serif); font-size:12px; line-height:1.22; color:#191712;
+    font-weight:500; letter-spacing:-.01em; margin-bottom:6px;
+    display:-webkit-box; -webkit-line-clamp:4; -webkit-box-orient:vertical; overflow:hidden;
+  }
+  .plate .pa{
+    font-family:var(--sans); font-size:7px; letter-spacing:.13em; text-transform:uppercase;
+    color:#6B6455; border-top:.5px solid #CFC7B4; padding-top:5px;
+    display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+  }
+  .acc{
+    position:absolute; z-index:1; bottom:7px; right:9px;
+    font-family:var(--sans); font-size:6.5px; letter-spacing:.11em;
+    color:rgba(255,255,255,.62);
+  }
+
+  .vol .vt{
+    font-family:var(--serif); font-size:14.5px; line-height:1.3; color:var(--ink);
+    margin-top:14px; font-weight:500;
+  }
+  .vol .va{
+    font-family:var(--sans); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--ink-3); margin-top:5px;
+  }
+
+  /* ---------- detail view ---------- */
+  .detail{display:none}
+  .detail.on{display:block}
+  .shelfview.off{display:none}
+
+  .dback{
+    background:none;border:none;padding:0;cursor:pointer;font-family:var(--sans);
+    font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);
+    margin:34px 0 0; display:flex; align-items:center; gap:8px;
+  }
+  .dback:hover{color:var(--seal)}
+
+  .dgrid{display:grid; grid-template-columns:1fr; gap:44px; padding:30px 0 0}
+  @media(min-width:860px){.dgrid{grid-template-columns:minmax(0,300px) minmax(0,1fr); gap:64px}}
+
+  .dobject{position:relative}
+  .dobject .halo{
+    position:absolute; inset:-14% -10% -18%; border-radius:50%;
+    background:radial-gradient(ellipse at 50% 45%, rgba(154,123,55,.16), transparent 66%);
+    pointer-events:none;
+  }
+  .dobject .cover{box-shadow:var(--lift-2); max-width:300px}
+  .dcaption{
+    font-family:var(--sans); font-size:10px; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--ink-3); text-align:center; margin-top:18px;
+  }
+
+  .dtitle{
+    font-family:var(--serif); font-weight:400; color:var(--ink); margin:0 0 10px;
+    font-size:clamp(30px,4.6vw,46px); line-height:1.08; letter-spacing:-.02em;
+    text-wrap:balance;
+  }
+  .dauthor{
+    font-family:var(--sans); font-size:11.5px; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--ink-3); margin-bottom:22px;
+  }
+  .dauthor b{color:var(--seal); font-weight:600}
+  .dblurb{
+    font-family:var(--serif); font-style:italic; font-size:clamp(16px,2.4vw,19px);
+    line-height:1.5; color:var(--ink-2); margin:0 0 20px; max-width:54ch;
+  }
+  .dbody{font-size:14.5px; line-height:1.68; color:var(--ink-2); max-width:60ch; margin:0 0 26px}
+
+  .dactions{display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin-bottom:32px}
+  .openbtn{
+    display:inline-flex; align-items:center; gap:9px;
+    background:var(--ink); color:var(--paper); border:1px solid var(--ink);
+    border-radius:40px; padding:13px 24px; font-family:var(--sans);
+    font-size:13.5px; font-weight:600; cursor:pointer; text-decoration:none;
+  }
+  .openbtn:hover{background:var(--seal); border-color:var(--seal); color:#fff}
+  .openbtn svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.9}
+  .sourcebtn{
+    display:inline-flex; align-items:center; gap:8px; border:1px solid var(--rule);
+    border-radius:40px; padding:13px 22px; font-size:13.5px; font-weight:500;
+    color:var(--ink-2); text-decoration:none;
+  }
+  .sourcebtn:hover{border-color:var(--ink); color:var(--ink)}
+
+  .dmeta{
+    display:grid; grid-template-columns:1fr; gap:0;
+    border-top:1px solid var(--rule); max-width:640px;
+  }
+  @media(min-width:620px){.dmeta{grid-template-columns:1fr 1fr; column-gap:44px}}
+  .mrow{display:flex; gap:16px; padding:11px 0; border-bottom:1px solid var(--rule-2); font-size:13px}
+  .mrow dt{
+    font-family:var(--sans); font-size:10px; letter-spacing:.13em; text-transform:uppercase;
+    color:var(--ink-3); width:104px; flex-shrink:0; padding-top:2px;
+  }
+  .mrow dd{margin:0; color:var(--ink); font-weight:500}
+
+  .note{
+    border-left:2px solid var(--brass); padding:14px 0 14px 18px; margin-top:30px;
+    font-size:13px; line-height:1.62; color:var(--ink-2); max-width:60ch;
+  }
+  .note b{color:var(--ink)}
+
+  /* ---------- also on the shelf ---------- */
+  .also{margin-top:56px; border-top:1px solid var(--rule); padding-top:26px}
+  .also h5{
+    font-family:var(--sans); font-size:10.5px; letter-spacing:.18em; text-transform:uppercase;
+    color:var(--ink-3); font-weight:600; margin:0 0 20px;
+  }
+  .alsorow{display:grid; grid-template-columns:repeat(auto-fill,minmax(104px,1fr)); gap:18px}
+  .alsorow .cover{border-radius:2px}
+  .alsorow .vt{font-size:12px; margin-top:10px}
+  .alsorow .va{font-size:9px}
+
+  footer{
+    border-top:1px solid var(--rule); margin-top:70px; padding:30px 26px 60px;
+    font-family:var(--sans); font-size:11.5px; letter-spacing:.05em; color:var(--ink-3);
+    line-height:1.9; text-align:center;
+  }
+  footer b{color:var(--ink-2); letter-spacing:.16em; font-weight:600}
+  footer a{color:var(--seal); text-decoration:none}
+
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="mast">
+  <a class="back" href="index.html">&larr;&nbsp; Bixxville</a>
+  <div class="wordmark">The <i>Library</i></div>
+  <div class="right">
+    <button class="tog" id="themeTog" type="button" aria-label="Switch theme" title="Switch theme">
+      <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.4M12 19v2.4M4.6 12H2.2M21.8 12h-2.4M6.5 6.5 4.8 4.8M19.2 19.2l-1.7-1.7M17.5 6.5l1.7-1.7M4.8 19.2l1.7-1.7"/></svg>
+      <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 14.4A8.4 8.4 0 0 1 9.6 3.8a8.6 8.6 0 1 0 10.6 10.6z"/></svg>
+    </button>
+    <a class="enterbtn" href="https://ii00270.github.io/Bixxvillenode/" target="_blank" rel="noopener">Sign in</a>
+  </div>
+</div>
+
+<div class="room">
+
+  <!-- ============ THE PORTAL ============ -->
+  <section class="portal">
+    <div class="kicker">Land of Geb &middot; Christiansted, St. Croix</div>
+    <h1>The reading room<br>of the <i>network.</i></h1>
+    <p class="standfirst">A working collection of primary sources on pattern, structure, symbol, and how the world was actually built. Assembled because the fourth pillar asks who built the container — and that question has a bibliography.</p>
+    <div class="meta">
+      <span>Holdings <b id="mHold">—</b></span>
+      <span>Wings <b id="mWings">—</b></span>
+      <span>Earliest <b>1684</b></span>
+      <span>Access <b>Members</b></span>
+    </div>
+
+    <div class="gate">
+      <div class="keyhole">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10.5" rx="2"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/></svg>
+      </div>
+      <div class="gt">
+        <h4>The catalogue is open. The volumes are not.</h4>
+        <p>Anyone may walk the room and read the cards — what each work is, when it was written, why it is here. Opening a volume requires member credentials, the same ones that get you into the operating system.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WINGS ============ -->
+  <nav class="wings" id="wings" aria-label="Collection wings"></nav>
+
+  <!-- ============ SHELF ============ -->
+  <div class="shelfview" id="shelfview">
+    <div class="shelfhead">
+      <h2 id="shelfTitle">All holdings</h2>
+      <div class="count" id="shelfCount"></div>
+    </div>
+    <div class="shelf" id="shelf"></div>
+  </div>
+
+  <!-- ============ DETAIL ============ -->
+  <div class="detail" id="detail">
+    <button class="dback" id="dback">&larr;&nbsp; Back to the shelf</button>
+    <div class="dgrid">
+      <div>
+        <div class="dobject">
+          <div class="halo" aria-hidden="true"></div>
+          <div id="dcover"></div>
+        </div>
+        <div class="dcaption" id="dcaption"></div>
+      </div>
+      <div>
+        <h2 class="dtitle" id="dtitle"></h2>
+        <div class="dauthor" id="dauthor"></div>
+        <p class="dblurb" id="dblurb"></p>
+        <p class="dbody" id="dbody"></p>
+        <div class="dactions">
+          <a class="openbtn" id="dopen" href="https://ii00270.github.io/Bixxvillenode/" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10.5" rx="2"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/></svg>
+            Sign in to open
+          </a>
+          <a class="sourcebtn" id="dsource" href="#" target="_blank" rel="noopener">View source record &nearr;</a>
+        </div>
+        <dl class="dmeta" id="dmeta"></dl>
+        <div class="note" id="dnote"></div>
+      </div>
+    </div>
+    <div class="also">
+      <h5>Also in this wing</h5>
+      <div class="alsorow" id="also"></div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <b>THE LIBRARY</b><br>
+  Land of Geb, LLC &middot; Christiansted, St. Croix, USVI<br>
+  Holdings are catalogued here and held at their source repositories.<br>
+  <a href="index.html">Return to Bixxville</a>
+</footer>
+
+<script>
+/* ============================================================
+   Catalogue. Each record points at the canonical public source
+   rather than rehosting the file.
+   ============================================================ */
+var WINGS = [
+  {id:'hermetic', name:'Hermetic &amp; Alchemical', hue:'#3E4A3A'},
+  {id:'kabbalah', name:'Kabbalah',                  hue:'#2E3A4C'},
+  {id:'masonic',  name:'Masonic History',           hue:'#4A3A2E'},
+  {id:'science',  name:'Science &amp; Invention',    hue:'#5A3430'},
+  {id:'records',  name:'Records &amp; Sources',      hue:'#33372E'}
+];
+
+var CAT = [
+ {w:'hermetic', acc:'BXV.L.001', t:'The Kybalion', a:'Three Initiates', y:'1908', pg:232,
+  blurb:'Seven principles offered as the operating grammar of everything else in this room.',
+  body:'A short book claiming to distill Hermetic teaching into seven principles — mentalism, correspondence, vibration, polarity, rhythm, cause and effect, gender. Whatever one makes of its provenance, it is the text most often standing behind the phrase "as above, so below," and it is where a great deal of later popular esoteric writing begins.',
+  cls:'Hermeticism', src:'https://archive.org/details/kybalionstudyofh00init',
+  note:'Published anonymously by the Yogi Publication Society, Chicago. Public domain.'},
+
+ {w:'hermetic', acc:'BXV.L.002', t:'The Secret Teachings of All Ages', a:'Manly P. Hall', y:'1928', pg:675,
+  blurb:'The encyclopedia of the symbolic tradition, written by a man of twenty-seven.',
+  body:'Hall\'s attempt to gather the symbolic, Masonic, Qabalistic, Rosicrucian, and alchemical traditions into a single illustrated reference. It is not a careful academic history and does not pretend to be. It is the map most people are actually using when they talk about this material, which is reason enough to read the original rather than the summaries of it.',
+  cls:'Comparative symbolism', src:'https://archive.org/details/secretteachings00hall',
+  note:'Public domain in the United States. Originally issued in a subscriber folio edition.'},
+
+ {w:'hermetic', acc:'BXV.L.003', t:'Azoth, or the Star in the East', a:'A. E. Waite', y:'1893', pg:265,
+  blurb:'Waite reading alchemy as a description of interior process rather than metallurgy.',
+  body:'An argument that the alchemical corpus is a psychological and spiritual literature written in chemical vocabulary. Waite is a useful guide precisely because he is sceptical — he spent his career separating what the sources actually say from what enthusiasts wished they said.',
+  cls:'Alchemy', src:'https://archive.org/details/azothorstarineas00wait',
+  note:'Public domain.'},
+
+ {w:'hermetic', acc:'BXV.L.004', t:'Collectanea Chymica', a:'Eirenaeus Philalethes and others', y:'1684', pg:250,
+  blurb:'The oldest thing in the room. Working alchemical papers, printed in London.',
+  body:'A collection of alchemical treatises gathered and printed in the seventeenth century — the raw material, before anyone had organised it into a tradition. Read alongside Waite it shows how much interpretation sits between a primary source and the story later told about it.',
+  cls:'Alchemy · primary', src:'https://archive.org/details/collectaneachymi00phil',
+  note:'Earliest holding in the collection. Public domain.'},
+
+ {w:'kabbalah', acc:'BXV.L.010', t:'The Holy Kabbalah', a:'A. E. Waite', y:'1929', pg:674,
+  blurb:'A survey of the Jewish esoteric tradition and its passage into Western occultism.',
+  body:'Waite traces the Zohar and its reception, then follows the material as it is absorbed, translated, and frequently distorted by Christian and occult writers. The distortion is the interesting part: it is a case study in how a body of thought changes shape as it crosses a cultural boundary.',
+  cls:'Kabbalah', src:'https://archive.org/details/holykabbalah0000wait',
+  note:'Public domain in the United States.'},
+
+ {w:'kabbalah', acc:'BXV.L.011', t:'The Kabbalah Unveiled', a:'S. L. MacGregor Mathers', y:'1887', pg:386,
+  blurb:'Mathers\' translation of three books of the Zohar, by way of Latin.',
+  body:'The translation that carried Kabbalistic material into the Golden Dawn and from there into most of twentieth-century Western occultism. Mathers worked from Knorr von Rosenroth\'s Latin rather than the Aramaic, which matters: much of what English-speaking occultism believes about Kabbalah arrives through two layers of translation.',
+  cls:'Kabbalah · translation', src:'https://archive.org/details/kabbalahunveiled00math',
+  note:'Public domain.'},
+
+ {w:'masonic', acc:'BXV.L.020', t:'The Constitutions of the Free-Masons', a:'James Anderson', y:'1723', pg:112,
+  blurb:'The founding document of organised Freemasonry, and a lesson in written constitutions.',
+  body:'Anderson\'s Constitutions set out the charges, regulations, and invented history of the first Grand Lodge. It is worth reading structurally rather than devotionally: how a body writes its own origins, fixes its rules, and establishes who may amend them. Any constitution — including a network\'s — faces the same problems.',
+  cls:'Constitutional', src:'https://archive.org/details/the-constitutions-of-the-free-masons',
+  note:'Public domain. Relevant to how The LOG handles amendment by append.'},
+
+ {w:'masonic', acc:'BXV.L.021', t:'History of Freemasonry, Vol. VII', a:'Albert G. Mackey', y:'1906', pg:406,
+  blurb:'The standard nineteenth-century institutional history, written from inside.',
+  body:'Mackey is the reference most later writers argue with. Useful for the same reason any official history is useful — it records what an institution believed about itself at the moment of writing, which is a different and often more revealing thing than what happened.',
+  cls:'Institutional history', src:'https://archive.org/details/historyoffreemas07mack',
+  note:'Public domain.'},
+
+ {w:'masonic', acc:'BXV.L.022', t:'The Master’s Carpet', a:'Edmond Ronayne', y:'1879', pg:417,
+  blurb:'An exposure, written by a former Master of his own lodge.',
+  body:'Ronayne left Freemasonry and published its ritual. Whether one reads it as betrayal or as disclosure, it is a primary account of ceremony and symbol from someone who had performed it — and a case study in what happens when an organisation\'s internal language reaches the outside.',
+  cls:'Ritual · exposure', src:'https://archive.org/details/masterscarpet00rona',
+  note:'Public domain.'},
+
+ {w:'science', acc:'BXV.L.030', t:'Nikola Tesla Papers', a:'Nikola Tesla', y:'1904', pg:18,
+  blurb:'Tesla in his own hand on the transmission of energy without wires.',
+  body:'Primary papers rather than the mythology that has grown around him. Tesla is worth reading directly because the actual engineering arguments — resonance, standing waves, grounded transmission — are more specific and more interesting than the legend, and because he wrote clearly about what he had not yet solved.',
+  cls:'Engineering · primary', src:'https://archive.org/details/nikolateslapapers',
+  note:'Public domain.'},
+
+ {w:'science', acc:'BXV.L.031', t:'The Edison Era, 1876–1892', a:'General Electric', y:'1976', pg:60,
+  blurb:'A corporate history of the years electricity became an industry.',
+  body:'How invention becomes infrastructure: patents, financing, standards wars, and the consolidation that produced General Electric. The technical story is well known; the organisational story — who structured the work, and how — is the one that repeats.',
+  cls:'Industrial history', src:'https://archive.org/search?query=edison+era+general+electric',
+  note:'Published by General Electric. Catalogued as a corporate record.'},
+
+ {w:'science', acc:'BXV.L.032', t:'United States Patents (six)', a:'United States Patent Office', y:'1868–2003', pg:65,
+  blurb:'Six granted patents, read as documents rather than as inventions.',
+  body:'A patent is a peculiar literary form: it must describe a thing precisely enough that a stranger could build it, while claiming exactly as much territory as the office will allow and no more. That is decomposition under legal constraint — the same discipline the network applies to a scope of work.',
+  cls:'Patents · primary', src:'https://patents.google.com/',
+  note:'US patents are public domain. Nos. 79819, 387347, 674427, 1540998, 1962439, 6506148.'},
+
+ {w:'records', acc:'BXV.L.040', t:'Enuma Elish', a:'Babylonian, anonymous', y:'c. 1750 BCE', pg:10,
+  blurb:'The oldest creation account in the room, and a study in how order is claimed.',
+  body:'The Babylonian creation epic, in which the world is made from a defeated body and a city\'s god is elevated over the others. Read for structure rather than devotion: it is a document about who has the right to organise things, written by the party that won.',
+  cls:'Primary text · translation', src:'https://www.sacred-texts.com/ane/enuma.htm',
+  note:'Ancient text. Modern translations vary in status; this record links a public edition.'},
+
+ {w:'records', acc:'BXV.L.041', t:'Revised Organic Act of the Virgin Islands', a:'United States Congress', y:'1954', pg:105,
+  blurb:'The document that defines the ground the network stands on.',
+  body:'The Act that establishes the government of the US Virgin Islands, its legislature, its courts, and the relationship between the territory and the federal government. Anyone operating a company from St. Croix is operating inside this document, and most people who do have never read it.',
+  cls:'Statute', src:'https://www.usvieda.org/sites/default/files/RevOrganicAct_1954.pdf',
+  note:'United States government work. Public domain. Held by USVI EDA.'},
+
+ {w:'records', acc:'BXV.L.042', t:'Bitcoin: A Peer-to-Peer Electronic Cash System', a:'Satoshi Nakamoto', y:'2008', pg:9,
+  blurb:'Nine pages that proposed settlement without an intermediary.',
+  body:'The paper is short, plain, and almost entirely about one problem: how to order events without a trusted party. The network reads it for the same reason it reads Anderson\'s Constitutions — it is a design document about who is allowed to write the ledger, and what happens when nobody is in charge of it.',
+  cls:'Protocol · primary', src:'https://bitcoin.org/bitcoin.pdf',
+  note:'Released under the MIT licence. Freely distributable.'},
+
+ {w:'records', acc:'BXV.L.043', t:'The Greater Key of Solomon', a:'S. L. MacGregor Mathers, trans.', y:'1889', pg:166,
+  blurb:'A grimoire, catalogued here as a document in the history of procedure.',
+  body:'Instructions: exact materials, exact sequence, exact words, and the claim that deviation voids the result. Read as a historical artefact it is a striking early example of procedural writing — a specification in which the ordering of steps is held to be the entire operative content.',
+  cls:'Grimoire · primary', src:'https://archive.org/details/greaterkeyofsolo00math',
+  note:'Public domain. Catalogued for its structure, not its claims.'},
+
+ {w:'records', acc:'BXV.L.044', t:'CIA Reading Room Releases', a:'Central Intelligence Agency', y:'declassified', pg:258,
+  blurb:'Two declassified files, read as government prose rather than as revelation.',
+  body:'Documents released through the CIA\'s public reading room. The value in reading primary declassified material is calibration: it shows what an internal government document actually looks like — hedged, procedural, frequently mundane — against the far more confident version that circulates second-hand.',
+  cls:'Declassified · primary', src:'https://www.cia.gov/readingroom/',
+  note:'United States government work, released under FOIA. Public domain.'}
+];
+
+/* ---------- build ---------- */
+var wingOf = {}; WINGS.forEach(function(w){ wingOf[w.id]=w; });
+var shelf=document.getElementById('shelf'), wingsNav=document.getElementById('wings');
+var shelfView=document.getElementById('shelfview'), detail=document.getElementById('detail');
+var current='all';
+
+document.getElementById('mHold').textContent = CAT.length;
+document.getElementById('mWings').textContent = WINGS.length;
+
+function coverHTML(v, small){
+  var hue = wingOf[v.w] ? wingOf[v.w].hue : '#3A3A3A';
+  return '<div class="cover" style="background:'+hue+'">'
+       +   '<div class="plate">'
+       +     '<div class="pt">'+v.t+'</div>'
+       +     '<div class="pa">'+v.a+'</div>'
+       +   '</div>'
+       +   (small?'':'<div class="acc">'+v.acc+'</div>')
+       + '</div>';
+}
+
+function volHTML(v, small){
+  return '<button class="vol" data-acc="'+v.acc+'">'
+       +   coverHTML(v, small)
+       +   '<div class="vt">'+v.t+'</div>'
+       +   '<div class="va">'+v.a+'</div>'
+       + '</button>';
+}
+
+function renderShelf(wing){
+  current = wing;
+  var list = wing==='all' ? CAT : CAT.filter(function(v){return v.w===wing;});
+  shelf.innerHTML = list.map(function(v){return volHTML(v,false);}).join('');
+  document.getElementById('shelfTitle').innerHTML = wing==='all' ? 'All holdings' : wingOf[wing].name;
+  document.getElementById('shelfCount').textContent = list.length + (list.length===1?' volume':' volumes');
+  wingsNav.querySelectorAll('button').forEach(function(b){
+    b.classList.toggle('on', b.dataset.wing===wing);
+  });
+}
+
+wingsNav.innerHTML = '<button data-wing="all">All holdings</button>'
+  + WINGS.map(function(w){return '<button data-wing="'+w.id+'">'+w.name+'</button>';}).join('');
+wingsNav.addEventListener('click', function(e){
+  var b=e.target.closest('button'); if(!b) return;
+  showShelf(); renderShelf(b.dataset.wing);
+});
+
+function showShelf(){
+  detail.classList.remove('on'); shelfView.classList.remove('off');
+  wingsNav.style.display='flex';
+}
+function openVol(acc){
+  var v = CAT.filter(function(x){return x.acc===acc;})[0]; if(!v) return;
+  document.getElementById('dcover').innerHTML = coverHTML(v,false);
+  document.getElementById('dcaption').textContent = v.acc + ' · ' + (wingOf[v.w]?wingOf[v.w].name.replace(/&amp;/g,'&'):'');
+  document.getElementById('dtitle').textContent = v.t;
+  document.getElementById('dauthor').innerHTML = 'by <b>'+v.a+'</b>';
+  document.getElementById('dblurb').textContent = v.blurb;
+  document.getElementById('dbody').textContent = v.body;
+  document.getElementById('dsource').href = v.src;
+  document.getElementById('dnote').innerHTML = '<b>Catalogue note.</b> ' + v.note;
+  document.getElementById('dmeta').innerHTML =
+      row('Accession', v.acc) + row('Classification', v.cls)
+    + row('Written', v.y)     + row('Extent', v.pg + ' pages')
+    + row('Wing', wingOf[v.w]?wingOf[v.w].name:'—')
+    + row('Access', 'Members only');
+  var others = CAT.filter(function(x){return x.w===v.w && x.acc!==v.acc;}).slice(0,6);
+  document.getElementById('also').innerHTML = others.map(function(x){return volHTML(x,true);}).join('');
+  shelfView.classList.add('off'); detail.classList.add('on');
+  wingsNav.style.display='none';
+  window.scrollTo({top:0, behavior:'instant'});
+}
+function row(k,val){ return '<div class="mrow"><dt>'+k+'</dt><dd>'+val+'</dd></div>'; }
+
+document.addEventListener('click', function(e){
+  var b = e.target.closest('.vol'); if(b) openVol(b.dataset.acc);
+});
+document.getElementById('dback').addEventListener('click', function(){
+  showShelf(); renderShelf(current);
+});
+
+/* theme */
+(function(){
+  var root=document.documentElement, btn=document.getElementById('themeTog');
+  function cur(){var s=root.getAttribute('data-theme'); if(s) return s;
+    return (window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';}
+  btn.addEventListener('click',function(){
+    var n = cur()==='dark'?'light':'dark';
+    root.setAttribute('data-theme',n);
+    try{localStorage.setItem('bx-theme',n);}catch(e){}
+  });
+})();
+
+renderShelf('all');
+</script>
+</body>
+</html>
