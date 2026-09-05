@@ -203,7 +203,7 @@
     display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
   }
   .acc{
-    position:absolute; z-index:1; bottom:7px; right:9px;
+    position:absolute; z-index:1; bottom:7px; right:9px; max-width:70%; text-align:right;
     font-family:var(--sans); font-size:6.5px; letter-spacing:.11em;
     color:rgba(255,255,255,.62);
   }
@@ -554,6 +554,7 @@
    ============================================================ */
 var WINGS = [
  {id:'canon', name:'The Canon', hue:'#1F3A1A'},
+ {id:'language', name:'The Language', hue:'#1E3A4A'},
  {id:'hermetic', name:'Hermetic &amp; Alchemical', hue:'#3E4A3A'},
  {id:'kabbalah', name:'Kabbalah', hue:'#2E3A4C'},
  {id:'masonic', name:'Masonic &amp; Fraternal', hue:'#4A3A2E'},
@@ -564,6 +565,18 @@ var WINGS = [
 ];
 
 var CAT = [
+ {w:'language', acc:'BXV-LANG-000', t:'The Language of the Network', a:'Land of Geb, LLC', y:'2026', pg:29,
+  blurb:'The unedited baseline. What the historical record actually says, before anyone decides anything.',
+  body:'Enters into canon the historical and linguistic record of Negerhollands — the Dutch-lexicon creole spoken on St. Thomas, St. John and St. Croix from roughly 1700 until the late twentieth century, and now extinct. It records the sources, the recorded names, the phonology and grammar as attested, and it deliberately preserves the inconsistencies rather than resolving them. Nothing here is adopted, normalised, corrected or coined. Every later decision about the network language has to trace back to an unmodified baseline, and this is that baseline.',
+  cls:'Foundational reference · append-only', src:'', url:'docs/bxv-lang-000-language-of-the-network.pdf',
+  note:'Open to all. Source of record: van Rossem &amp; van der Voort, Die Creol taal, Amsterdam University Press, 1996. A language is not copyrightable — the grammar, phonology and historical vocabulary are facts. The source book\'s editorial apparatus is not reproduced.'},
+
+ {w:'language', acc:'BXV-LANG-001', t:'Di Buki van LOGG', a:'Land of Geb, LLC', y:'2026', pg:32,
+  blurb:'The first book of the Language of Geb\'s Guild. Letters, words, and how a sentence is built.',
+  body:'The learner\'s book for Plain LOGG — the everyday register the operating system speaks and messages are written in. Verbs never change shape. Nouns have no gender. There is one word for "the." Every letter has one sound and every sound has one letter, so a reader who can say the letters can read any word on sight. Formal LOGG, used for the constitution and for ceremony, is five spelling rules further on; each word box shows the formal spelling alongside so the pattern builds as you read.',
+  cls:'Learner\'s book · Plain LOGG', src:'', url:'docs/bxv-lang-001-di-buki-van-logg.pdf',
+  note:'Open to all. Companion to BXV-LANG-000.'},
+
  {w:'canon', acc:'BXV.C.001', t:'The LOG', a:'Land of Geb, LLC', y:'Rung 1', pg:10,
   blurb:'The constitution of the network. What does not change between cycles.',
   body:'Ten articles governing identity, the unit system, tiers, standing, settlement, governance, treasury and amendment — plus The Known, the ten guarantees no mechanism of the network may abridge. Where the runtime and The LOG conflict, The LOG governs. Amended only by append.',
