@@ -294,6 +294,43 @@
   }
   .note.restricted{border-left-color:var(--seal); color:var(--ink-2)}
   .note.restricted b{color:var(--seal)}
+  /* ---------- the door: first state when not signed in ---------- */
+  .entrance{
+    display:none; min-height:calc(100vh - 61px);
+    align-items:center; justify-content:center; padding:48px 26px 80px;
+  }
+  .entrance.on{display:flex}
+  .doorcard{width:100%; max-width:440px; text-align:left}
+  .doorcard .crest{
+    width:52px;height:52px;border-radius:50%;border:1.5px solid var(--brass);
+    display:flex;align-items:center;justify-content:center;color:var(--brass);margin-bottom:28px;
+  }
+  .doorcard .crest svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.6}
+  .doorcard .dk{
+    font-family:var(--sans); font-size:10px; letter-spacing:.26em; text-transform:uppercase;
+    color:var(--seal); font-weight:600; margin-bottom:16px;
+  }
+  .doorcard h1{
+    font-family:var(--serif); font-weight:400; color:var(--ink); margin:0 0 14px;
+    font-size:clamp(34px,6vw,52px); line-height:1.04; letter-spacing:-.02em;
+  }
+  .doorcard h1 i{font-style:italic; color:var(--ink-3)}
+  .doorcard .dlede{
+    font-family:var(--serif); font-size:17px; line-height:1.55; color:var(--ink-2);
+    margin:0 0 30px; max-width:46ch;
+  }
+  .doorcard .dstat{
+    display:flex; gap:26px; flex-wrap:wrap; margin-bottom:30px;
+    font-family:var(--sans); font-size:10.5px; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--ink-3);
+  }
+  .doorcard .dstat b{color:var(--ink); font-weight:600}
+  .doorfoot{
+    margin-top:22px; padding-top:18px; border-top:1px solid var(--rule);
+    font-size:12.5px; line-height:1.6; color:var(--ink-3);
+  }
+  .doorfoot a{color:var(--seal); text-decoration:none; border-bottom:1px solid rgba(168,51,42,.35)}
+
   /* ---------- reading-desk sign in ---------- */
   .deskwrap{
     position:fixed; inset:0; z-index:80; background:rgba(25,23,18,.55);
@@ -391,7 +428,32 @@
   </div>
 </div>
 
-<div class="room">
+<section class="entrance" id="entrance">
+  <div class="doorcard">
+    <div class="crest">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10.5" rx="2"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/></svg>
+    </div>
+    <div class="dk">Land of Geb &middot; Christiansted, St. Croix</div>
+    <h1>The reading room<br>is <i>closed to the street.</i></h1>
+    <p class="dlede">Sixty-six holdings on pattern, structure, symbol, and how the world was actually built — alongside the network's own canon. Entry is by member credentials.</p>
+    <div class="dstat">
+      <span>Holdings <b>66</b></span>
+      <span>Wings <b>8</b></span>
+      <span>Earliest <b>1684</b></span>
+    </div>
+    <form id="doorForm">
+      <div class="fld"><label for="eEmail">Email</label><input id="eEmail" type="email" autocomplete="email" required></div>
+      <div class="fld"><label for="ePass">Password</label><input id="ePass" type="password" autocomplete="current-password" required></div>
+      <button class="deskbtn" id="doorGo" type="submit">Unlock the reading room</button>
+      <div class="deskmsg" id="doorMsg"></div>
+    </form>
+    <div class="doorfoot">
+      Use the same credentials that open the operating system. Not a member yet? Entry runs through the <a href="realskills.html#exam">entrance exam</a>.
+    </div>
+  </div>
+</section>
+
+<div class="room" id="room" style="display:none">
 
   <!-- ============ THE PORTAL ============ -->
   <section class="portal">
@@ -1029,15 +1091,23 @@ var deskwrap=document.getElementById('deskwrap'), deskMsg=document.getElementByI
     who=document.getElementById('who'), whoEmail=document.getElementById('whoEmail'),
     signInBtn=document.getElementById('signInBtn');
 
+var entrance = document.getElementById('entrance');
+var room = document.getElementById('room');
+
 function setMember(u){
   member = u;
   if(u){
     who.classList.add('on'); whoEmail.textContent = u.email || 'member';
     signInBtn.style.display='none';
+    entrance.classList.remove('on');
+    room.style.display='';
   } else {
-    who.classList.remove('on'); signInBtn.style.display='';
+    who.classList.remove('on'); signInBtn.style.display='none';
+    entrance.classList.add('on');
+    room.style.display='none';
+    showShelf(); renderShelf('all');
   }
-  if(detail.classList.contains('on') && lastAcc) openVol(lastAcc);
+  if(member && detail.classList.contains('on') && lastAcc) openVol(lastAcc);
 }
 function openDesk(){ deskwrap.classList.add('on'); deskMsg.textContent=''; setTimeout(function(){document.getElementById('dEmail').focus();},60); }
 function closeDesk(){ deskwrap.classList.remove('on'); }
@@ -1047,20 +1117,29 @@ document.getElementById('deskClose').addEventListener('click', closeDesk);
 deskwrap.addEventListener('click', function(e){ if(e.target===deskwrap) closeDesk(); });
 document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeDesk(); });
 
-document.getElementById('deskForm').addEventListener('submit', async function(e){
-  e.preventDefault();
-  if(!sb){ deskMsg.textContent='Sign-in is unavailable right now. Try again shortly.'; return; }
-  var btn=document.getElementById('deskGo');
-  btn.disabled=true; deskMsg.textContent='Checking credentials…';
+async function attemptSignIn(emailEl, passEl, btnEl, msgEl, onDone){
+  if(!sb){ msgEl.textContent='Sign-in is unavailable right now. Try again shortly.'; return; }
+  btnEl.disabled=true; msgEl.textContent='Checking credentials\u2026';
   try{
     var res = await sb.auth.signInWithPassword({
-      email: document.getElementById('dEmail').value.trim(),
-      password: document.getElementById('dPass').value
+      email: emailEl.value.trim(), password: passEl.value
     });
-    if(res.error){ deskMsg.textContent = res.error.message || 'That did not work.'; }
-    else { setMember(res.data.user); closeDesk(); }
-  }catch(err){ deskMsg.textContent='Could not reach the reading room. Check your connection.'; }
-  btn.disabled=false;
+    if(res.error){ msgEl.textContent = res.error.message || 'Those credentials were not recognised.'; }
+    else { msgEl.textContent=''; passEl.value=''; setMember(res.data.user); if(onDone) onDone(); }
+  }catch(err){ msgEl.textContent='Could not reach the reading room. Check your connection.'; }
+  btnEl.disabled=false;
+}
+
+document.getElementById('doorForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  attemptSignIn(document.getElementById('eEmail'), document.getElementById('ePass'),
+                document.getElementById('doorGo'), document.getElementById('doorMsg'));
+});
+
+document.getElementById('deskForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  attemptSignIn(document.getElementById('dEmail'), document.getElementById('dPass'),
+                document.getElementById('deskGo'), deskMsg, closeDesk);
 });
 
 document.getElementById('signOut').addEventListener('click', async function(){
@@ -1068,13 +1147,15 @@ document.getElementById('signOut').addEventListener('click', async function(){
   setMember(null);
 });
 
-/* restore an existing session on load */
+/* the door is shut until a session proves otherwise */
 (async function(){
-  if(!sb) return;
+  if(!sb){ setMember(null); return; }
   try{
     var r = await sb.auth.getSession();
-    if(r && r.data && r.data.session) setMember(r.data.session.user);
-  }catch(e){}
+    if(r && r.data && r.data.session){ setMember(r.data.session.user); }
+    else { setMember(null); }
+  }catch(e){ setMember(null); }
+  setTimeout(function(){ document.getElementById('eEmail').focus(); }, 80);
 })();
 
 /* open a held volume: signed URL, valid for two minutes */
