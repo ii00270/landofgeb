@@ -1,5 +1,6 @@
-/* Shared tokens: dark values match tokens.css (landofgeb.net). Light values were aligned to the
-   landofgeb.net light theme on 23 Oct 2026 (review draft); see Brand-Review 02-TOKENS.md.
+/* Shared tokens with landofgeb.net and the OS (tokens.css): same neutrals, the same Land of Geb
+   neon, the same typefaces (Anton, IBM Plex Mono). Restyled 23 Oct 2026 (review draft).
+   The token names below are older than the restyle: --green is now the ACCENT (ink), not green.
    ==========================================================================
    BIXXVILLE — shared design system
    Land of Geb, LLC · Christiansted, St. Croix · USVI
@@ -20,19 +21,19 @@
   --soft:#CDCFD3;           /* body text */
   --grey:#A6ADB4;           /* muted, labels, captions */
 
-  /* accents */
-  --green:#8CF060;
+  /* accents: the Land of Geb look is ink plus the neon gradient */
+  --green:#F4F5F7;
   --orange:#F45E26;
   --gold:#AA8C4E;
-  --rail:#2C482A;
+  --rail:#262626;
 
   /* derived — flip with the theme */
-  --on-green:#08110C;                     /* text sitting on a green fill */
-  --green-tint:rgba(140,240,96,.04);
-  --green-tint-2:rgba(140,240,96,.06);
-  --green-edge:rgba(140,240,96,.40);
-  --green-edge-soft:rgba(140,240,96,.20);
-  --green-edge-strong:rgba(140,240,96,.55);
+  --on-green:#0A0B0C;                     /* text sitting on an accent fill */
+  --green-tint:rgba(255,45,149,.06);
+  --green-tint-2:rgba(255,45,149,.09);
+  --green-edge:rgba(244,245,247,.40);
+  --green-edge-soft:rgba(244,245,247,.20);
+  --green-edge-strong:#F4F5F7;
   --gold-edge:rgba(170,140,78,.40);
   --line:rgba(244,245,247,.12);           /* visible divider */
   --line2:rgba(244,245,247,.07);          /* faint divider */
@@ -44,7 +45,9 @@
   --sun:block;                            /* which toggle icon shows */
   --moon:none;
 
-  --mono:'Poppins',sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+  --display:'Anton','Impact','Arial Narrow',sans-serif;
+  --neon:linear-gradient(90deg,#FFEA00 0%,#FF7A1A 50%,#FF2D95 100%);
   --nav-h:64px;
 }
 
@@ -59,17 +62,17 @@
     --soft:#1C1C1C;
     --grey:#5A5A5A;
 
-    --green:#2A7314;
+    --green:#0A0A0A;
     --orange:#C0411A;
     --gold:#7D6428;
-    --rail:#C7D3C2;
+    --rail:#DCDCD8;
 
-    --on-green:#FFFFFF;
-    --green-tint:rgba(42,115,20,.05);
-    --green-tint-2:rgba(42,115,20,.09);
-    --green-edge:rgba(42,115,20,.34);
-    --green-edge-soft:rgba(42,115,20,.17);
-    --green-edge-strong:rgba(42,115,20,.45);
+    --on-green:#F2F2F0;
+    --green-tint:rgba(255,45,149,.05);
+    --green-tint-2:rgba(255,45,149,.08);
+    --green-edge:rgba(10,10,10,.45);
+    --green-edge-soft:rgba(10,10,10,.18);
+    --green-edge-strong:#0A0A0A;
     --gold-edge:rgba(125,100,40,.38);
     --line:rgba(10,10,10,.14);
     --line2:rgba(10,10,10,.08);
@@ -93,17 +96,17 @@
   --soft:#1C1C1C;
   --grey:#5A5A5A;
 
-  --green:#2A7314;
+  --green:#0A0A0A;
   --orange:#C0411A;
   --gold:#7D6428;
-  --rail:#C7D3C2;
+  --rail:#DCDCD8;
 
-  --on-green:#FFFFFF;
-  --green-tint:rgba(42,115,20,.05);
-  --green-tint-2:rgba(42,115,20,.09);
-  --green-edge:rgba(42,115,20,.34);
-  --green-edge-soft:rgba(42,115,20,.17);
-  --green-edge-strong:rgba(42,115,20,.45);
+  --on-green:#F2F2F0;
+  --green-tint:rgba(255,45,149,.05);
+  --green-tint-2:rgba(255,45,149,.08);
+  --green-edge:rgba(10,10,10,.45);
+  --green-edge-soft:rgba(10,10,10,.18);
+  --green-edge-strong:#0A0A0A;
   --gold-edge:rgba(125,100,40,.38);
   --line:rgba(10,10,10,.14);
   --line2:rgba(10,10,10,.08);
@@ -371,6 +374,63 @@ footer .ftitle{color:var(--white); font-size:11px; letter-spacing:.2em; text-tra
 .themetog .i-sun{display:var(--sun)}
 .themetog .i-moon{display:var(--moon)}
 
+/* ══ The Land of Geb / OS look ═══════════════════════════════════════════
+   Same type, neon and square edges as landofgeb.net and the OS. */
+body{font-family:var(--mono); font-size:15px; line-height:1.6}
+::selection{background:#FF2D95; color:#0A0A0A}
+h1,h2{font-family:var(--display); font-weight:400; text-transform:uppercase; letter-spacing:0; line-height:.9}
+h1{font-size:clamp(52px,10.5vw,124px)}
+h2{font-size:clamp(40px,7vw,84px)}
+h3{font-family:var(--mono); font-weight:600; letter-spacing:-.01em}
+.g{background:var(--neon); -webkit-background-clip:text; background-clip:text; color:transparent}
+h3 .g,p .g,.body .g,.lead .g{background:none; color:var(--white); text-decoration:underline; text-decoration-color:#FF2D95; text-decoration-thickness:3px; -webkit-text-fill-color:currentColor}
+.eyebrow{font-family:var(--mono); font-size:12px; letter-spacing:.14em}
+.eyebrow .n{color:var(--white); font-weight:600}
+.lead{font-size:clamp(15px,3.9vw,18px)}
+.body{font-size:clamp(14px,3.6vw,15.5px)}
+nav{border-bottom:1px solid var(--line)}
+nav::after{content:''; position:absolute; left:0; right:0; bottom:-1px; height:2px; background:var(--neon)}
+.brand b{font-family:var(--display); font-weight:400; font-size:20px; letter-spacing:.02em; text-transform:uppercase}
+.glyph polyline{stroke:#FF2D95}
+.navlinks a{font-family:var(--mono); font-size:12px; letter-spacing:.12em; text-transform:uppercase; position:relative; padding:4px 0}
+.navlinks a::after{content:''; position:absolute; left:0; right:100%; bottom:0; height:2px; background:var(--neon); transition:right .3s}
+.navlinks a:hover::after,.navlinks a.on::after{right:0}
+.navlinks a.on{color:var(--white)}
+.pill{border-radius:0; background:var(--white); color:var(--black); border:1px solid var(--white); font-family:var(--mono); font-size:12px; font-weight:500; letter-spacing:.12em; text-transform:uppercase; padding:12px 16px}
+.pill:hover{background:var(--white); color:var(--black); box-shadow:3px 3px 0 #FF2D95,6px 6px 0 #FFEA00}
+.themetog{width:44px; height:44px; color:var(--white); border-color:var(--line)}
+.themetog:hover{color:var(--white); border-color:var(--white)}
+.themetog:focus-visible{outline-color:#FF2D95}
+.menu a{font-family:var(--display); font-weight:400; text-transform:uppercase; letter-spacing:0; font-size:clamp(36px,9vw,72px); line-height:1.05}
+.menu a:hover,.menu a.on{background:var(--neon); -webkit-background-clip:text; background-clip:text; color:transparent}
+.menu .mfoot span{color:var(--white)}
+.spine span{color:var(--white)}
+.card,.stat,.tblwrap,.note,.formula,.ctabox{border-radius:0}
+.card{position:relative; overflow:hidden}
+.card .ck{font-size:12px; letter-spacing:.14em; color:var(--grey)}
+.card h3{font-size:clamp(18px,3vw,22px)}
+a.card::before{content:''; position:absolute; left:0; right:0; top:0; height:3px; background:var(--neon); opacity:0; transition:opacity .25s}
+a.card:hover{border-color:var(--white); background:var(--panel)}
+a.card:hover::before{opacity:1}
+a.card .arr{color:var(--white); font-family:var(--mono); font-size:12px; letter-spacing:.12em; text-transform:uppercase}
+.stat .sv{color:var(--white)}
+.biglink{border-radius:0; background:var(--white); color:var(--black); font-family:var(--mono); font-size:12.5px; font-weight:500; letter-spacing:.12em; text-transform:uppercase; transition:box-shadow .25s}
+.biglink:hover{filter:none; box-shadow:4px 4px 0 #FF2D95,8px 8px 0 #FFEA00}
+.biglink.ghost{border:1px solid var(--white)}
+.biglink.ghost:hover{color:var(--white); border-color:var(--white)}
+.ctabox{background:var(--panel); border-color:var(--line)}
+.serif,.quote{color:var(--soft)}
+.quote{border-left-color:#FF2D95}
+footer{border-top:none; position:relative}
+footer::before{content:''; position:absolute; left:0; right:0; top:0; height:4px; background:var(--neon)}
+footer b{font-family:var(--mono)}
+footer .sx{color:var(--white)}
+footer .fnav a:hover{color:var(--white); text-decoration:underline; text-decoration-color:#FF2D95}
+.note.good{border-left-color:#FF2D95}
+.tag.live{color:var(--white); border-color:var(--white); background:transparent}
+th{font-size:11px}
+td.num{color:var(--white)}
+
 /* ── print: always on white, whatever the theme ── */
 @media print{
   :root,:root[data-theme="dark"],:root:not([data-theme="light"]){
@@ -379,6 +439,8 @@ footer .ftitle{color:var(--white); font-size:11px; letter-spacing:.2em; text-tra
   }
   html,body{background:#FFFFFF !important;color:#000000 !important}
   nav,.menu,.themetog,.ham,.spine{display:none !important}
+  .g,.menu a{background:none !important;-webkit-text-fill-color:#000 !important;color:#000 !important}
+  footer::before,nav::after,a.card::before{display:none !important}
   *,*::before,*::after{box-shadow:none !important;text-shadow:none !important;animation:none !important;transition:none !important}
   .rv{opacity:1 !important;transform:none !important}
   a[href^="http"]::after{content:" (" attr(href) ")";font-size:.85em;word-break:break-all}
