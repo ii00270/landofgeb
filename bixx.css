@@ -1,4 +1,6 @@
-/* ==========================================================================
+/* Shared tokens: dark values match tokens.css (landofgeb.net). Light values were aligned to the
+   landofgeb.net light theme on 23 Oct 2026 (review draft); see Brand-Review 02-TOKENS.md.
+   ==========================================================================
    BIXXVILLE — shared design system
    Land of Geb, LLC · Christiansted, St. Croix · USVI
 
@@ -49,16 +51,16 @@
 /* ---- light: automatic for a light-preferring OS, unless dark was chosen ---- */
 @media (prefers-color-scheme: light){
   :root:not([data-theme="dark"]){
-    --black:#FAFBF8;
+    --black:#F2F2F0;
     --panel:#FFFFFF;
-    --panel2:#F2F5EF;
+    --panel2:#FAFAF8;
 
-    --white:#0D1110;
-    --soft:#39423E;
-    --grey:#697370;
+    --white:#0A0A0A;
+    --soft:#1C1C1C;
+    --grey:#5A5A5A;
 
     --green:#2A7314;
-    --orange:#C4431A;
+    --orange:#C0411A;
     --gold:#7D6428;
     --rail:#C7D3C2;
 
@@ -69,13 +71,13 @@
     --green-edge-soft:rgba(42,115,20,.17);
     --green-edge-strong:rgba(42,115,20,.45);
     --gold-edge:rgba(125,100,40,.38);
-    --line:rgba(13,17,16,.14);
-    --line2:rgba(13,17,16,.08);
-    --line3:rgba(13,17,16,.025);
-    --field:rgba(13,17,16,.20);
-    --nav-bg:rgba(250,251,248,.90);
-    --menu-bg:rgba(250,251,248,.98);
-    --card-shadow:0 1px 2px rgba(13,17,16,.05);
+    --line:rgba(10,10,10,.14);
+    --line2:rgba(10,10,10,.08);
+    --line3:rgba(10,10,10,.025);
+    --field:rgba(10,10,10,.20);
+    --nav-bg:rgba(242,242,240,.92);
+    --menu-bg:rgba(242,242,240,.98);
+    --card-shadow:0 1px 2px rgba(10,10,10,.05);
     --sun:none;
     --moon:block;
   }
@@ -83,16 +85,16 @@
 
 /* ---- light: chosen explicitly ---- */
 :root[data-theme="light"]{
-  --black:#FAFBF8;
+  --black:#F2F2F0;
   --panel:#FFFFFF;
-  --panel2:#F2F5EF;
+  --panel2:#FAFAF8;
 
-  --white:#0D1110;
-  --soft:#39423E;
-  --grey:#697370;
+  --white:#0A0A0A;
+  --soft:#1C1C1C;
+  --grey:#5A5A5A;
 
   --green:#2A7314;
-  --orange:#C4431A;
+  --orange:#C0411A;
   --gold:#7D6428;
   --rail:#C7D3C2;
 
@@ -103,13 +105,13 @@
   --green-edge-soft:rgba(42,115,20,.17);
   --green-edge-strong:rgba(42,115,20,.45);
   --gold-edge:rgba(125,100,40,.38);
-  --line:rgba(13,17,16,.14);
-  --line2:rgba(13,17,16,.08);
-  --line3:rgba(13,17,16,.025);
-  --field:rgba(13,17,16,.20);
-  --nav-bg:rgba(250,251,248,.90);
-  --menu-bg:rgba(250,251,248,.98);
-  --card-shadow:0 1px 2px rgba(13,17,16,.05);
+  --line:rgba(10,10,10,.14);
+  --line2:rgba(10,10,10,.08);
+  --line3:rgba(10,10,10,.025);
+  --field:rgba(10,10,10,.20);
+  --nav-bg:rgba(242,242,240,.92);
+  --menu-bg:rgba(242,242,240,.98);
+  --card-shadow:0 1px 2px rgba(10,10,10,.05);
   --sun:none;
   --moon:block;
 }
@@ -368,3 +370,17 @@ footer .ftitle{color:var(--white); font-size:11px; letter-spacing:.2em; text-tra
   stroke-width:1.9; stroke-linecap:round; stroke-linejoin:round}
 .themetog .i-sun{display:var(--sun)}
 .themetog .i-moon{display:var(--moon)}
+
+/* ── print: always on white, whatever the theme ── */
+@media print{
+  :root,:root[data-theme="dark"],:root:not([data-theme="light"]){
+    --black:#FFFFFF; --panel:#FFFFFF; --panel2:#FFFFFF; --white:#000000; --soft:#000000; --grey:#333333;
+    --green:#1E5A0E; --orange:#9A3412; --gold:#5C4A1E; --line:rgba(0,0,0,.25); --line2:rgba(0,0,0,.15);
+  }
+  html,body{background:#FFFFFF !important;color:#000000 !important}
+  nav,.menu,.themetog,.ham,.spine{display:none !important}
+  *,*::before,*::after{box-shadow:none !important;text-shadow:none !important;animation:none !important;transition:none !important}
+  .rv{opacity:1 !important;transform:none !important}
+  a[href^="http"]::after{content:" (" attr(href) ")";font-size:.85em;word-break:break-all}
+  .card,.ctabox,section{break-inside:avoid}
+}
