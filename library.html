@@ -8,7 +8,7 @@
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400&family=Anton&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>(function(){try{var t=localStorage.getItem('bx-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}})();</script>
 <style>
@@ -17,39 +17,42 @@
      Warm paper, generated series covers, catalogue metadata.
      ============================================================ */
   :root{
-    --paper:#F2EEE4;
-    --paper-2:#FBF9F4;
-    --shelf:#E7E1D3;
-    --ink:#191712;
-    --ink-2:#4A443A;
-    --ink-3:#8A8272;
-    --rule:#D8D0BE;
-    --rule-2:#EAE4D6;
-    --seal:#A8332A;
-    --brass:#9A7B37;
+    /* shared tokens (landofgeb.net, bixxville.xyz, the OS); Newsreader stays for the books */
+    --paper:#F2F2F0;
+    --paper-2:#FFFFFF;
+    --shelf:#FAFAF8;
+    --ink:#0A0A0A;
+    --ink-2:#1C1C1C;
+    --ink-3:#5A5A5A;
+    --rule:#DCDCD8;
+    --rule-2:#E4E4E4;
+    --seal:#C0411A;
+    --brass:#7D6428;
     --green:#2A7314;
     --lift:0 1px 2px rgba(25,23,18,.06), 0 8px 24px rgba(25,23,18,.08);
     --lift-2:0 2px 4px rgba(25,23,18,.08), 0 18px 44px rgba(25,23,18,.14);
     --serif:'Newsreader',Georgia,'Times New Roman',serif;
-    --sans:'Poppins',system-ui,sans-serif;
+    --sans:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+    --display:'Anton','Impact','Arial Narrow',sans-serif;
+    --neon:linear-gradient(90deg,#FFEA00 0%,#FF7A1A 50%,#FF2D95 100%);
     --sun:block; --moon:none;
   }
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
-      --paper:#15130E; --paper-2:#1D1A14; --shelf:#221E17;
-      --ink:#F3EFE4; --ink-2:#C3BCAB; --ink-3:#8B8474;
-      --rule:#332E24; --rule-2:#262119;
-      --seal:#D4685C; --brass:#C9A455; --green:#8CF060;
+      --paper:#0A0B0C; --paper-2:#111316; --shelf:#0D0F11;
+      --ink:#F4F5F7; --ink-2:#CDCFD3; --ink-3:#A6ADB4;
+      --rule:rgba(244,245,247,.14); --rule-2:rgba(244,245,247,.07);
+      --seal:#F45E26; --brass:#AA8C4E; --green:#8CF060;
       --lift:0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.45);
       --lift-2:0 2px 6px rgba(0,0,0,.5), 0 20px 48px rgba(0,0,0,.6);
       --sun:none; --moon:block;
     }
   }
   :root[data-theme="dark"]{
-    --paper:#15130E; --paper-2:#1D1A14; --shelf:#221E17;
-    --ink:#F3EFE4; --ink-2:#C3BCAB; --ink-3:#8B8474;
-    --rule:#332E24; --rule-2:#262119;
-    --seal:#D4685C; --brass:#C9A455; --green:#8CF060;
+    --paper:#0A0B0C; --paper-2:#111316; --shelf:#0D0F11;
+    --ink:#F4F5F7; --ink-2:#CDCFD3; --ink-3:#A6ADB4;
+    --rule:rgba(244,245,247,.14); --rule-2:rgba(244,245,247,.07);
+    --seal:#F45E26; --brass:#AA8C4E; --green:#8CF060;
     --lift:0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.45);
     --lift-2:0 2px 6px rgba(0,0,0,.5), 0 20px 48px rgba(0,0,0,.6);
     --sun:none; --moon:block;
@@ -63,6 +66,7 @@
   img{max-width:100%}
 
   /* ---------- masthead ---------- */
+  .mast::after{content:''; position:absolute; left:0; right:0; bottom:-1px; height:2px; background:var(--neon)}
   .mast{
     position:sticky; top:0; z-index:40; background:var(--paper);
     border-bottom:1px solid var(--rule);
@@ -75,17 +79,18 @@
   }
   .mast .back:hover{color:var(--seal)}
   .mast .wordmark{
-    font-family:var(--serif); font-size:16px; font-weight:500; color:var(--ink);
+    font-family:var(--display); font-size:20px; font-weight:400; color:var(--ink); text-transform:uppercase;
     letter-spacing:.02em; white-space:nowrap;
   }
-  .mast .wordmark i{font-style:italic; color:var(--ink-3)}
+  .mast .wordmark i{font-style:normal; color:var(--ink-3)}
   .mast .right{display:flex; align-items:center; gap:12px}
   .tog{
-    width:32px;height:32px;border-radius:50%;border:1px solid var(--rule);
+    width:44px;height:44px;border-radius:50%;border:1px solid var(--rule);
     background:transparent;color:var(--ink-2);cursor:pointer;flex-shrink:0;
     display:flex;align-items:center;justify-content:center;padding:0;
   }
-  .tog:hover{color:var(--seal);border-color:var(--seal)}
+  .tog:hover{color:var(--ink);border-color:var(--ink)}
+  .tog:focus-visible{outline:2px solid #FF2D95;outline-offset:2px}
   .tog svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.9;
     stroke-linecap:round;stroke-linejoin:round}
   .tog .i-sun{display:var(--sun)} .tog .i-moon{display:var(--moon)}
@@ -102,12 +107,12 @@
 
   .portal{padding:74px 0 46px; border-bottom:1px solid var(--rule); position:relative}
   .kicker{
-    font-family:var(--sans); font-size:10.5px; letter-spacing:.28em;
+    font-family:var(--sans); font-size:12px; letter-spacing:.2em;
     text-transform:uppercase; color:var(--seal); font-weight:600; margin-bottom:20px;
   }
   .portal h1{
-    font-family:var(--serif); font-weight:400; color:var(--ink);
-    font-size:clamp(42px,8vw,86px); line-height:1.02; letter-spacing:-.02em;
+    font-family:var(--display); font-weight:400; color:var(--ink); text-transform:uppercase;
+    font-size:clamp(46px,9vw,112px); line-height:.92; letter-spacing:0;
     margin:0 0 22px; text-wrap:balance;
   }
   .portal h1 i{font-style:italic; color:var(--ink-3)}
