@@ -4,12 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>The Library — Bixxville</title>
-<meta name="description" content="The Bixxville reading room. A catalogue of primary sources on pattern, structure, and how the world was built. Entry by member credentials.">
+<meta name="description" content="The Bixxville reading room. A catalogue of primary sources on pattern, structure, and how the world was built. Open to everyone.">
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400&family=Anton&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>(function(){try{var t=localStorage.getItem('bx-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}})();</script>
 <style>
   /* ============================================================
@@ -336,7 +335,7 @@
   }
   .doorfoot a{color:var(--seal); text-decoration:none; border-bottom:1px solid rgba(168,51,42,.35)}
 
-  /* ---------- reading-desk sign in ---------- */
+  /* ---------- reading desk (unused since 25 Oct 2026) ---------- */
   .deskwrap{
     position:fixed; inset:0; z-index:80; background:rgba(25,23,18,.55);
     backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);
@@ -428,37 +427,10 @@
       <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.4M12 19v2.4M4.6 12H2.2M21.8 12h-2.4M6.5 6.5 4.8 4.8M19.2 19.2l-1.7-1.7M17.5 6.5l1.7-1.7M4.8 19.2l1.7-1.7"/></svg>
       <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 14.4A8.4 8.4 0 0 1 9.6 3.8a8.6 8.6 0 1 0 10.6 10.6z"/></svg>
     </button>
-    <div class="who" id="who"><span>Reading as <b id="whoEmail"></b></span><button id="signOut" type="button">Sign out</button></div>
-    <button class="enterbtn" id="signInBtn" type="button">Sign in</button>
   </div>
 </div>
 
-<section class="entrance" id="entrance">
-  <div class="doorcard">
-    <div class="crest">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10.5" rx="2"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/></svg>
-    </div>
-    <div class="dk">Land of Geb &middot; Christiansted, St. Croix</div>
-    <h1>The reading room<br>is <i>closed to the street.</i></h1>
-    <p class="dlede">Sixty-six holdings on pattern, structure, symbol, and how the world was actually built — alongside the network's own canon. Entry is by member credentials.</p>
-    <div class="dstat">
-      <span>Holdings <b>66</b></span>
-      <span>Wings <b>8</b></span>
-      <span>Earliest <b>1684</b></span>
-    </div>
-    <form id="doorForm">
-      <div class="fld"><label for="eEmail">Email</label><input id="eEmail" type="email" autocomplete="email" required></div>
-      <div class="fld"><label for="ePass">Password</label><input id="ePass" type="password" autocomplete="current-password" required></div>
-      <button class="deskbtn" id="doorGo" type="submit">Unlock the reading room</button>
-      <div class="deskmsg" id="doorMsg"></div>
-    </form>
-    <div class="doorfoot">
-      Use the same credentials that open the operating system. Not a member yet? Entry runs through the <a href="learning.html#exam">entrance exam</a>.
-    </div>
-  </div>
-</section>
-
-<div class="room" id="room" style="display:none">
+<div class="room" id="room">
 
   <!-- ============ THE PORTAL ============ -->
   <section class="portal">
@@ -469,7 +441,6 @@
       <span>Holdings <b id="mHold">—</b></span>
       <span>Wings <b id="mWings">—</b></span>
       <span>Earliest <b>1684</b></span>
-      <span>Access <b>Members</b></span>
     </div>
 
     <div class="gate">
@@ -477,8 +448,8 @@
         <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10.5" rx="2"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/></svg>
       </div>
       <div class="gt">
-        <h4>The catalogue is open. The volumes are not.</h4>
-        <p>Anyone may walk the room and read the cards — what each work is, when it was written, why it is here. Opening a volume requires member credentials, the same ones that get you into the operating system.</p>
+        <h4>The catalogue is open to everyone.</h4>
+        <p>Anyone may walk the room and read the cards — what each work is, when it was written, why it is here. Most volumes open here or at their home repository. A few are held for members and are not opened from this page.</p>
       </div>
     </div>
   </section>
@@ -512,10 +483,7 @@
         <p class="dblurb" id="dblurb"></p>
         <p class="dbody" id="dbody"></p>
         <div class="dactions">
-          <a class="openbtn" id="dopen" href="https://ii00270.github.io/Bixxvillenode/" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10.5" rx="2"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/></svg>
-            Sign in to open
-          </a>
+          <a class="openbtn" id="dopen" href="#" target="_blank" rel="noopener">Open volume</a>
           <a class="sourcebtn" id="dsource" href="#" target="_blank" rel="noopener">View source record &nearr;</a>
         </div>
         <dl class="dmeta" id="dmeta"></dl>
@@ -528,21 +496,6 @@
     </div>
   </div>
 
-</div>
-
-<div class="deskwrap" id="deskwrap" role="dialog" aria-modal="true" aria-labelledby="deskTitle">
-  <div class="desk">
-    <div class="dk">Reading room</div>
-    <h3 id="deskTitle">Sign in to open volumes</h3>
-    <p class="dsub">Use your Bixxville credentials — the same ones that get you into the operating system. The catalogue stays open either way.</p>
-    <form id="deskForm">
-      <div class="fld"><label for="dEmail">Email</label><input id="dEmail" type="email" autocomplete="email" required></div>
-      <div class="fld"><label for="dPass">Password</label><input id="dPass" type="password" autocomplete="current-password" required></div>
-      <button class="deskbtn" id="deskGo" type="submit">Enter the reading room</button>
-      <div class="deskmsg" id="deskMsg"></div>
-    </form>
-    <button class="deskclose" id="deskClose" type="button">Keep browsing the catalogue</button>
-  </div>
 </div>
 
 <footer>
@@ -581,72 +534,6 @@ var CAT = [
   body:'The learner\'s book for Plain LOGG — the everyday register the operating system speaks and messages are written in. Verbs never change shape. Nouns have no gender. There is one word for "the." Every letter has one sound and every sound has one letter, so a reader who can say the letters can read any word on sight. Formal LOGG, used for the constitution and for ceremony, is five spelling rules further on; each word box shows the formal spelling alongside so the pattern builds as you read.',
   cls:'Learner\'s book · Plain LOGG', src:'', url:'docs/bxv-lang-001-di-buki-van-logg.pdf',
   note:'Open to all. Companion to BXV-LANG-000.'},
-
- {w:'canon', acc:'BXV.C.001', t:'The LOG', a:'Land of Geb, LLC', y:'Rung 1', pg:10,
-  blurb:'The constitution of the network. What does not change between cycles.',
-  body:'Ten articles governing identity, the unit system, tiers, standing, settlement, governance, treasury and amendment — plus The Known, the ten guarantees no mechanism of the network may abridge. Where the runtime and The LOG conflict, The LOG governs. Amended only by append.',
-  cls:'Constitutional · Rung 1', src:'', file:'canon/the-log-v2.pdf',
-  note:'Internal canon. Members only.'},
-
- {w:'canon', acc:'BXV.C.002', t:'Master Canon, Consolidated', a:'Land of Geb, LLC', y:'OS v1.1', pg:0,
-  blurb:'The consolidated current state of the system, in full.',
-  body:'Everything The LOG does not address: brand, strategy, product, runtime, pipeline, and open threads. Read together with The LOG — the constitution is the spine, this is the body.',
-  cls:'Canon · Rung 2', src:'', file:'canon/master-canon-consolidated.html',
-  note:'Internal canon. Members only.'},
-
- {w:'canon', acc:'BXV.C.003', t:'Operating System v1.0', a:'Land of Geb, LLC', y:'v1.0',pg:17,
-  blurb:'The founding constitution document, kept for the record.',
-  body:'The earlier constitutional statement, superseded by The LOG but retained because amendment by append means nothing is overwritten — the prior text remains readable.',
-  cls:'Constitutional · superseded', src:'', file:'canon/operating-system-v1.0.pdf',
-  note:'Superseded by The LOG. Retained for the record. Members only.'},
-
- {w:'canon', acc:'BXV.C.004', t:'North Star', a:'Land of Geb, LLC', y:'OS v1.1', pg:3,
-  blurb:'Mission, vision, and the operating principles the network behaves by.',
-  body:'Why this exists — smart people in environments that do not let them do what they are good at — and the principles that follow: time as the real unit, standing earned never granted, scope before price, the credential boundary, and the structural reserve.',
-  cls:'Foundational', src:'', file:'canon/north-star.pdf',
-  note:'Internal canon. Members only.'},
-
- {w:'canon', acc:'BXV.C.005', t:'Founding Vision', a:'Land of Geb, LLC', y:'OS v1.1', pg:6,
-  blurb:'The operating system for human experience, in three layers.',
-  body:'Layer One is now: the OS, the network, the first node. Layer Two is the mesh. Layer Three is the felt reality of a life inside a fully realised node. Also the principles beneath the brand — mathematics, geometry, music and frequency, colour and light.',
-  cls:'Foundational', src:'', file:'canon/founding-vision.pdf',
-  note:'Internal canon. Members only.'},
-
- {w:'canon', acc:'BXV.C.006', t:'The Four Pillars', a:'Land of Geb, LLC', y:'—', pg:1,
-  blurb:'One lens, four directions. The content architecture.',
-  body:'The Pattern, The Decomposition, The Observation, The Container. Every piece of published work sits inside one of them, and the lens never changes: decompose it, find the pattern, read the gap.',
-  cls:'Content architecture', src:'', file:'canon/four-pillars.pdf',
-  note:'Internal canon. Members only.'},
-
- {w:'canon', acc:'BXV.C.007', t:'The Contract Blueprint', a:'Land of Geb, LLC', y:'Bridge Key 1', pg:7,
-  blurb:'One canon, per-participant classification. How to wrap work for W-2 and 1099.',
-  body:'Governs any work performed under a direct external contract, federal included. The unit of account does not fork; the contract wrapper reading off it does. Includes the two issues sharper than "can 1099 work" — similarly-situated workers, and the ABC-test states where Prong B is the one that bites.',
-  cls:'Operating guide', src:'', file:'canon/contract-blueprint.pdf',
-  note:'Internal canon. Does not amend LOG 4. Members only.'},
-
- {w:'canon', acc:'BXV.C.008', t:'Federal Contracting Path', a:'Land of Geb, LLC', y:'—', pg:5,
-  blurb:'Solo to first federal contract, decomposed as a map rather than a to-do list.',
-  body:'Nine dependency-ordered nodes from SAM.gov registration to a second win, with the two keys flagged — HUBZone eligibility, which gates what set-asides are even visible, and the bonding relationship, which blocks nothing today and everything later.',
-  cls:'Strategy · internal', src:'', file:'canon/federal-contracting-path.pdf',
-  note:'Internal strategy. Deliberately not published on the contracting page. Members only.'},
-
- {w:'canon', acc:'BXV.C.009', t:'Amendment I — Government Contracting', a:'Land of Geb, LLC', y:'proposed', pg:5,
-  blurb:'Three corrections that make a federal engagement safe to run through canon.',
-  body:'The contract-type boundary, the Service Contract Act wage floor, and the open question of sealed versus funded — a cashflow decision presented as two options rather than one answer, because it is a decision and not an arithmetic error.',
-  cls:'Amendment · proposed', src:'', file:'canon/amendment-i.pdf',
-  note:'Proposed under LOG 10. No force until appended. Members only.'},
-
- {w:'canon', acc:'BXV.C.010', t:'Applied Example', a:'Land of Geb, LLC', y:'—', pg:6,
-  blurb:'One real engagement, decomposed start to finish.',
-  body:'The map, the keys, and the checkpoints worked in full on a three-unit rental gut, so the mechanics have somewhere to live besides the abstract.',
-  cls:'Worked example', src:'', file:'canon/applied-example.pdf',
-  note:'Internal canon. Members only.'},
-
- {w:'canon', acc:'BXV.C.011', t:'Dry Run Guide', a:'Land of Geb, LLC', y:'—', pg:11,
-  blurb:'Running the system end to end before a client is on the line.',
-  body:'The rehearsal protocol: scope, sequence, verify and settle a full engagement internally, so the first real one is not the first one.',
-  cls:'Operating guide', src:'', file:'canon/dry-run-guide.pdf',
-  note:'Internal canon. Members only.'},
 
  {w:'canon', acc:'BXV.C.012', t:'Proposal Template', a:'Land of Geb, LLC', y:'—', pg:3,
   blurb:'The client-facing proposal, in the form the network issues it.',
@@ -1072,31 +959,25 @@ function paintOpen(v, btn){
     btn.innerHTML = LOCK_SVG + 'Restricted \u2014 not circulated';
     return;
   }
-  // 2. closed room: nothing opens until you are through the door
-  if(!member){
-    btn.innerHTML = LOCK_SVG + 'Sign in to open';
-    btn.onclick = function(e){ e.preventDefault(); openDesk(); };
-    return;
-  }
-  // 3. held here, openly
+  // 2. held here, openly
   if(v.url){
     btn.innerHTML = OPEN_SVG + 'Open volume';
     btn.onclick = function(e){ e.preventDefault(); window.open(v.url,'_blank','noopener'); };
     return;
   }
-  // 4. held here, privately \u2014 signed URL from the members bucket
+  // 3. held for members: not opened from this public page
   if(v.file){
-    btn.innerHTML = OPEN_SVG + 'Open volume';
-    btn.onclick = function(e){ e.preventDefault(); fetchVolume(v, btn); };
+    btn.classList.add('restricted');
+    btn.innerHTML = LOCK_SVG + 'Members only \u2014 not opened here';
     return;
   }
-  // 5. not held here, but readable at its home repository
+  // 4. not held here, but readable at its home repository
   if(v.src){
     btn.innerHTML = OPEN_SVG + 'Read at source';
     btn.onclick = function(e){ e.preventDefault(); window.open(v.src,'_blank','noopener'); };
     return;
   }
-  // 6. genuinely not available to open
+  // 5. genuinely not available to open
   btn.classList.add('restricted');
   btn.innerHTML = LOCK_SVG + 'Held in reserve \u2014 no public copy';
 }
@@ -1110,107 +991,6 @@ document.getElementById('dback').addEventListener('click', function(){
   showShelf(); renderShelf(current);
 });
 
-
-/* ============================================================
-   Real entry. Same Supabase project and same accounts as the OS,
-   so a member signs in here with the credentials they already have.
-   The catalogue stays public; only opening a volume is gated.
-   ============================================================ */
-var SB_URL = 'https://deotcopartijomfveakr.supabase.co';
-var SB_KEY = 'sb_publishable_yi4AJEt5MLMafDBgTgXnBg_1gvB4gtz';
-var LIB_BUCKET = 'library';          // private bucket, RLS: authenticated read
-var sb = null, member = null;
-
-try { if(window.supabase) sb = window.supabase.createClient(SB_URL, SB_KEY); } catch(e){}
-
-var deskwrap=document.getElementById('deskwrap'), deskMsg=document.getElementById('deskMsg'),
-    who=document.getElementById('who'), whoEmail=document.getElementById('whoEmail'),
-    signInBtn=document.getElementById('signInBtn');
-
-var entrance = document.getElementById('entrance');
-var room = document.getElementById('room');
-
-function setMember(u){
-  member = u;
-  if(u){
-    who.classList.add('on'); whoEmail.textContent = u.email || 'member';
-    signInBtn.style.display='none';
-    entrance.classList.remove('on');
-    room.style.display='';
-  } else {
-    who.classList.remove('on'); signInBtn.style.display='none';
-    entrance.classList.add('on');
-    room.style.display='none';
-    showShelf(); renderShelf('all');
-  }
-  if(member && detail.classList.contains('on') && lastAcc) openVol(lastAcc);
-}
-function openDesk(){ deskwrap.classList.add('on'); deskMsg.textContent=''; setTimeout(function(){document.getElementById('dEmail').focus();},60); }
-function closeDesk(){ deskwrap.classList.remove('on'); }
-
-signInBtn.addEventListener('click', openDesk);
-document.getElementById('deskClose').addEventListener('click', closeDesk);
-deskwrap.addEventListener('click', function(e){ if(e.target===deskwrap) closeDesk(); });
-document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeDesk(); });
-
-async function attemptSignIn(emailEl, passEl, btnEl, msgEl, onDone){
-  if(!sb){ msgEl.textContent='Sign-in is unavailable right now. Try again shortly.'; return; }
-  btnEl.disabled=true; msgEl.textContent='Checking credentials\u2026';
-  try{
-    var res = await sb.auth.signInWithPassword({
-      email: emailEl.value.trim(), password: passEl.value
-    });
-    if(res.error){ msgEl.textContent = res.error.message || 'Those credentials were not recognised.'; }
-    else { msgEl.textContent=''; passEl.value=''; setMember(res.data.user); if(onDone) onDone(); }
-  }catch(err){ msgEl.textContent='Could not reach the reading room. Check your connection.'; }
-  btnEl.disabled=false;
-}
-
-document.getElementById('doorForm').addEventListener('submit', function(e){
-  e.preventDefault();
-  attemptSignIn(document.getElementById('eEmail'), document.getElementById('ePass'),
-                document.getElementById('doorGo'), document.getElementById('doorMsg'));
-});
-
-document.getElementById('deskForm').addEventListener('submit', function(e){
-  e.preventDefault();
-  attemptSignIn(document.getElementById('dEmail'), document.getElementById('dPass'),
-                document.getElementById('deskGo'), deskMsg, closeDesk);
-});
-
-document.getElementById('signOut').addEventListener('click', async function(){
-  if(sb) { try{ await sb.auth.signOut(); }catch(e){} }
-  setMember(null);
-});
-
-/* the door is shut until a session proves otherwise */
-(async function(){
-  if(!sb){ setMember(null); return; }
-  try{
-    var r = await sb.auth.getSession();
-    if(r && r.data && r.data.session){ setMember(r.data.session.user); }
-    else { setMember(null); }
-  }catch(e){ setMember(null); }
-  setTimeout(function(){ document.getElementById('eEmail').focus(); }, 80);
-})();
-
-/* open a held volume: signed URL, valid for two minutes */
-async function fetchVolume(v, btn){
-  if(!sb || !member){ openDesk(); return; }
-  if(!v.file){ paintOpen(v, btn); return; }
-  var label = btn.innerHTML;
-  btn.innerHTML = 'Retrieving…';
-  try{
-    var r = await sb.storage.from(LIB_BUCKET).createSignedUrl(v.file, 120);
-    if(r.error || !r.data){
-      btn.innerHTML = 'Not uploaded yet';
-      setTimeout(function(){ paintOpen(v, btn); }, 2600);
-      return;
-    }
-    window.open(r.data.signedUrl, '_blank', 'noopener');
-    btn.innerHTML = label;
-  }catch(e){ btn.innerHTML='Not uploaded yet'; setTimeout(function(){ paintOpen(v, btn); }, 2600); }
-}
 
 /* theme */
 (function(){
