@@ -286,6 +286,21 @@ td{color:var(--soft)}
 tr:last-child td{border-bottom:none}
 td.k{color:var(--white); font-weight:600; white-space:nowrap}
 td.num{font-family:var(--mono); color:var(--green); font-weight:600; white-space:nowrap}
+/* rail status chip */
+.rs{display:inline-block; font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase; font-weight:600; padding:3px 8px; margin:0 6px 4px 0; border:1px solid var(--green-edge); color:var(--white)}
+.rs.soon{border-color:var(--gold-edge); color:var(--gold)}
+/* tables that stack into cards on phones */
+@media(max-width:699px){
+  .tbl-stack table{min-width:0}
+  .tbl-stack thead{display:none}
+  .tbl-stack tr,.tbl-stack td{display:block}
+  .tbl-stack tr{border-bottom:1px solid var(--line)}
+  .tbl-stack tr:last-child{border-bottom:none}
+  .tbl-stack td{border-bottom:none; padding:4px 16px}
+  .tbl-stack td.k{padding-top:16px; white-space:normal}
+  .tbl-stack td:last-child{padding-bottom:16px}
+  .tbl-stack td[data-l]::before{content:attr(data-l); display:block; font-size:9.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--grey); font-weight:600; margin:6px 0 3px}
+}
 
 /* ---------- formula block ---------- */
 .formula{

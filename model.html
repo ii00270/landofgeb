@@ -227,20 +227,19 @@
       </div>
 
       <h3 class="rv d4" style="margin-top:46px">Rails</h3>
-      <p class="body rv d4">Bixxville acts as the direct counterparty to every payment — never as an intermediary holding someone else's money in between.</p>
-      <div class="tblwrap rv d5">
+      <p class="body rv d4">Every payment is recorded to the ledger when it arrives. Some rails are open now. The others are being built, and they are marked that way until they work.</p>
+      <div class="tblwrap tbl-stack rv d5">
         <table>
-          <thead><tr><th>Rail</th><th>Instrument</th><th>Note</th></tr></thead>
+          <thead><tr><th>Rail</th><th>How</th><th>Status</th></tr></thead>
           <tbody>
-            <tr><td class="k">Bank transfer</td><td>ACH, wire, direct deposit</td><td>Primary rail</td></tr>
-            <tr><td class="k">Card</td><td>Debit / credit</td><td>Fees borne by the engagement, never deducted from member pay</td></tr>
-            <tr><td class="k">Cash &amp; check</td><td>In-person, local</td><td>Recorded to the ledger on receipt, same as any inflow</td></tr>
-            <tr><td class="k">BTC</td><td>Self-hosted BTCPay Server</td><td>Optional</td></tr>
-            <tr><td class="k">USDC</td><td>Ethereum node or API provider</td><td>Optional</td></tr>
+            <tr><td class="k">Bank transfer</td><td data-l="How">ACH or wire to Land of Geb, LLC</td><td data-l="Status"><span class="rs on">Available now</span> Received and recorded to the ledger. Direct deposit to members is coming.</td></tr>
+            <tr><td class="k">Cash &amp; check</td><td data-l="How">In person, local</td><td data-l="Status"><span class="rs on">Available now</span> Recorded to the ledger on receipt, same as any payment.</td></tr>
+            <tr><td class="k">Card</td><td data-l="How">Debit or credit</td><td data-l="Status"><span class="rs soon">Coming</span> Card fees will be paid by the engagement, never taken from member pay.</td></tr>
+            <tr><td class="k">USDC</td><td data-l="How">Escrow contract on Hedera</td><td data-l="Status"><span class="rs soon">Coming</span> Tested on Hedera&rsquo;s test network. Not yet open for real money. The contract holds the funds and releases them when the work is verified.</td></tr>
           </tbody>
         </table>
       </div>
-      <div class="note rv d6"><b>No member and no client is ever required to transact in a digital asset.</b> Fiat is always available on both sides, and a member is paid in the instrument they elect. The choice of rail does not alter the hour count, the tier rate, the price, or the reserve. Rails move value; they do not price it.</div>
+      <div class="note rv d6"><b>No member and no client is ever required to transact in a digital asset.</b> Fiat is always available on both sides, and a member is paid in the instrument they elect among those the network offers. The choice of rail does not alter the hour count, the tier rate, the price, or the reserve. Rails move value; they do not price it.</div>
     </div>
   </section>
 
