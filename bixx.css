@@ -19,7 +19,7 @@
   /* type */
   --white:#FFFFFF;          /* primary text */
   --soft:#C8C6C2;           /* body text */
-  --grey:#8A8A8A;           /* muted, labels, captions */
+  --grey:#707070;           /* muted, labels, captions */
 
   /* accents: the OS pink, with its orange and yellow. --green is the accent (pink), not green. */
   --green:#FF2D95;
