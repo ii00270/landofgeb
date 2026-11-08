@@ -1,5 +1,5 @@
 /* Shared tokens with landofgeb.net and the OS (tokens.css): same neutrals, the same Land of Geb
-   neon, the same typefaces (Anton, IBM Plex Mono). Restyled 23 Oct 2026 (review draft).
+   neon, the same typefaces (Anton, IBM Plex Mono). Restyled 23 Oct 2026; blue and purple (gradient 4) 8 Nov 2026.
    The token names below are older than the restyle: --green is now the ACCENT (ink), not green.
    ==========================================================================
    BIXXVILLE — shared design system
@@ -11,117 +11,133 @@
    ========================================================================== */
 
 :root{
-  /* ground & surface */
-  --black:#0A0B0C;          /* page ground */
-  --panel:#111316;          /* raised surface — cards, fields */
-  --panel2:#0D0F11;         /* alternating section ground */
+  /* ground & surface: gradient 4 (#0033FF > #0600A8 > #00033D) */
+  --black:#00033D;          /* page ground */
+  --panel:#070C5E;          /* raised surface: cards, fields */
+  --panel2:#00022E;         /* alternating section ground */
 
   /* type */
   --white:#F4F5F7;          /* primary text */
-  --soft:#CDCFD3;           /* body text */
-  --grey:#A6ADB4;           /* muted, labels, captions */
+  --soft:#D0D4F0;           /* body text */
+  --grey:#A7ACD8;           /* muted, labels, captions */
 
-  /* accents: the Land of Geb look is ink plus the neon gradient */
-  --green:#F4F5F7;
+  /* accents: blue and purple. --green is the accent (periwinkle), not green. */
+  --green:#977DFF;
   --orange:#F45E26;
-  --gold:#AA8C4E;
-  --rail:#262626;
+  --gold:#B6A5FF;
+  --rail:#1B2380;
+  --hot:#977DFF;            /* sharp accent: underlines, shadows, selection */
+  --hot2:#0033FF;           /* second accent: the vivid blue of the gradient */
 
-  /* derived — flip with the theme */
-  --on-green:#0A0B0C;                     /* text sitting on an accent fill */
-  --green-tint:rgba(255,45,149,.06);
-  --green-tint-2:rgba(255,45,149,.09);
-  --green-edge:rgba(244,245,247,.40);
-  --green-edge-soft:rgba(244,245,247,.20);
-  --green-edge-strong:#F4F5F7;
-  --gold-edge:rgba(170,140,78,.40);
-  --line:rgba(244,245,247,.12);           /* visible divider */
-  --line2:rgba(244,245,247,.07);          /* faint divider */
-  --line3:rgba(244,245,247,.02);          /* table header wash */
-  --field:rgba(244,245,247,.16);          /* form control border */
-  --nav-bg:rgba(10,11,12,.88);
-  --menu-bg:rgba(10,11,12,.975);
+  /* derived: flip with the theme */
+  --on-green:#00033D;                     /* text sitting on an accent fill */
+  --green-tint:rgba(151,125,255,.10);
+  --green-tint-2:rgba(151,125,255,.15);
+  --green-edge:rgba(151,125,255,.50);
+  --green-edge-soft:rgba(151,125,255,.25);
+  --green-edge-strong:#977DFF;
+  --gold-edge:rgba(182,165,255,.40);
+  --line:rgba(176,186,255,.18);           /* visible divider */
+  --line2:rgba(176,186,255,.10);          /* faint divider */
+  --line3:rgba(176,186,255,.04);          /* table header wash */
+  --field:rgba(176,186,255,.28);          /* form control border */
+  --nav-bg:rgba(0,3,61,.88);
+  --menu-bg:rgba(0,3,61,.975);
   --card-shadow:none;
   --sun:block;                            /* which toggle icon shows */
   --moon:none;
+  --wash:linear-gradient(180deg,#0033FF 0,#0600A8 260px,#00033D 700px);
 
   --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
   --display:'Anton','Impact','Arial Narrow',sans-serif;
-  --neon:linear-gradient(90deg,#FFEA00 0%,#FF7A1A 50%,#FF2D95 100%);
+  --neon:linear-gradient(90deg,#977DFF 0%,#0033FF 55%,#0600A8 100%);      /* lines and bars */
+  --neon-text:linear-gradient(90deg,#B6A5FF 0%,#6F8CFF 100%);             /* gradient text: kept light enough to read */
   --nav-h:64px;
 }
 
 /* ---- light: automatic for a light-preferring OS, unless dark was chosen ---- */
 @media (prefers-color-scheme: light){
   :root:not([data-theme="dark"]){
-    --black:#F2F2F0;
+    /* ground & surface */
+    --black:#F3F0FF;
     --panel:#FFFFFF;
-    --panel2:#FAFAF8;
-
-    --white:#0A0A0A;
-    --soft:#1C1C1C;
-    --grey:#5A5A5A;
-
-    --green:#0A0A0A;
+    --panel2:#EAE6FF;
+    
+    --white:#0B0A33;
+    --soft:#1B1B52;
+    --grey:#4D4E86;
+    
+    --green:#0600A8;
     --orange:#C0411A;
-    --gold:#7D6428;
-    --rail:#DCDCD8;
-
-    --on-green:#F2F2F0;
-    --green-tint:rgba(255,45,149,.05);
-    --green-tint-2:rgba(255,45,149,.08);
-    --green-edge:rgba(10,10,10,.45);
-    --green-edge-soft:rgba(10,10,10,.18);
-    --green-edge-strong:#0A0A0A;
-    --gold-edge:rgba(125,100,40,.38);
-    --line:rgba(10,10,10,.14);
-    --line2:rgba(10,10,10,.08);
-    --line3:rgba(10,10,10,.025);
-    --field:rgba(10,10,10,.20);
-    --nav-bg:rgba(242,242,240,.92);
-    --menu-bg:rgba(242,242,240,.98);
-    --card-shadow:0 1px 2px rgba(10,10,10,.05);
+    --gold:#4D32D6;
+    --rail:#D6D0F5;
+    --hot:#0600A8;
+    --hot2:#977DFF;
+    
+    --on-green:#F3F0FF;
+    --green-tint:rgba(6,0,168,.06);
+    --green-tint-2:rgba(6,0,168,.10);
+    --green-edge:rgba(6,0,168,.45);
+    --green-edge-soft:rgba(6,0,168,.20);
+    --green-edge-strong:#0600A8;
+    --gold-edge:rgba(77,50,214,.38);
+    --line:rgba(6,0,168,.16);
+    --line2:rgba(6,0,168,.09);
+    --line3:rgba(6,0,168,.03);
+    --field:rgba(6,0,168,.24);
+    --nav-bg:rgba(243,240,255,.92);
+    --menu-bg:rgba(243,240,255,.98);
+    --card-shadow:0 1px 2px rgba(6,0,168,.07);
     --sun:none;
     --moon:block;
+    --wash:linear-gradient(180deg,#C9BEFF 0,#F3F0FF 520px);
+    --neon:linear-gradient(90deg,#977DFF 0%,#0033FF 55%,#0600A8 100%);
+    --neon-text:linear-gradient(90deg,#4D32D6 0%,#0600A8 100%);
   }
 }
 
 /* ---- light: chosen explicitly ---- */
 :root[data-theme="light"]{
-  --black:#F2F2F0;
+  /* ground & surface */
+  --black:#F3F0FF;
   --panel:#FFFFFF;
-  --panel2:#FAFAF8;
-
-  --white:#0A0A0A;
-  --soft:#1C1C1C;
-  --grey:#5A5A5A;
-
-  --green:#0A0A0A;
+  --panel2:#EAE6FF;
+  
+  --white:#0B0A33;
+  --soft:#1B1B52;
+  --grey:#4D4E86;
+  
+  --green:#0600A8;
   --orange:#C0411A;
-  --gold:#7D6428;
-  --rail:#DCDCD8;
-
-  --on-green:#F2F2F0;
-  --green-tint:rgba(255,45,149,.05);
-  --green-tint-2:rgba(255,45,149,.08);
-  --green-edge:rgba(10,10,10,.45);
-  --green-edge-soft:rgba(10,10,10,.18);
-  --green-edge-strong:#0A0A0A;
-  --gold-edge:rgba(125,100,40,.38);
-  --line:rgba(10,10,10,.14);
-  --line2:rgba(10,10,10,.08);
-  --line3:rgba(10,10,10,.025);
-  --field:rgba(10,10,10,.20);
-  --nav-bg:rgba(242,242,240,.92);
-  --menu-bg:rgba(242,242,240,.98);
-  --card-shadow:0 1px 2px rgba(10,10,10,.05);
+  --gold:#4D32D6;
+  --rail:#D6D0F5;
+  --hot:#0600A8;
+  --hot2:#977DFF;
+  
+  --on-green:#F3F0FF;
+  --green-tint:rgba(6,0,168,.06);
+  --green-tint-2:rgba(6,0,168,.10);
+  --green-edge:rgba(6,0,168,.45);
+  --green-edge-soft:rgba(6,0,168,.20);
+  --green-edge-strong:#0600A8;
+  --gold-edge:rgba(77,50,214,.38);
+  --line:rgba(6,0,168,.16);
+  --line2:rgba(6,0,168,.09);
+  --line3:rgba(6,0,168,.03);
+  --field:rgba(6,0,168,.24);
+  --nav-bg:rgba(243,240,255,.92);
+  --menu-bg:rgba(243,240,255,.98);
+  --card-shadow:0 1px 2px rgba(6,0,168,.07);
   --sun:none;
   --moon:block;
+  --wash:linear-gradient(180deg,#C9BEFF 0,#F3F0FF 520px);
+  --neon:linear-gradient(90deg,#977DFF 0%,#0033FF 55%,#0600A8 100%);
+  --neon-text:linear-gradient(90deg,#4D32D6 0%,#0600A8 100%);
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
-  background:var(--black); color:var(--white);
+  background:var(--wash) top/100% 760px no-repeat, var(--black); color:var(--white);
   font-family:'Poppins',sans-serif; -webkit-font-smoothing:antialiased;
   overflow-x:hidden;
 }
@@ -392,13 +408,13 @@ footer .ftitle{color:var(--white); font-size:11px; letter-spacing:.2em; text-tra
 /* ══ The Land of Geb / OS look ═══════════════════════════════════════════
    Same type, neon and square edges as landofgeb.net and the OS. */
 body{font-family:var(--mono); font-size:15px; line-height:1.6}
-::selection{background:#FF2D95; color:#0A0A0A}
+::selection{background:var(--hot); color:var(--on-green)}
 h1,h2{font-family:var(--display); font-weight:400; text-transform:uppercase; letter-spacing:0; line-height:.9}
 h1{font-size:clamp(52px,10.5vw,124px)}
 h2{font-size:clamp(40px,7vw,84px)}
 h3{font-family:var(--mono); font-weight:600; letter-spacing:-.01em}
-.g{background:var(--neon); -webkit-background-clip:text; background-clip:text; color:transparent}
-h3 .g,p .g,.body .g,.lead .g{background:none; color:var(--white); text-decoration:underline; text-decoration-color:#FF2D95; text-decoration-thickness:3px; -webkit-text-fill-color:currentColor}
+.g{background:var(--neon-text); -webkit-background-clip:text; background-clip:text; color:transparent}
+h3 .g,p .g,.body .g,.lead .g{background:none; color:var(--white); text-decoration:underline; text-decoration-color:var(--hot); text-decoration-thickness:3px; -webkit-text-fill-color:currentColor}
 .eyebrow{font-family:var(--mono); font-size:12px; letter-spacing:.14em}
 .eyebrow .n{color:var(--white); font-weight:600}
 .lead{font-size:clamp(15px,3.9vw,18px)}
@@ -406,18 +422,18 @@ h3 .g,p .g,.body .g,.lead .g{background:none; color:var(--white); text-decoratio
 nav{border-bottom:1px solid var(--line)}
 nav::after{content:''; position:absolute; left:0; right:0; bottom:-1px; height:2px; background:var(--neon)}
 .brand b{font-family:var(--display); font-weight:400; font-size:20px; letter-spacing:.02em; text-transform:uppercase}
-.glyph polyline{stroke:#FF2D95}
+.glyph polyline{stroke:var(--green)}
 .navlinks a{font-family:var(--mono); font-size:12px; letter-spacing:.12em; text-transform:uppercase; position:relative; padding:4px 0}
 .navlinks a::after{content:''; position:absolute; left:0; right:100%; bottom:0; height:2px; background:var(--neon); transition:right .3s}
 .navlinks a:hover::after,.navlinks a.on::after{right:0}
 .navlinks a.on{color:var(--white)}
 .pill{border-radius:0; background:var(--white); color:var(--black); border:1px solid var(--white); font-family:var(--mono); font-size:12px; font-weight:500; letter-spacing:.12em; text-transform:uppercase; padding:12px 16px}
-.pill:hover{background:var(--white); color:var(--black); box-shadow:3px 3px 0 #FF2D95,6px 6px 0 #FFEA00}
+.pill:hover{background:var(--white); color:var(--black); box-shadow:3px 3px 0 var(--hot),6px 6px 0 var(--hot2)}
 .themetog{width:44px; height:44px; color:var(--white); border-color:var(--line)}
 .themetog:hover{color:var(--white); border-color:var(--white)}
-.themetog:focus-visible{outline-color:#FF2D95}
+.themetog:focus-visible{outline-color:var(--hot)}
 .menu a{font-family:var(--display); font-weight:400; text-transform:uppercase; letter-spacing:0; font-size:clamp(36px,9vw,72px); line-height:1.05}
-.menu a:hover,.menu a.on{background:var(--neon); -webkit-background-clip:text; background-clip:text; color:transparent}
+.menu a:hover,.menu a.on{background:var(--neon-text); -webkit-background-clip:text; background-clip:text; color:transparent}
 .menu .mfoot span{color:var(--white)}
 .spine span{color:var(--white)}
 .card,.stat,.tblwrap,.note,.formula,.ctabox{border-radius:0}
@@ -430,18 +446,18 @@ a.card:hover::before{opacity:1}
 a.card .arr{color:var(--white); font-family:var(--mono); font-size:12px; letter-spacing:.12em; text-transform:uppercase}
 .stat .sv{color:var(--white)}
 .biglink{border-radius:0; background:var(--white); color:var(--black); font-family:var(--mono); font-size:12.5px; font-weight:500; letter-spacing:.12em; text-transform:uppercase; transition:box-shadow .25s}
-.biglink:hover{filter:none; box-shadow:4px 4px 0 #FF2D95,8px 8px 0 #FFEA00}
+.biglink:hover{filter:none; box-shadow:4px 4px 0 var(--hot),8px 8px 0 var(--hot2)}
 .biglink.ghost{border:1px solid var(--white)}
 .biglink.ghost:hover{color:var(--white); border-color:var(--white)}
 .ctabox{background:var(--panel); border-color:var(--line)}
 .serif,.quote{color:var(--soft)}
-.quote{border-left-color:#FF2D95}
+.quote{border-left-color:var(--hot)}
 footer{border-top:none; position:relative}
 footer::before{content:''; position:absolute; left:0; right:0; top:0; height:4px; background:var(--neon)}
 footer b{font-family:var(--mono)}
 footer .sx{color:var(--white)}
-footer .fnav a:hover{color:var(--white); text-decoration:underline; text-decoration-color:#FF2D95}
-.note.good{border-left-color:#FF2D95}
+footer .fnav a:hover{color:var(--white); text-decoration:underline; text-decoration-color:var(--hot)}
+.note.good{border-left-color:var(--hot)}
 .tag.live{color:var(--white); border-color:var(--white); background:transparent}
 th{font-size:11px}
 td.num{color:var(--white)}
