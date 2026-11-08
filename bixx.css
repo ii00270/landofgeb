@@ -1,5 +1,5 @@
 /* Shared tokens with landofgeb.net and the OS (tokens.css): same neutrals, the same Land of Geb
-   neon, the same typefaces (Anton, IBM Plex Mono). Restyled 23 Oct 2026; blue and purple (gradient 4) 8 Nov 2026.
+   neon, the same typefaces (Anton, IBM Plex Mono). Restyled 23 Oct 2026; crimson (gradient 5, #95122C > #100C08) 8 Nov 2026.
    The token names below are older than the restyle: --green is now the ACCENT (ink), not green.
    ==========================================================================
    BIXXVILLE — shared design system
@@ -11,47 +11,47 @@
    ========================================================================== */
 
 :root{
-  /* ground & surface: gradient 4 (#0033FF > #0600A8 > #00033D) */
-  --black:#00033D;          /* page ground */
-  --panel:#070C5E;          /* raised surface: cards, fields */
-  --panel2:#00022E;         /* alternating section ground */
+  /* ground & surface: gradient 5 (#95122C > #100C08) */
+  --black:#100C08;          /* page ground */
+  --panel:#1F0E12;          /* raised surface: cards, fields */
+  --panel2:#0A0705;         /* alternating section ground */
 
   /* type */
   --white:#F4F5F7;          /* primary text */
-  --soft:#D0D4F0;           /* body text */
-  --grey:#A7ACD8;           /* muted, labels, captions */
+  --soft:#DDD4D5;           /* body text */
+  --grey:#B7A9AC;           /* muted, labels, captions */
 
-  /* accents: blue and purple. --green is the accent (periwinkle), not green. */
-  --green:#977DFF;
+  /* accents: crimson and rose. --green is the accent (periwinkle), not green. */
+  --green:#F0788F;
   --orange:#F45E26;
-  --gold:#B6A5FF;
-  --rail:#1B2380;
-  --hot:#977DFF;            /* sharp accent: underlines, shadows, selection */
-  --hot2:#0033FF;           /* second accent: the vivid blue of the gradient */
+  --gold:#F7A1B1;
+  --rail:#3A1119;
+  --hot:#F0788F;            /* sharp accent: underlines, shadows, selection */
+  --hot2:#95122C;           /* second accent: the crimson of the gradient */
 
   /* derived: flip with the theme */
-  --on-green:#00033D;                     /* text sitting on an accent fill */
-  --green-tint:rgba(151,125,255,.10);
-  --green-tint-2:rgba(151,125,255,.15);
-  --green-edge:rgba(151,125,255,.50);
-  --green-edge-soft:rgba(151,125,255,.25);
-  --green-edge-strong:#977DFF;
-  --gold-edge:rgba(182,165,255,.40);
-  --line:rgba(176,186,255,.18);           /* visible divider */
-  --line2:rgba(176,186,255,.10);          /* faint divider */
-  --line3:rgba(176,186,255,.04);          /* table header wash */
-  --field:rgba(176,186,255,.28);          /* form control border */
-  --nav-bg:rgba(0,3,61,.88);
-  --menu-bg:rgba(0,3,61,.975);
+  --on-green:#100C08;                     /* text sitting on an accent fill */
+  --green-tint:rgba(240,120,143,.10);
+  --green-tint-2:rgba(240,120,143,.15);
+  --green-edge:rgba(240,120,143,.50);
+  --green-edge-soft:rgba(240,120,143,.25);
+  --green-edge-strong:#F0788F;
+  --gold-edge:rgba(247,161,177,.40);
+  --line:rgba(243,200,208,.18);           /* visible divider */
+  --line2:rgba(243,200,208,.10);          /* faint divider */
+  --line3:rgba(243,200,208,.04);          /* table header wash */
+  --field:rgba(243,200,208,.28);          /* form control border */
+  --nav-bg:rgba(16,12,8,.88);
+  --menu-bg:rgba(16,12,8,.975);
   --card-shadow:none;
   --sun:block;                            /* which toggle icon shows */
   --moon:none;
-  --wash:linear-gradient(180deg,#0033FF 0,#0600A8 260px,#00033D 700px);
+  --wash:linear-gradient(180deg,#95122C 0,#500F1A 280px,#100C08 700px);
 
   --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
   --display:'Anton','Impact','Arial Narrow',sans-serif;
-  --neon:linear-gradient(90deg,#977DFF 0%,#0033FF 55%,#0600A8 100%);      /* lines and bars */
-  --neon-text:linear-gradient(90deg,#B6A5FF 0%,#6F8CFF 100%);             /* gradient text: kept light enough to read */
+  --neon:linear-gradient(90deg,#F7A1B1 0%,#F0788F 40%,#95122C 100%);      /* lines and bars */
+  --neon-text:linear-gradient(90deg,#FFD3DA 0%,#F7A1B1 100%);             /* gradient text: kept light enough to read */
   --nav-h:64px;
 }
 
@@ -59,80 +59,80 @@
 @media (prefers-color-scheme: light){
   :root:not([data-theme="dark"]){
     /* ground & surface */
-    --black:#F3F0FF;
+    --black:#F7F2F2;
     --panel:#FFFFFF;
-    --panel2:#EAE6FF;
+    --panel2:#EFE6E7;
     
-    --white:#0B0A33;
-    --soft:#1B1B52;
-    --grey:#4D4E86;
+    --white:#150D10;
+    --soft:#2C1A1F;
+    --grey:#6A5559;
     
-    --green:#0600A8;
+    --green:#95122C;
     --orange:#C0411A;
-    --gold:#4D32D6;
-    --rail:#D6D0F5;
-    --hot:#0600A8;
-    --hot2:#977DFF;
+    --gold:#95122C;
+    --rail:#E6D5D8;
+    --hot:#95122C;
+    --hot2:#D9677D;
     
-    --on-green:#F3F0FF;
-    --green-tint:rgba(6,0,168,.06);
-    --green-tint-2:rgba(6,0,168,.10);
-    --green-edge:rgba(6,0,168,.45);
-    --green-edge-soft:rgba(6,0,168,.20);
-    --green-edge-strong:#0600A8;
-    --gold-edge:rgba(77,50,214,.38);
-    --line:rgba(6,0,168,.16);
-    --line2:rgba(6,0,168,.09);
-    --line3:rgba(6,0,168,.03);
-    --field:rgba(6,0,168,.24);
-    --nav-bg:rgba(243,240,255,.92);
-    --menu-bg:rgba(243,240,255,.98);
-    --card-shadow:0 1px 2px rgba(6,0,168,.07);
+    --on-green:#F7F2F2;
+    --green-tint:rgba(149,18,44,.06);
+    --green-tint-2:rgba(149,18,44,.10);
+    --green-edge:rgba(149,18,44,.45);
+    --green-edge-soft:rgba(149,18,44,.20);
+    --green-edge-strong:#95122C;
+    --gold-edge:rgba(149,18,44,.38);
+    --line:rgba(149,18,44,.16);
+    --line2:rgba(149,18,44,.09);
+    --line3:rgba(149,18,44,.03);
+    --field:rgba(149,18,44,.24);
+    --nav-bg:rgba(247,242,242,.92);
+    --menu-bg:rgba(247,242,242,.98);
+    --card-shadow:0 1px 2px rgba(149,18,44,.07);
     --sun:none;
     --moon:block;
-    --wash:linear-gradient(180deg,#C9BEFF 0,#F3F0FF 520px);
-    --neon:linear-gradient(90deg,#977DFF 0%,#0033FF 55%,#0600A8 100%);
-    --neon-text:linear-gradient(90deg,#4D32D6 0%,#0600A8 100%);
+    --wash:linear-gradient(180deg,#EBBFC8 0,#F7F2F2 520px);
+    --neon:linear-gradient(90deg,#D9677D 0%,#C9304F 50%,#95122C 100%);
+    --neon-text:linear-gradient(90deg,#C9304F 0%,#95122C 100%);
   }
 }
 
 /* ---- light: chosen explicitly ---- */
 :root[data-theme="light"]{
   /* ground & surface */
-  --black:#F3F0FF;
+  --black:#F7F2F2;
   --panel:#FFFFFF;
-  --panel2:#EAE6FF;
+  --panel2:#EFE6E7;
   
-  --white:#0B0A33;
-  --soft:#1B1B52;
-  --grey:#4D4E86;
+  --white:#150D10;
+  --soft:#2C1A1F;
+  --grey:#6A5559;
   
-  --green:#0600A8;
+  --green:#95122C;
   --orange:#C0411A;
-  --gold:#4D32D6;
-  --rail:#D6D0F5;
-  --hot:#0600A8;
-  --hot2:#977DFF;
+  --gold:#95122C;
+  --rail:#E6D5D8;
+  --hot:#95122C;
+  --hot2:#D9677D;
   
-  --on-green:#F3F0FF;
-  --green-tint:rgba(6,0,168,.06);
-  --green-tint-2:rgba(6,0,168,.10);
-  --green-edge:rgba(6,0,168,.45);
-  --green-edge-soft:rgba(6,0,168,.20);
-  --green-edge-strong:#0600A8;
-  --gold-edge:rgba(77,50,214,.38);
-  --line:rgba(6,0,168,.16);
-  --line2:rgba(6,0,168,.09);
-  --line3:rgba(6,0,168,.03);
-  --field:rgba(6,0,168,.24);
-  --nav-bg:rgba(243,240,255,.92);
-  --menu-bg:rgba(243,240,255,.98);
-  --card-shadow:0 1px 2px rgba(6,0,168,.07);
+  --on-green:#F7F2F2;
+  --green-tint:rgba(149,18,44,.06);
+  --green-tint-2:rgba(149,18,44,.10);
+  --green-edge:rgba(149,18,44,.45);
+  --green-edge-soft:rgba(149,18,44,.20);
+  --green-edge-strong:#95122C;
+  --gold-edge:rgba(149,18,44,.38);
+  --line:rgba(149,18,44,.16);
+  --line2:rgba(149,18,44,.09);
+  --line3:rgba(149,18,44,.03);
+  --field:rgba(149,18,44,.24);
+  --nav-bg:rgba(247,242,242,.92);
+  --menu-bg:rgba(247,242,242,.98);
+  --card-shadow:0 1px 2px rgba(149,18,44,.07);
   --sun:none;
   --moon:block;
-  --wash:linear-gradient(180deg,#C9BEFF 0,#F3F0FF 520px);
-  --neon:linear-gradient(90deg,#977DFF 0%,#0033FF 55%,#0600A8 100%);
-  --neon-text:linear-gradient(90deg,#4D32D6 0%,#0600A8 100%);
+  --wash:linear-gradient(180deg,#EBBFC8 0,#F7F2F2 520px);
+  --neon:linear-gradient(90deg,#D9677D 0%,#C9304F 50%,#95122C 100%);
+  --neon-text:linear-gradient(90deg,#C9304F 0%,#95122C 100%);
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
