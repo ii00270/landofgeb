@@ -83,81 +83,76 @@
         <b>What you get back.</b> A short conversation, and from it a <b>partial map</b> of the work — the real first steps and the order that matters most. Before anyone talks about a number. If it's a fit, we scope the rest.
       </div>
 
-      <!-- FormSubmit: delivers to bixxville@proton.me via a hashed endpoint, so the
-           address is not exposed in the page source to scrapers. Activated 4 Sep 2026.
-           To change the destination inbox you must re-activate and swap the hash. -->
-      <form class="rv d4" action="https://formsubmit.co/f20c3e4a2b55740f665ed45facac5830" method="POST">
-        <input type="hidden" name="_subject" value="New Bixxville intake">
-        <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="_captcha" value="true">
-        <input type="hidden" name="_next" value="https://www.bixxville.xyz/thanks.html">
-        <input type="text" name="_honey" style="display:none">
+      <form class="rv d4" id="wk" action="#" method="post">
+        <input type="text" id="wk-web" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;height:0;width:0;opacity:0">
 
         <div class="sectlabel first">What brings you</div>
         <div class="field">
           <label for="kind">This is about</label>
-          <select id="kind" name="Inquiry type" required>
+          <select id="kind" name="kind" required>
             <option value="">Choose one…</option>
-            <option>A contract or scope of work</option>
-            <option>A project I want run</option>
-            <option>Sitting the entrance exam</option>
-            <option>Joining the network as a member</option>
-            <option>Something else</option>
+            <option value="contract">A contract or scope of work</option>
+            <option value="project">A project I want run</option>
+            <option value="exam">Sitting the entrance exam</option>
+            <option value="network">Joining the network as a member</option>
+            <option value="other">Something else</option>
           </select>
         </div>
 
         <div class="sectlabel">About you</div>
         <div class="frow">
-          <div class="field"><label for="nm">Name</label><input id="nm" type="text" name="Name" required></div>
-          <div class="field"><label for="loc">Where you're based</label><input id="loc" type="text" name="Location" placeholder="City / area" required></div>
+          <div class="field"><label for="nm">Name</label><input id="nm" maxlength="120" type="text" name="Name" required></div>
+          <div class="field"><label for="loc">Where you're based</label><input id="loc" maxlength="60" type="text" name="Location" placeholder="City / area" required></div>
         </div>
         <div class="frow">
           <div class="field"><label for="em">Email</label><input id="em" type="email" name="Email" required></div>
-          <div class="field"><label for="org">Organization (optional)</label><input id="org" type="text" name="Organization"></div>
+          <div class="field"><label for="org">Organization (optional)</label><input id="org" maxlength="160" type="text" name="Organization"></div>
         </div>
 
         <div class="sectlabel">The work</div>
         <div class="field">
           <label for="goal">What's the goal?</label>
           <div class="hint">In your own words — what are you trying to get done?</div>
-          <textarea id="goal" name="The goal" required></textarea>
+          <textarea id="goal" maxlength="450" name="The goal" required></textarea>
         </div>
         <div class="field">
           <label for="done">What does "done" look like?</label>
           <div class="hint">How will you know it succeeded? This becomes the deliverable definition.</div>
-          <textarea id="done" name="What done looks like" required></textarea>
+          <textarea id="done" maxlength="350" name="What done looks like" required></textarea>
         </div>
         <div class="frow">
-          <div class="field"><label for="tf">Window</label><div class="hint">The deadline, if there is one</div><input id="tf" type="text" name="Timeframe" placeholder="e.g. 8 weeks, by March"></div>
-          <div class="field"><label for="bud">Budget range</label><div class="hint">Optional</div><input id="bud" type="text" name="Budget range" placeholder="Optional"></div>
+          <div class="field"><label for="tf">Window</label><div class="hint">The deadline, if there is one</div><input id="tf" maxlength="60" type="text" name="Timeframe" placeholder="e.g. 8 weeks, by March"></div>
+          <div class="field"><label for="bud">Budget range</label><div class="hint">Optional</div><input id="bud" maxlength="40" type="text" name="Budget range" placeholder="Optional"></div>
         </div>
         <div class="field">
           <label for="mot">What's already in motion?</label>
           <div class="hint">Anything started, already done, or already decided.</div>
-          <textarea id="mot" name="Already in motion"></textarea>
+          <textarea id="mot" maxlength="250" name="Already in motion"></textarea>
         </div>
         <div class="field">
           <label for="obs">Biggest obstacle or unknown?</label>
-          <textarea id="obs" name="Biggest obstacle"></textarea>
+          <textarea id="obs" maxlength="250" name="Biggest obstacle"></textarea>
         </div>
         <div class="field">
           <label for="who">Who's involved?</label>
           <div class="hint">Who has to do the work, or who needs to sign off.</div>
-          <input id="who" type="text" name="Who is involved">
+          <input id="who" maxlength="120" type="text" name="Who is involved">
         </div>
 
         <div class="sectlabel">Last thing</div>
         <div class="field">
           <label for="hear">How did you hear about us?</label>
-          <input id="hear" type="text" name="How they heard">
+          <input id="hear" maxlength="80" type="text" name="How they heard">
         </div>
 
-        <button type="submit" class="submit">Send it →</button>
+        <label class="field" style="display:flex;gap:10px;align-items:flex-start;font-weight:400;font-size:13px;line-height:1.5;color:var(--soft)"><input type="checkbox" id="wk-ok" required style="width:auto;margin-top:3px"><span id="wk-ok-text">Yes, Land of Geb may reply to this request by email. I can ask them to stop, or to erase my details, at any time. <a href="https://landofgeb.net/privacy.html" style="color:var(--green);text-decoration:underline">Privacy note</a></span></label>
+        <div id="wk-out" role="status" aria-live="polite" style="min-height:20px;font-size:13px"></div>
+        <button type="submit" class="submit" id="wk-go">Send it →</button>
       </form>
 
       <div class="formfoot rv d5">
         We read every submission and you'll hear back to set up the conversation.<br>
-        Prefer email? Write to <a href="mailto:bixxville@proton.me" style="color:var(--green)">bixxville@proton.me</a> directly — same inbox, same answer.<br>
+        Something wrong with the form? You can still write to <a href="mailto:bixxville@proton.me" style="color:var(--green)">bixxville@proton.me</a>.<br>
         <span class="gold">Bixxville · Land of Geb, LLC · Christiansted, St. Croix, USVI · We trust the math.</span>
       </div>
     </div>
@@ -189,5 +184,38 @@
 </footer>
 
 <script src="bixx.js"></script>
+
+<script>
+(function(){
+  // The intake goes straight into the Operating System (the same list the landofgeb.net request form fills). No email is involved.
+  var SB_URL = 'https://deotcopartijomfveakr.supabase.co';
+  var SB_KEY = 'sb_publishable_yi4AJEt5MLMafDBgTgXnBg_1gvB4gtz';   // the public key; the database does the guarding
+  var $ = function(id){ return document.getElementById(id); };
+  var t0 = Date.now();
+  var src = (new URLSearchParams(location.search).get('src') || 'bixxville-work').trim().slice(0, 80);
+  function say(m, err){ var o = $('wk-out'); o.textContent = m || ''; o.style.color = err ? 'var(--orange)' : 'var(--soft)'; }
+  $('wk').addEventListener('submit', function(e){
+    e.preventDefault();
+    var f = $('wk'); if (!f.reportValidity()) return;
+    var v = function(id){ return $(id).value.trim(); };
+    var lines = [['Goal', 'goal'], ['What done looks like', 'done'], ['Window', 'tf'], ['Budget range', 'bud'], ['Already in motion', 'mot'], ['Biggest obstacle', 'obs'], ['Who is involved', 'who'], ['Based in', 'loc'], ['Heard about us', 'hear']]
+      .filter(function(x){ return v(x[1]); }).map(function(x){ return x[0] + ': ' + v(x[1]); });
+    var go = $('wk-go'); go.disabled = true; say('Sending…');
+    fetch(SB_URL + '/rest/v1/rpc/submit_prospect', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', apikey: SB_KEY, Authorization: 'Bearer ' + SB_KEY },
+      body: JSON.stringify({
+        p_name: v('nm'), p_email: v('em'), p_phone: null, p_organization: v('org') || null, p_interest: $('kind').value,
+        p_message: lines.join('\n').slice(0, 1990) || null, p_source: src, p_consent: $('wk-ok').checked,
+        p_consent_text: $('wk-ok-text').textContent.trim().slice(0, 480), p_website: v('wk-web') || null, p_elapsed_ms: Date.now() - t0
+      })
+    }).then(function(res){
+      if (res.ok) { location.href = 'thanks.html'; return null; }
+      return res.json().catch(function(){ return null; }).then(function(b){
+        say(b && b.code === 'P0001' && b.message ? b.message : 'Something went wrong on our side. Please email bixxville@proton.me instead.', true); go.disabled = false; });
+    }).catch(function(){ say('We could not reach the server. Check your connection, or email bixxville@proton.me instead.', true); go.disabled = false; });
+  });
+})();
+</script>
 </body>
 </html>
